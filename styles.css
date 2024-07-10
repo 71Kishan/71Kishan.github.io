@@ -1,0 +1,283 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s;
+}
+
+header.scrolled {
+    background-color: rgba(51, 51, 51, 0.9);
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 1rem;
+}
+
+nav ul li:hover {
+  background-color: #555;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.hero {
+    background-color: #ff6600;
+    color: #fff;
+    padding: 5rem 0;
+    text-align: center;
+    margin-top: 20px;
+}
+
+main {
+    padding: 2rem;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.job, .education-item, .project-item {
+    background-color: #fff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    font-size: 18px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+    transition: opacity 0.3s;
+}
+
+.scroll-to-top.visible {
+    display: block;
+    opacity: 0.8;
+}
+
+.animate {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.hero img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px;
+}
+.hero.hero-text {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+}
+
+.about {
+  padding: 20px;
+}
+
+.about h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #bebbbb; 
+  padding: 10px
+}
+
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.summary-box {
+  flex-basis: 50%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: justify;
+}
+
+.skills-box {
+  flex-basis: 40%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.skills-box h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.skills-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skills-box li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.skills-box li:last-child {
+  border-bottom: none;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.social-media a {
+    margin: 0 10px;
+    color: #fff;
+    text-decoration: none;
+    padding: 0;
+    background-color: #333;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    display: inline-flex;
+    justify-content: center;
+  }
+  
+  .social-media a:hover {
+    background-color: #555;
+  }
+  
+  .social-media i {
+    font-size: 24px;
+    margin: 0 0.5rem;
+  }
+  
+  .social-media .fa-facebook {
+    background-color: #3b5998;
+  }
+  
+  .social-media .fa-twitter {
+    background-color: #1da1f2;
+  }
+  
+  .social-media .fa-instagram {
+    background-color: #e1306c;
+  }
+  
+  .social-media .fa-linkedin {
+    background-color: #0077b5;
+  }
+  
+  .social-media .fa-github {
+    background-color: #333;
+  }
+  
+  .social-media a:hover .fa-facebook {
+    background-color: #2f4778;
+  }
+  
+  .social-media a:hover .fa-twitter {
+    background-color: #0c9cd6;
+  }
+  
+  .social-media a:hover .fa-instagram {
+    background-color: #d0021b;
+  }
+  
+  .social-media a:hover .fa-linkedin {
+    background-color: #006097;
+  }
+  
+  .social-media a:hover .fa-github {
+    background-color: #444;
+  }
+
+.contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact form label {
+    font-weight: bold;
+}
+
+.contact form input,
+.contact form textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact form button {
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact form button:hover {
+    background-color: #555;
+}
