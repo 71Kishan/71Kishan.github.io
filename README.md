@@ -3,7 +3,7 @@
 This repository contains the source code for my personal portfolio website, built as a modern, interactive presentation deck. It features a dark professional theme, smooth snap-scrolling navigation, and responsive layouts highlighting my background in networking, cybersecurity, and Python automation.
 
 ## 🚀 Live Site
-You can view the live portfolio here: [71kishan.github.io](https://71kishan.github.io)
+You can view the live portfolio here: [71kishan.github.io](https://71kishan.github.io/)
 
 ## 🛠️ Built With
 * **HTML5 & CSS3:** Custom styling utilizing CSS Grid, Flexbox, and Scroll Snap mechanics.
