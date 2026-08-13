@@ -155,9 +155,9 @@
         /* Grids & Cards */
         .grid-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.25rem;
-            max-height: 62vh;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            max-height: 72vh;
             overflow-y: auto;
             padding-right: 0.5rem;
         }
@@ -177,10 +177,13 @@
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 14px;
-            padding: 1.4rem;
+            padding: 1.2rem;
             backdrop-filter: blur(8px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .card:hover {
@@ -418,54 +421,62 @@
         </div>
     </section>
 
-  <!-- Slide 4: Projects -->
-<section id="slide-4">
-    <div class="slide-content">
-        <h2>Featured Projects & Repositories</h2>
-        <div class="grid-layout">
-            <div class="card">
-                <h3>Network Traffic Analyzer</h3>
-                <div class="badge-container">
-                    <span class="badge">Python</span>
-                    <span class="badge">Subprocess</span>
-                    <span class="badge">Cross-Platform</span>
+    <!-- Slide 4: Projects -->
+    <section id="slide-4">
+        <div class="slide-content">
+            <h2>Featured Projects & Repositories</h2>
+            <div class="grid-layout">
+                <div class="card">
+                    <div>
+                        <h3>Network Traffic Analyzer</h3>
+                        <div class="badge-container">
+                            <span class="badge">Python</span>
+                            <span class="badge">Subprocess</span>
+                            <span class="badge">Cross-Platform</span>
+                        </div>
+                        <p>A continuous monitoring utility designed to evaluate round-trip latency, flag performance degradation spikes, and output live diagnostic tables.</p>
+                    </div>
+                    <a href="https://github.com/71Kishan/network-analyzer/" target="_blank" class="btn" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">Source Repository ↗</a>
                 </div>
-                <p>A continuous monitoring utility designed to evaluate round-trip latency, flag performance degradation spikes, and output live diagnostic tables.</p>
-                <a href="https://github.com/71Kishan/network-analyzer/" target="_blank" class="btn" style="padding: 0.45rem 0.9rem; font-size: 0.8rem;">Source Repository ↗</a>
-            </div>
-            
-            <div class="card">
-                <h3>System Hardening Auditor</h3>
-                <div class="badge-container">
-                    <span class="badge">Python</span>
-                    <span class="badge">OS Security</span>
-                    <span class="badge">Compliance</span>
+                
+                <div class="card">
+                    <div>
+                        <h3>System Hardening Auditor</h3>
+                        <div class="badge-container">
+                            <span class="badge">Python</span>
+                            <span class="badge">OS Security</span>
+                            <span class="badge">Compliance</span>
+                        </div>
+                        <p>An automated audit engine that inspects local endpoint configurations, verifies native firewall states, and checks administrative privileges.</p>
+                    </div>
+                    <a href="https://github.com/71Kishan/system-hardening/" target="_blank" class="btn" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">Source Repository ↗</a>
                 </div>
-                <p>An automated audit engine that inspects local endpoint configurations, verifies native firewall states, and checks administrative privileges.</p>
-                <a href="https://github.com/71Kishan/system-hardening/" target="_blank" class="btn" style="padding: 0.45rem 0.9rem; font-size: 0.8rem;">Source Repository ↗</a>
-            </div>
 
-            <div class="card">
-                <h3>AI Job Search & Outreach Pipeline</h3>
-                <div class="badge-container">
-                    <span class="badge">Python</span>
-                    <span class="badge">Playwright</span>
-                    <span class="badge">Gemini API</span>
-                    <span class="badge">Google Sheets API</span>
+                <div class="card">
+                    <div>
+                        <h3>AI Job Search & Outreach Pipeline</h3>
+                        <div class="badge-container">
+                            <span class="badge">Python</span>
+                            <span class="badge">Playwright</span>
+                            <span class="badge">Gemini API</span>
+                            <span class="badge">Google Sheets API</span>
+                        </div>
+                        <p>An automated pipeline that scrapes daily job postings across 4 portals, uses Gemini AI to rank role compatibility and generate cold outreach drafts, and syncs live leads to Google Sheets.</p>
+                    </div>
+                    <a href="https://github.com/71Kishan/Job-Search-Automation/" target="_blank" class="btn" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">Source Repository ↗</a>
                 </div>
-                <p>An automated pipeline that scrapes daily job postings across 4 portals, uses Gemini AI to rank role compatibility and generate cold outreach drafts, and syncs live leads to Google Sheets.</p>
-                <a href="https://github.com/71Kishan/Job-Search-Automation/" target="_blank" class="btn" style="padding: 0.45rem 0.9rem; font-size: 0.8rem;">Source Repository ↗</a>
-            </div>
 
-            <div class="card">
-                <h3>Network Design Specification Project</h3>
-                <div class="company-sub">St. Clair College, Canada | Jan 2023 - Apr 2023</div>
-                <p>Implemented upgraded physical network layouts, server rack architectures, and advanced Wi-Fi mapping analytics.</p>
-                <a href="https://drive.google.com/file/d/1nHaiQ5wNGNsMFbfsfw2fCmzwXEKCuk1W/view?usp=sharing" target="_blank" class="btn" style="padding: 0.45rem 0.9rem; font-size: 0.8rem;">View File (Google Drive) ↗</a>
+                <div class="card">
+                    <div>
+                        <h3>Network Design Specification Project</h3>
+                        <div class="company-sub">St. Clair College, Canada | Jan 2023 - Apr 2023</div>
+                        <p>Implemented upgraded physical network layouts, server rack architectures, and advanced Wi-Fi mapping analytics.</p>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1nHaiQ5wNGNsMFbfsfw2fCmzwXEKCuk1W/view?usp=sharing" target="_blank" class="btn" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">View File (Google Drive) ↗</a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Slide 5: Education -->
     <section id="slide-5">
@@ -510,7 +521,7 @@
                     content.classList.remove('active');
                 }
             });
-        }, { threshold: 0.55 });
+        }, { threshold: 0.2 });
 
         document.querySelectorAll('section').forEach(section => {
             observer.observe(section);
