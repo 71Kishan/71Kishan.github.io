@@ -49,8 +49,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.25rem 3rem;
-            background: rgba(7, 11, 25, 0.85);
+            padding: 1rem 2rem;
+            background: rgba(7, 11, 25, 0.9);
             backdrop-filter: blur(12px);
             z-index: 1000;
             border-bottom: 1px solid var(--border-color);
@@ -58,7 +58,7 @@
 
         .nav-brand {
             font-weight: 800;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--accent);
             letter-spacing: 1px;
             display: flex;
@@ -77,7 +77,7 @@
 
         .nav-links {
             display: flex;
-            gap: 1.75rem;
+            gap: 1.5rem;
             list-style: none;
         }
 
@@ -97,12 +97,12 @@
         /* General Section Layout */
         section {
             min-height: 100vh;
-            width: 100vw;
+            width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 8rem 2rem 4rem 2rem;
+            padding: 7rem 1.5rem 4rem 1.5rem;
             position: relative;
         }
 
@@ -121,7 +121,7 @@
 
         /* Typography */
         h1 {
-            font-size: 3.2rem;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
             font-weight: 800;
             letter-spacing: -1px;
             margin-bottom: 0.75rem;
@@ -131,7 +131,7 @@
         h1 span { color: var(--accent); }
 
         h2 {
-            font-size: 2rem;
+            font-size: clamp(1.6rem, 3vw, 2rem);
             font-weight: 700;
             color: var(--text-main);
             margin-bottom: 2.5rem;
@@ -149,7 +149,7 @@
         }
 
         p.subtitle {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--text-muted);
             margin-bottom: 2rem;
             line-height: 1.7;
@@ -160,7 +160,7 @@
         .hero-layout {
             display: flex;
             align-items: center;
-            gap: 4rem;
+            gap: 3rem;
             justify-content: space-between;
         }
 
@@ -172,8 +172,8 @@
         }
 
         .hero-img {
-            width: 280px;
-            height: 280px;
+            width: 260px;
+            height: 260px;
             border-radius: 20px;
             object-fit: cover;
             border: 2px solid var(--border-color);
@@ -192,22 +192,22 @@
         .about-grid {
             display: grid;
             grid-template-columns: 3fr 2fr;
-            gap: 3rem;
+            gap: 2.5rem;
             align-items: center;
         }
 
         .about-text p {
             color: var(--text-muted);
-            font-size: 1.05rem;
+            font-size: 1rem;
             line-height: 1.8;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .about-visual {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 14px;
-            padding: 2rem;
+            padding: 1.5rem;
             text-align: center;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -222,7 +222,7 @@
         }
 
         .about-visual i {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--accent);
             margin-bottom: 0.5rem;
         }
@@ -230,7 +230,7 @@
         /* Grids & Cards */
         .grid-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
@@ -263,7 +263,7 @@
         /* Project Cards with Images */
         .project-img-wrapper {
             width: 100%;
-            height: 180px;
+            height: 170px;
             border-radius: 8px;
             overflow: hidden;
             margin-bottom: 1.2rem;
@@ -327,7 +327,7 @@
         }
 
         .timeline-item {
-            padding: 10px 40px 40px 50px;
+            padding: 10px 10px 30px 45px;
             position: relative;
             background-color: inherit;
             width: 100%;
@@ -336,22 +336,21 @@
         .timeline-item::after {
             content: '';
             position: absolute;
-            width: 16px;
-            height: 16px;
-            right: -8px;
+            width: 14px;
+            height: 14px;
             background-color: var(--bg-color);
             border: 3px solid var(--accent);
             top: 15px;
             border-radius: 50%;
             z-index: 1;
-            left: 12px;
+            left: 13px;
             box-shadow: 0 0 10px var(--accent-glow);
         }
 
         .timeline-content {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 1.5rem;
+            padding: 1.25rem;
             border-radius: 12px;
             transition: all 0.3s ease;
         }
@@ -383,7 +382,7 @@
             gap: 0.5rem;
             background-color: var(--accent);
             color: var(--bg-color);
-            padding: 0.7rem 1.6rem;
+            padding: 0.7rem 1.4rem;
             border-radius: 8px;
             font-weight: 700;
             font-size: 0.95rem;
@@ -413,7 +412,7 @@
         /* Scroll Hint */
         .scroll-indicator {
             position: absolute;
-            bottom: 2rem;
+            bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
             color: var(--text-muted);
@@ -429,12 +428,49 @@
             60% { transform: translate(-50%, -3px); }
         }
 
-        @media (max-width: 900px) {
-            .hero-layout, .about-grid { flex-direction: column; text-align: center; }
-            .hero-img { width: 220px; height: 220px; }
+        /* Responsive Breakpoints for Tablet & Mobile */
+        @media (max-width: 1024px) {
+            .hero-layout, .about-grid {
+                flex-direction: column;
+                text-align: center;
+                gap: 2.5rem;
+            }
+
+            .hero-text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
             h2::after { display: none; }
-            .nav-links { display: none; }
-            nav { padding: 1rem 1.5rem; }
+            
+            .btn-group {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.75rem 1rem;
+            }
+
+            .nav-links {
+                display: none; /* Keeps mobile view clean; can be turned into a drawer if desired */
+            }
+
+            section {
+                padding: 6rem 1rem 3rem 1rem;
+                min-height: auto;
+            }
+
+            .hero-img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .about-visual {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -480,7 +516,7 @@
         <div class="section-content">
             <h2><i class="fa-solid fa-address-card"></i> About Me</h2>
             <div class="about-grid">
-                <div class="about-text">
+                <div class="about-text" style="text-align: left;">
                     <p>My passion lies entirely in computer networking, cybersecurity, and building resilient IT systems. I thrive on diving deep into network topologies, optimizing data flows, and securing digital environments against modern vulnerabilities.</p>
                     <p>I am a hands-on technical builder at heart. Whether I'm configuring routing protocols, managing and troubleshooting local media servers, or diagnosing complex hardware and software bottlenecks, I love turning technical friction into seamless operations.</p>
                     <p>When I'm away from the terminal, you'll find me exploring nature through photography, stargazing under clear night skies, traveling to new places, or diving into open-world gaming.</p>
@@ -640,20 +676,20 @@
     <section id="contact">
         <div class="section-content">
             <h2><i class="fa-solid fa-paper-plane"></i> Let's Connect</h2>
-            <div class="about-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="about-grid" style="grid-template-columns: 1.2fr 1fr; align-items: stretch;">
                 
-                <div style="background: var(--card-bg); padding: 2rem; border-radius: 14px; border: 1px solid var(--border-color);">
+                <div style="background: var(--card-bg); padding: 2rem; border-radius: 14px; border: 1px solid var(--border-color); text-align: left;">
                     <h3 style="color: var(--text-main); margin-bottom: 1rem;">Get In Touch</h3>
                     <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.6;">Based in Ahmedabad/Gandhinagar, India. Currently open to on-site and hybrid roles in IT infrastructure, cloud administration, and networking.</p>
                     
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <a href="mailto:k.s.panchal7576@gmail.com" style="color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 1rem;"><i class="fa-solid fa-envelope" style="color: var(--accent); font-size: 1.2rem;"></i> k.s.panchal7576@gmail.com</a>
+                        <a href="mailto:k.s.panchal7576@gmail.com" style="color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 1rem; word-break: break-all;"><i class="fa-solid fa-envelope" style="color: var(--accent); font-size: 1.2rem;"></i> k.s.panchal7576@gmail.com</a>
                         <a href="https://www.linkedin.com/in/kspanchal/" target="_blank" style="color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 1rem;"><i class="fa-brands fa-linkedin" style="color: var(--accent); font-size: 1.2rem;"></i> linkedin.com/in/kspanchal</a>
                         <a href="https://github.com/71Kishan" target="_blank" style="color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 1rem;"><i class="fa-brands fa-github" style="color: var(--accent); font-size: 1.2rem;"></i> github.com/71Kishan</a>
                     </div>
                 </div>
 
-                <div style="padding: 2rem;">
+                <div style="background: var(--card-bg); padding: 2rem; border-radius: 14px; border: 1px solid var(--border-color); text-align: left;">
                     <h3 style="color: var(--accent); margin-bottom: 1rem;"><i class="fa-solid fa-graduation-cap"></i> Education</h3>
                     <p style="color: var(--text-main); font-weight: 600;">St. Clair College, Canada</p>
                     <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Advanced Diploma, CST - Networking (GPA: 3.0/4.0)</p>
