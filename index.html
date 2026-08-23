@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kishan Panchal | IT Systems Administrator & Network Specialist</title>
+    <!-- FontAwesome for Professional Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --bg-color: #070b19;
@@ -14,6 +17,7 @@
             --accent-glow: rgba(56, 189, 248, 0.2);
             --border-color: rgba(51, 65, 85, 0.8);
             --badge-bg: rgba(56, 189, 248, 0.1);
+            --timeline-line: #1e293b;
         }
 
         * {
@@ -24,7 +28,6 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-snap-type: y mandatory;
         }
 
         body {
@@ -33,8 +36,8 @@
             color: var(--text-main);
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.05) 0%, transparent 40%);
+                radial-gradient(circle at 15% 50%, rgba(56, 189, 248, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.04) 0%, transparent 50%);
         }
 
         /* Glassmorphism Navigation */
@@ -84,65 +87,54 @@
             font-size: 0.85rem;
             font-weight: 500;
             transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
-        .nav-links a:hover {
-            color: var(--accent);
-        }
+        .nav-links a:hover { color: var(--accent); }
 
-        /* Presentation Slides */
+        /* General Section Layout */
         section {
-            height: 100vh;
+            min-height: 100vh;
             width: 100vw;
-            scroll-snap-align: start;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 5.5rem 2rem 2rem 2rem;
+            padding: 8rem 2rem 4rem 2rem;
             position: relative;
         }
 
-        .slide-content {
+        .section-content {
             max-width: 1100px;
             width: 100%;
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        .slide-content.active {
+        .section-content.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Hero Image */
-        .hero-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent);
-            box-shadow: 0 0 25px var(--accent-glow);
-            margin-bottom: 1.5rem;
-        }
-
+        /* Typography */
         h1 {
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-weight: 800;
             letter-spacing: -1px;
             margin-bottom: 0.75rem;
+            line-height: 1.2;
         }
 
-        h1 span {
-            color: var(--accent);
-        }
+        h1 span { color: var(--accent); }
 
         h2 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--text-main);
-            margin-bottom: 1rem;
+            margin-bottom: 2.5rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
@@ -153,114 +145,235 @@
             flex: 1;
             height: 1px;
             background: var(--border-color);
-            max-width: 200px;
+            max-width: 300px;
         }
 
         p.subtitle {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            max-width: 800px;
+        }
+
+        /* Hero Layout */
+        .hero-layout {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            justify-content: space-between;
+        }
+
+        .hero-text { flex: 1; }
+        
+        .hero-img-container {
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .hero-img {
+            width: 280px;
+            height: 280px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transform: rotate(3deg);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .hero-img-container:hover .hero-img {
+            transform: rotate(0deg) translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 25px 50px var(--accent-glow);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
             margin-bottom: 1.5rem;
-            line-height: 1.6;
+        }
+
+        .about-visual {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 2rem;
+            text-align: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .about-visual div {
+            padding: 1rem;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .about-visual i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
         }
 
         /* Grids & Cards */
         .grid-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1rem;
-            max-height: 72vh;
-            overflow-y: auto;
-            padding-right: 0.5rem;
-        }
-
-        .grid-layout::-webkit-scrollbar {
-            width: 6px;
-        }
-        .grid-layout::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.02);
-        }
-        .grid-layout::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 4px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 14px;
-            padding: 1.2rem;
+            padding: 1.5rem;
             backdrop-filter: blur(8px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
         }
 
         .card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px);
             border-color: var(--accent);
             box-shadow: 0 12px 30px var(--accent-glow);
         }
 
         .card h3 {
             color: var(--accent);
-            font-size: 1.05rem;
-            margin-bottom: 0.3rem;
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 0.5rem;
         }
 
-        .card .company-sub {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin-bottom: 0.7rem;
-            font-weight: 600;
+        /* Project Cards with Images */
+        .project-img-wrapper {
+            width: 100%;
+            height: 180px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1.2rem;
+            border: 1px solid var(--border-color);
+            background: #0f172a;
+        }
+
+        .project-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .project-img-wrapper img {
+            transform: scale(1.05);
         }
 
         .card p {
             color: var(--text-muted);
-            font-size: 0.88rem;
-            line-height: 1.5;
-            margin-bottom: 0.8rem;
-        }
-
-        .card ul {
-            list-style-type: disc;
-            padding-left: 1.2rem;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            line-height: 1.45;
-        }
-
-        .card ul li {
-            margin-bottom: 0.35rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex-grow: 1;
         }
 
         /* Badges */
         .badge-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.35rem;
-            margin-bottom: 0.8rem;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
         }
 
         .badge {
             background-color: var(--badge-bg);
             color: var(--accent);
             border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 0.15rem 0.55rem;
+            padding: 0.25rem 0.65rem;
             border-radius: 20px;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 600;
         }
 
-        /* Base Buttons */
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--timeline-line);
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px 40px 50px;
+            position: relative;
+            background-color: inherit;
+            width: 100%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: -8px;
+            background-color: var(--bg-color);
+            border: 3px solid var(--accent);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            left: 12px;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .timeline-content {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--accent);
+            box-shadow: 0 5px 20px var(--accent-glow);
+        }
+        
+        .timeline-date {
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Buttons */
         .btn-group {
             display: flex;
             gap: 1rem;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             flex-wrap: wrap;
         }
 
@@ -270,13 +383,12 @@
             gap: 0.5rem;
             background-color: var(--accent);
             color: var(--bg-color);
-            padding: 0.6rem 1.4rem;
+            padding: 0.7rem 1.6rem;
             border-radius: 8px;
             font-weight: 700;
-            font-size: 0.88rem;
+            font-size: 0.95rem;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
@@ -285,30 +397,10 @@
             box-shadow: 0 5px 20px var(--accent-glow);
         }
 
-        /* Custom Interactive Buttons with Shimmer & Glow */
         .btn-outline {
             background: rgba(15, 23, 42, 0.6);
             color: var(--text-main);
             border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn-outline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.2), transparent);
-            transition: left 0.6s ease;
-            z-index: -1;
-        }
-
-        .btn-outline:hover::before {
-            left: 100%;
         }
 
         .btn-outline:hover {
@@ -318,71 +410,14 @@
             box-shadow: 0 6px 20px var(--accent-glow);
         }
 
-        .arrow-icon {
-            display: inline-block;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .btn-outline:hover .arrow-icon {
-            transform: translate(3px, -3px);
-        }
-
-        /* Tooltip Styles */
-        [data-tooltip] {
-            position: relative;
-        }
-
-        [data-tooltip]::before {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 130%;
-            left: 50%;
-            transform: translateX(-50%) translateY(8px);
-            background: rgba(15, 23, 42, 0.95);
-            color: var(--accent);
-            padding: 0.4rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.72rem;
-            font-weight: 600;
-            white-space: nowrap;
-            pointer-events: none;
-            opacity: 0;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
-            z-index: 100;
-        }
-
-        [data-tooltip]::after {
-            content: '';
-            position: absolute;
-            bottom: 112%;
-            left: 50%;
-            transform: translateX(-50%) translateY(8px);
-            border-width: 5px;
-            border-style: solid;
-            border-color: rgba(15, 23, 42, 0.95) transparent transparent transparent;
-            pointer-events: none;
-            opacity: 0;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 100;
-        }
-
-        [data-tooltip]:hover::before,
-        [data-tooltip]:hover::after {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
         /* Scroll Hint */
         .scroll-indicator {
             position: absolute;
-            bottom: 1.2rem;
+            bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
             color: var(--text-muted);
-            font-size: 0.72rem;
+            font-size: 0.8rem;
             letter-spacing: 2px;
             text-transform: uppercase;
             animation: bounce 2s infinite;
@@ -394,12 +429,12 @@
             60% { transform: translate(-50%, -3px); }
         }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.5rem; }
-            nav { padding: 1rem 1.2rem; }
+        @media (max-width: 900px) {
+            .hero-layout, .about-grid { flex-direction: column; text-align: center; }
+            .hero-img { width: 220px; height: 220px; }
+            h2::after { display: none; }
             .nav-links { display: none; }
-            .grid-layout { grid-template-columns: 1fr; max-height: none; }
+            nav { padding: 1rem 1.5rem; }
         }
     </style>
 </head>
@@ -407,71 +442,97 @@
 
     <!-- Navigation Header -->
     <nav>
-        <a href="#slide-1" class="nav-brand">
+        <a href="#home" class="nav-brand">
             <div class="status-dot"></div>
             KISHAN.DEV
         </a>
         <ul class="nav-links">
-            <li><a href="#slide-1">Overview</a></li>
-            <li><a href="#slide-2">Expertise</a></li>
-            <li><a href="#slide-3">Experience</a></li>
-            <li><a href="#slide-4">Projects</a></li>
-            <li><a href="#slide-5">Certifications</a></li>
-            <li><a href="#slide-6">Education</a></li>
-            <li><a href="#slide-7">Contact</a></li>
+            <li><a href="#home"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#about"><i class="fa-solid fa-user"></i> About</a></li>
+            <li><a href="#skills"><i class="fa-solid fa-code"></i> Skills</a></li>
+            <li><a href="#experience"><i class="fa-solid fa-briefcase"></i> Experience</a></li>
+            <li><a href="#projects"><i class="fa-solid fa-folder-open"></i> Projects</a></li>
+            <li><a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
         </ul>
     </nav>
 
-    <!-- Slide 1: Introduction -->
-    <section id="slide-1">
-        <div class="slide-content">
-            <img src="Profile_Pic - Kishan Panchal.png" alt="Kishan Panchal" class="hero-img">
-            <h1>IT Systems Administrator & <span>Network Specialist</span></h1>
-            <p class="subtitle">Highly motivated IT professional with 2+ years of experience resolving complex software and hardware issues, optimizing network traffic (VLANs, OSPF, BGP), and managing cloud/server environments (AWS, Azure).</p>
-            <div class="btn-group">
-                <a href="#slide-4" class="btn">View Technical Projects <span class="arrow-icon">→</span></a>
-                <a href="#slide-7" class="btn btn-outline">Get in Touch</a>
+    <!-- Slide 1: Hero -->
+    <section id="home">
+        <div class="section-content active hero-layout">
+            <div class="hero-text">
+                <h1>IT Systems Administrator & <br><span>Network Specialist</span></h1>
+                <p class="subtitle">Highly motivated IT professional with experience resolving complex software and hardware issues, optimizing network traffic, and managing cloud environments.</p>
+                <div class="btn-group">
+                    <a href="#projects" class="btn"><i class="fa-solid fa-layer-group"></i> View Projects</a>
+                    <a href="https://github.com/71Kishan" target="_blank" class="btn btn-outline"><i class="fa-brands fa-github"></i> GitHub</a>
+                    <a href="https://www.linkedin.com/in/kspanchal/" target="_blank" class="btn btn-outline"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                </div>
+            </div>
+            <div class="hero-img-container">
+                <img src="Profile_Pic - Kishan Panchal.png" alt="Kishan Panchal" class="hero-img">
             </div>
         </div>
         <div class="scroll-indicator">Scroll to Explore ↓</div>
     </section>
 
-    <!-- Slide 2: Technical Expertise & Stack -->
-    <section id="slide-2">
-        <div class="slide-content">
-            <h2>Core Technical Stack</h2>
+    <!-- Slide 2: About Me -->
+    <section id="about">
+        <div class="section-content">
+            <h2><i class="fa-solid fa-address-card"></i> About Me</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>My passion lies entirely in computer networking, cybersecurity, and building resilient IT systems. I thrive on diving deep into network topologies, optimizing data flows, and securing digital environments against modern vulnerabilities.</p>
+                    <p>I am a hands-on technical builder at heart. Whether I'm configuring routing protocols, managing and troubleshooting local media servers, or diagnosing complex hardware and software bottlenecks, I love turning technical friction into seamless operations.</p>
+                    <p>When I'm away from the terminal, you'll find me exploring nature through photography, stargazing under clear night skies, traveling to new places, or diving into open-world gaming.</p>
+                </div>
+                <div class="about-visual">
+                    <div>
+                        <i class="fa-solid fa-network-wired"></i>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Network Architecture</p>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-server"></i>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Systems & Homelabs</p>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-camera"></i>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Nature Photography</p>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-gamepad"></i>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Gaming Enthusiast</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: Skills -->
+    <section id="skills">
+        <div class="section-content">
+            <h2><i class="fa-solid fa-microchip"></i> Core Technical Stack</h2>
             <div class="grid-layout">
                 <div class="card">
-                    <h3>Networking & Infrastructure</h3>
+                    <h3><i class="fa-solid fa-globe"></i> Networking</h3>
                     <div class="badge-container">
-                        <span class="badge">VLANs</span>
-                        <span class="badge">OSPF</span>
-                        <span class="badge">BGP</span>
-                        <span class="badge">TCP/IP</span>
-                        <span class="badge">DNS / DHCP</span>
+                        <span class="badge">VLANs</span> <span class="badge">OSPF</span> <span class="badge">BGP</span>
+                        <span class="badge">TCP/IP</span> <span class="badge">DNS / DHCP</span>
                     </div>
                     <p>Designing high-performance network topologies, routing protocols, and securing enterprise connectivity frameworks.</p>
                 </div>
                 <div class="card">
-                    <h3>Cloud & Systems Administration</h3>
+                    <h3><i class="fa-solid fa-cloud"></i> Cloud & Systems</h3>
                     <div class="badge-container">
-                        <span class="badge">AWS</span>
-                        <span class="badge">Azure</span>
-                        <span class="badge">Linux / Unix</span>
-                        <span class="badge">Windows Server</span>
-                        <span class="badge">GrapheneOS</span>
+                        <span class="badge">AWS</span> <span class="badge">Azure</span> <span class="badge">Linux / Unix</span>
+                        <span class="badge">Windows Server</span> <span class="badge">GrapheneOS</span>
                     </div>
                     <p>Deploying secure cloud architecture, server provisioning, and cross-platform endpoint security baselines.</p>
                 </div>
                 <div class="card">
-                    <h3>Programming & Tools</h3>
+                    <h3><i class="fa-solid fa-terminal"></i> Tools & Automation</h3>
                     <div class="badge-container">
-                        <span class="badge">Python</span>
-                        <span class="badge">Bash</span>
-                        <span class="badge">SQL</span>
-                        <span class="badge">Terraform</span>
-                        <span class="badge">Ansible</span>
-                        <span class="badge">ServiceNow</span>
+                        <span class="badge">Python</span> <span class="badge">Bash</span> <span class="badge">SQL</span>
+                        <span class="badge">Terraform</span> <span class="badge">Ansible</span>
                     </div>
                     <p>Writing backend automation scripts, infrastructure management utilities, and tracking system tickets.</p>
                 </div>
@@ -479,198 +540,147 @@
         </div>
     </section>
 
-    <!-- Slide 3: Professional Experience -->
-    <section id="slide-3">
-        <div class="slide-content">
-            <h2>Professional Experience</h2>
-            <div class="grid-layout">
-                <div class="card">
-                    <h3>Independent IT Consultant & Systems Administrator</h3>
-                    <div class="company-sub">Self-Employed | Feb 2025 - Present</div>
-                    <ul>
-                        <li>Architected and administered local media server environments (Emby), resolving intricate buffering and bandwidth bottlenecks.</li>
-                        <li>Provisioned secure mobile environments using privacy-focused operating systems (GrapheneOS).</li>
-                        <li>Diagnosed wireless dropouts and optimized packet/bandwidth allocation for high-traffic environments.</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>Advisor II - Technical Support</h3>
-                    <div class="company-sub">Concentrix, Canada | Nov 2024 - Feb 2025</div>
-                    <ul>
-                        <li>Delivered expert software tech support, achieving a 95% CSAT rating and 90% first-call resolution metric.</li>
-                        <li>Streamlined service operations by documenting workflows, cutting response times by 30%.</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>IT Support Technician</h3>
-                    <div class="company-sub">Onsite Computer Solutions, Canada | Apr 2024 - Nov 2024</div>
-                    <ul>
-                        <li>Engineered high-performing physical cabling infrastructure, boosting overall connectivity performance by 50%.</li>
-                        <li>Resolved hardware and network failures, upholding a strict 95% systemic operational efficiency rate.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Slide 4: Projects -->
-    <section id="slide-4">
-        <div class="slide-content">
-            <h2>Featured Projects & Repositories</h2>
-            <div class="grid-layout">
-                <div class="card">
-                    <div>
-                        <h3>Network Traffic Analyzer</h3>
-                        <div class="badge-container">
-                            <span class="badge">Python</span>
-                            <span class="badge">Subprocess</span>
-                            <span class="badge">Cross-Platform</span>
-                        </div>
-                        <p>A continuous monitoring utility designed to evaluate round-trip latency, flag performance degradation spikes, and output live diagnostic tables.</p>
-                    </div>
-                    <a href="https://github.com/71Kishan/network-analyzer/" target="_blank" class="btn btn-outline" data-tooltip="View GitHub Code & Readme" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">Source Repository <span class="arrow-icon">↗</span></a>
-                </div>
+    <!-- Slide 4: Experience Timeline -->
+    <section id="experience">
+        <div class="section-content">
+            <h2><i class="fa-solid fa-briefcase"></i> Professional Experience</h2>
+            <div class="timeline">
                 
-                <div class="card">
-                    <div>
-                        <h3>System Hardening Auditor</h3>
-                        <div class="badge-container">
-                            <span class="badge">Python</span>
-                            <span class="badge">OS Security</span>
-                            <span class="badge">Compliance</span>
-                        </div>
-                        <p>An automated audit engine that inspects local endpoint configurations, verifies native firewall states, and checks administrative privileges.</p>
-                    </div>
-                    <a href="https://github.com/71Kishan/system-hardening/" target="_blank" class="btn btn-outline" data-tooltip="View GitHub Code & Readme" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">Source Repository <span class="arrow-icon">↗</span></a>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <h3>AI Job Search & Outreach Pipeline</h3>
-                        <div class="badge-container">
-                            <span class="badge">Python</span>
-                            <span class="badge">Playwright</span>
-                            <span class="badge">Gemini API</span>
-                            <span class="badge">Google Sheets API</span>
-                        </div>
-                        <p>An automated pipeline that scrapes daily job postings across 4 portals, uses Gemini AI to rank role compatibility and generate cold outreach drafts, and syncs live leads to Google Sheets.</p>
-                    </div>
-                    <a href="https://github.com/71Kishan/Job-Search-Automation/" target="_blank" class="btn btn-outline" data-tooltip="View GitHub Code & Readme" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">Source Repository <span class="arrow-icon">↗</span></a>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <h3>Network Design Specification Project</h3>
-                        <div class="company-sub">St. Clair College, Canada | Jan 2023 - Apr 2023</div>
-                        <p>Implemented upgraded physical network layouts, server rack architectures, and advanced Wi-Fi mapping analytics.</p>
-                    </div>
-                    <a href="https://drive.google.com/file/d/1nHaiQ5wNGNsMFbfsfw2fCmzwXEKCuk1W/view?usp=sharing" target="_blank" class="btn btn-outline" data-tooltip="Opens Project Spec Document in Google Drive" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">View File (Google Drive) <span class="arrow-icon">↗</span></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Slide 5: Certifications -->
-    <section id="slide-5">
-        <div class="slide-content">
-            <h2>Certifications & Continuous Learning</h2>
-            <div class="grid-layout">
-                
-                <!-- Python Certificate -->
-                <div class="card">
-                    <div>
-                        <h3>Python Quick Start</h3>
-                        <div class="company-sub">LinkedIn Learning | June 2024</div>
-                        <div class="badge-container">
-                            <span class="badge">Python (Programming Language)</span>
-                        </div>
-                        <p>Focused on foundational programming concepts, syntax, and scripting applications using Python.</p>
-                    </div>
-                    <a href="https://drive.google.com/file/d/1papFruRbwdjsMZASh7HD15nTA1XNJxmr/view?usp=drive_link" target="_blank" class="btn btn-outline" data-tooltip="Verify Python PDF Certificate" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">View Certificate <span class="arrow-icon">↗</span></a>
-                </div>
-
-                <!-- Customer Service Certificate -->
-                <div class="card">
-                    <div>
-                        <h3>Customer Service: Problem-Solving and Troubleshooting</h3>
-                        <div class="company-sub">LinkedIn Learning | June 2024</div>
-                        <div class="badge-container">
-                            <span class="badge">Problem Solving</span>
-                            <span class="badge">Customer Service</span>
-                            <span class="badge">Troubleshooting</span>
-                        </div>
-                        <p>Developed core skills in user communication, issue isolation, and delivering effective technical support resolutions.</p>
-                    </div>
-                    <a href="https://drive.google.com/file/d/1GgwBVfBNS7ubeEQCWua5BFT57Kce-7wr/view?usp=drive_link" target="_blank" class="btn btn-outline" data-tooltip="Verify Problem-Solving PDF Certificate" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">View Certificate <span class="arrow-icon">↗</span></a>
-                </div>
-
-                <!-- CompTIA A+ Certificate -->
-                <div class="card">
-                    <div>
-                        <h3>CompTIA A+ Cert Prep: The Basics</h3>
-                        <div class="company-sub">LinkedIn Learning | September 2022</div>
-                        <div class="badge-container">
-                            <span class="badge">Hardware</span>
-                            <span class="badge">Operating Systems</span>
-                        </div>
-                        <p>Covered foundational IT skills including hardware troubleshooting, operating systems, networking, and security.</p>
-                    </div>
-                    <a href="https://drive.google.com/file/d/1dVHdcIucJmI9w8ywgNnOewAmRf7n6-bD/view?usp=sharing" target="_blank" class="btn btn-outline" data-tooltip="Verify CompTIA A+ Prep PDF Certificate" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">View Certificate <span class="arrow-icon">↗</span></a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Slide 6: Education -->
-    <section id="slide-6">
-        <div class="slide-content">
-            <h2>Education & Academic Record</h2>
-            <div class="grid-layout">
-                <div class="card" style="grid-column: span 2;">
-                    <div>
-                        <h3>St. Clair College, Canada</h3>
-                        <div class="company-sub">September 2020 - May 2023</div>
-                        <p style="color: var(--text-main); font-weight: 600; font-size: 0.95rem;">Advanced Diploma, Computer Systems Technology - Networking</p>
-                        <ul style="margin-top: 0.5rem;">
-                            <li><strong>GPA:</strong> 3.00/4.00</li>
-                            <li><strong>Achievements:</strong> Academic Honors & Academic Distinction</li>
-                            <li>Focus areas included advanced network design, enterprise security systems, infrastructure deployment, and server configurations.</li>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Feb 2025 - Present</span>
+                        <h3 style="color: var(--text-main); margin-bottom: 0.3rem;">Independent IT Consultant</h3>
+                        <p style="color: var(--accent); font-size: 0.85rem; margin-bottom: 1rem; font-weight: 600;">Self-Employed</p>
+                        <ul style="color: var(--text-muted); font-size: 0.9rem; padding-left: 1.2rem; line-height: 1.6;">
+                            <li>Architected and administered local media server environments, resolving buffering and bandwidth bottlenecks.</li>
+                            <li>Provisioned secure mobile environments using privacy-focused operating systems (GrapheneOS).</li>
+                            <li>Diagnosed wireless dropouts and optimized packet/bandwidth allocation.</li>
                         </ul>
                     </div>
-                    <a href="https://drive.google.com/file/d/1BPWZB4ujJtkqQgHxPVzUcjGWxRkiD9y2/view?usp=drive_link" target="_blank" class="btn btn-outline" data-tooltip="View Official St. Clair Graduation Diploma" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 1rem; width: fit-content;">View Diploma <span class="arrow-icon">↗</span></a>
                 </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Nov 2024 - Feb 2025</span>
+                        <h3 style="color: var(--text-main); margin-bottom: 0.3rem;">Advisor II - Technical Support</h3>
+                        <p style="color: var(--accent); font-size: 0.85rem; margin-bottom: 1rem; font-weight: 600;">Concentrix, Canada</p>
+                        <ul style="color: var(--text-muted); font-size: 0.9rem; padding-left: 1.2rem; line-height: 1.6;">
+                            <li>Delivered expert software tech support, achieving a 95% CSAT rating and 90% first-call resolution metric.</li>
+                            <li>Streamlined service operations by documenting workflows, cutting response times by 30%.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Apr 2024 - Nov 2024</span>
+                        <h3 style="color: var(--text-main); margin-bottom: 0.3rem;">IT Support Technician</h3>
+                        <p style="color: var(--accent); font-size: 0.85rem; margin-bottom: 1rem; font-weight: 600;">Onsite Computer Solutions, Canada</p>
+                        <ul style="color: var(--text-muted); font-size: 0.9rem; padding-left: 1.2rem; line-height: 1.6;">
+                            <li>Engineered high-performing physical cabling infrastructure, boosting overall connectivity performance by 50%.</li>
+                            <li>Resolved hardware and network failures, upholding a strict 95% systemic operational efficiency rate.</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Slide 7: Contact -->
-    <section id="slide-7">
-        <div class="slide-content">
-            <h2>Let's Connect</h2>
-            <p class="subtitle">Based in Ahmedabad/Gandhinagar, India. Open to on-site and hybrid roles in IT infrastructure, cloud administration, and networking.</p>
-            <div class="btn-group">
-                <a href="mailto:k.s.panchal7576@gmail.com" class="btn" data-tooltip="Send Direct Email">Email Me <span class="arrow-icon">↗</span></a>
-                <a href="https://www.linkedin.com/in/kspanchal/" target="_blank" class="btn btn-outline" data-tooltip="Open LinkedIn Profile">LinkedIn Profile <span class="arrow-icon">↗</span></a>
-                <a href="https://github.com/71Kishan" target="_blank" class="btn btn-outline" data-tooltip="Open GitHub Profile">GitHub Profile <span class="arrow-icon">↗</span></a>
+    <!-- Slide 5: Projects with Linked Screenshots -->
+    <section id="projects">
+        <div class="section-content">
+            <h2><i class="fa-solid fa-folder-tree"></i> Featured Projects</h2>
+            <div class="grid-layout">
+                
+                <!-- Project 1: Network Analyzer -->
+                <div class="card">
+                    <div class="project-img-wrapper">
+                        <img src="https://raw.githubusercontent.com/71Kishan/network-analyzer/main/analyzer.png" alt="Network Traffic Analyzer">
+                    </div>
+                    <h3>Network Traffic Analyzer</h3>
+                    <div class="badge-container">
+                        <span class="badge">Python</span> <span class="badge">Subprocess</span>
+                    </div>
+                    <p>A continuous monitoring utility designed to evaluate round-trip latency, flag performance degradation spikes, and output live diagnostic tables.</p>
+                    <a href="https://github.com/71Kishan/network-analyzer/" target="_blank" class="btn btn-outline" style="width: fit-content; padding: 0.5rem 1rem; font-size: 0.8rem;"><i class="fa-brands fa-github"></i> Repository</a>
+                </div>
+                
+                <!-- Project 2: System Hardening -->
+                <div class="card">
+                    <div class="project-img-wrapper">
+                        <img src="https://raw.githubusercontent.com/71Kishan/system-hardening/main/hardener.png" alt="System Hardening Auditor">
+                    </div>
+                    <h3>System Hardening Auditor</h3>
+                    <div class="badge-container">
+                        <span class="badge">Python</span> <span class="badge">OS Security</span>
+                    </div>
+                    <p>An automated audit engine that inspects local endpoint configurations, verifies native firewall states, and checks administrative privileges.</p>
+                    <a href="https://github.com/71Kishan/system-hardening/" target="_blank" class="btn btn-outline" style="width: fit-content; padding: 0.5rem 1rem; font-size: 0.8rem;"><i class="fa-brands fa-github"></i> Repository</a>
+                </div>
+
+                <!-- Project 3: Job Search Automation -->
+                <div class="card">
+                    <div class="project-img-wrapper">
+                        <img src="https://raw.githubusercontent.com/71Kishan/Job-Search-Automation/main/job_fetcher.png" alt="AI Job Search Pipeline">
+                    </div>
+                    <h3>AI Job Search Pipeline</h3>
+                    <div class="badge-container">
+                        <span class="badge">Playwright</span> <span class="badge">Gemini API</span>
+                    </div>
+                    <p>An automated pipeline that scrapes daily job postings across 4 portals, uses Gemini AI to rank role compatibility, and syncs leads to Google Sheets.</p>
+                    <a href="https://github.com/71Kishan/Job-Search-Automation/" target="_blank" class="btn btn-outline" style="width: fit-content; padding: 0.5rem 1rem; font-size: 0.8rem;"><i class="fa-brands fa-github"></i> Repository</a>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Cinematic Intersection Observer Script -->
+    <!-- Slide 6: Contact & Credentials Summary -->
+    <section id="contact">
+        <div class="section-content">
+            <h2><i class="fa-solid fa-paper-plane"></i> Let's Connect</h2>
+            <div class="about-grid" style="grid-template-columns: 1fr 1fr;">
+                
+                <div style="background: var(--card-bg); padding: 2rem; border-radius: 14px; border: 1px solid var(--border-color);">
+                    <h3 style="color: var(--text-main); margin-bottom: 1rem;">Get In Touch</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.6;">Based in Ahmedabad/Gandhinagar, India. Currently open to on-site and hybrid roles in IT infrastructure, cloud administration, and networking.</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <a href="mailto:k.s.panchal7576@gmail.com" style="color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 1rem;"><i class="fa-solid fa-envelope" style="color: var(--accent); font-size: 1.2rem;"></i> k.s.panchal7576@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/kspanchal/" target="_blank" style="color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 1rem;"><i class="fa-brands fa-linkedin" style="color: var(--accent); font-size: 1.2rem;"></i> linkedin.com/in/kspanchal</a>
+                        <a href="https://github.com/71Kishan" target="_blank" style="color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 1rem;"><i class="fa-brands fa-github" style="color: var(--accent); font-size: 1.2rem;"></i> github.com/71Kishan</a>
+                    </div>
+                </div>
+
+                <div style="padding: 2rem;">
+                    <h3 style="color: var(--accent); margin-bottom: 1rem;"><i class="fa-solid fa-graduation-cap"></i> Education</h3>
+                    <p style="color: var(--text-main); font-weight: 600;">St. Clair College, Canada</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Advanced Diploma, CST - Networking (GPA: 3.0/4.0)</p>
+                    
+                    <h3 style="color: var(--accent); margin-bottom: 1rem;"><i class="fa-solid fa-certificate"></i> Certifications</h3>
+                    <ul style="color: var(--text-muted); font-size: 0.9rem; list-style: none; display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li><i class="fa-solid fa-check" style="color: #10b981; margin-right: 0.5rem;"></i> Python Quick Start (LinkedIn Learning)</li>
+                        <li><i class="fa-solid fa-check" style="color: #10b981; margin-right: 0.5rem;"></i> Problem-Solving & Troubleshooting</li>
+                        <li><i class="fa-solid fa-check" style="color: #10b981; margin-right: 0.5rem;"></i> CompTIA A+ Cert Prep: The Basics</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll Animation Script -->
     <script>
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                const content = entry.target.querySelector('.slide-content');
                 if (entry.isIntersecting) {
-                    content.classList.add('active');
-                } else {
-                    content.classList.remove('active');
+                    entry.target.classList.add('active');
                 }
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.15 });
 
-        document.querySelectorAll('section').forEach(section => {
+        document.querySelectorAll('.section-content').forEach(section => {
             observer.observe(section);
         });
     </script>
