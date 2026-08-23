@@ -11,7 +11,7 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.15);
+            --accent-glow: rgba(56, 189, 248, 0.2);
             --border-color: rgba(51, 65, 85, 0.8);
             --badge-bg: rgba(56, 189, 248, 0.1);
         }
@@ -256,7 +256,7 @@
             font-weight: 600;
         }
 
-        /* Buttons */
+        /* Base Buttons */
         .btn-group {
             display: flex;
             gap: 1rem;
@@ -275,25 +275,104 @@
             font-weight: 700;
             font-size: 0.88rem;
             text-decoration: none;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
         }
 
         .btn:hover {
             background-color: #0ea5e9;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 5px 20px var(--accent-glow);
         }
 
+        /* Custom Interactive Buttons with Shimmer & Glow */
         .btn-outline {
-            background-color: transparent;
+            background: rgba(15, 23, 42, 0.6);
             color: var(--text-main);
             border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.2), transparent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn-outline:hover::before {
+            left: 100%;
         }
 
         .btn-outline:hover {
-            background-color: rgba(255, 255, 255, 0.03);
             border-color: var(--accent);
             color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--accent-glow);
+        }
+
+        .arrow-icon {
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-outline:hover .arrow-icon {
+            transform: translate(3px, -3px);
+        }
+
+        /* Tooltip Styles */
+        [data-tooltip] {
+            position: relative;
+        }
+
+        [data-tooltip]::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 130%;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background: rgba(15, 23, 42, 0.95);
+            color: var(--accent);
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+        }
+
+        [data-tooltip]::after {
+            content: '';
+            position: absolute;
+            bottom: 112%;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(15, 23, 42, 0.95) transparent transparent transparent;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 100;
+        }
+
+        [data-tooltip]:hover::before,
+        [data-tooltip]:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
 
         /* Scroll Hint */
@@ -346,12 +425,11 @@
     <!-- Slide 1: Introduction -->
     <section id="slide-1">
         <div class="slide-content">
-            <!-- Keep image locally on GitHub as discussed for performance and stability -->
             <img src="Profile_Pic - Kishan Panchal.png" alt="Kishan Panchal" class="hero-img">
             <h1>IT Systems Administrator & <span>Network Specialist</span></h1>
             <p class="subtitle">Highly motivated IT professional with 2+ years of experience resolving complex software and hardware issues, optimizing network traffic (VLANs, OSPF, BGP), and managing cloud/server environments (AWS, Azure).</p>
             <div class="btn-group">
-                <a href="#slide-4" class="btn">View Technical Projects →</a>
+                <a href="#slide-4" class="btn">View Technical Projects <span class="arrow-icon">→</span></a>
                 <a href="#slide-7" class="btn btn-outline">Get in Touch</a>
             </div>
         </div>
@@ -450,7 +528,7 @@
                         </div>
                         <p>A continuous monitoring utility designed to evaluate round-trip latency, flag performance degradation spikes, and output live diagnostic tables.</p>
                     </div>
-                    <a href="https://github.com/71Kishan/network-analyzer/" target="_blank" class="btn btn-outline" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">Source Repository ↗</a>
+                    <a href="https://github.com/71Kishan/network-analyzer/" target="_blank" class="btn btn-outline" data-tooltip="View GitHub Code & Readme" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">Source Repository <span class="arrow-icon">↗</span></a>
                 </div>
                 
                 <div class="card">
@@ -463,7 +541,7 @@
                         </div>
                         <p>An automated audit engine that inspects local endpoint configurations, verifies native firewall states, and checks administrative privileges.</p>
                     </div>
-                    <a href="https://github.com/71Kishan/system-hardening/" target="_blank" class="btn btn-outline" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">Source Repository ↗</a>
+                    <a href="https://github.com/71Kishan/system-hardening/" target="_blank" class="btn btn-outline" data-tooltip="View GitHub Code & Readme" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">Source Repository <span class="arrow-icon">↗</span></a>
                 </div>
 
                 <div class="card">
@@ -477,7 +555,7 @@
                         </div>
                         <p>An automated pipeline that scrapes daily job postings across 4 portals, uses Gemini AI to rank role compatibility and generate cold outreach drafts, and syncs live leads to Google Sheets.</p>
                     </div>
-                    <a href="https://github.com/71Kishan/Job-Search-Automation/" target="_blank" class="btn btn-outline" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">Source Repository ↗</a>
+                    <a href="https://github.com/71Kishan/Job-Search-Automation/" target="_blank" class="btn btn-outline" data-tooltip="View GitHub Code & Readme" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">Source Repository <span class="arrow-icon">↗</span></a>
                 </div>
 
                 <div class="card">
@@ -486,7 +564,7 @@
                         <div class="company-sub">St. Clair College, Canada | Jan 2023 - Apr 2023</div>
                         <p>Implemented upgraded physical network layouts, server rack architectures, and advanced Wi-Fi mapping analytics.</p>
                     </div>
-                    <a href="https://drive.google.com/file/d/1nHaiQ5wNGNsMFbfsfw2fCmzwXEKCuk1W/view?usp=sharing" target="_blank" class="btn btn-outline" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">View File (Google Drive) ↗</a>
+                    <a href="https://drive.google.com/file/d/1nHaiQ5wNGNsMFbfsfw2fCmzwXEKCuk1W/view?usp=sharing" target="_blank" class="btn btn-outline" data-tooltip="Opens Project Spec Document in Google Drive" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">View File (Google Drive) <span class="arrow-icon">↗</span></a>
                 </div>
             </div>
         </div>
@@ -508,7 +586,7 @@
                         </div>
                         <p>Focused on foundational programming concepts, syntax, and scripting applications using Python.</p>
                     </div>
-                    <a href="https://drive.google.com/file/d/1papFruRbwdjsMZASh7HD15nTA1XNJxmr/view?usp=drive_link" target="_blank" class="btn btn-outline" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">View Certificate ↗</a>
+                    <a href="https://drive.google.com/file/d/1papFruRbwdjsMZASh7HD15nTA1XNJxmr/view?usp=drive_link" target="_blank" class="btn btn-outline" data-tooltip="Verify Python PDF Certificate" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">View Certificate <span class="arrow-icon">↗</span></a>
                 </div>
 
                 <!-- Customer Service Certificate -->
@@ -523,7 +601,7 @@
                         </div>
                         <p>Developed core skills in user communication, issue isolation, and delivering effective technical support resolutions.</p>
                     </div>
-                    <a href="https://drive.google.com/file/d/1GgwBVfBNS7ubeEQCWua5BFT57Kce-7wr/view?usp=drive_link" target="_blank" class="btn btn-outline" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">View Certificate ↗</a>
+                    <a href="https://drive.google.com/file/d/1GgwBVfBNS7ubeEQCWua5BFT57Kce-7wr/view?usp=drive_link" target="_blank" class="btn btn-outline" data-tooltip="Verify Problem-Solving PDF Certificate" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">View Certificate <span class="arrow-icon">↗</span></a>
                 </div>
 
                 <!-- CompTIA A+ Certificate -->
@@ -537,7 +615,7 @@
                         </div>
                         <p>Covered foundational IT skills including hardware troubleshooting, operating systems, networking, and security.</p>
                     </div>
-                    <a href="https://drive.google.com/file/d/1dVHdcIucJmI9w8ywgNnOewAmRf7n6-bD/view?usp=sharing" target="_blank" class="btn btn-outline" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">View Certificate ↗</a>
+                    <a href="https://drive.google.com/file/d/1dVHdcIucJmI9w8ywgNnOewAmRf7n6-bD/view?usp=sharing" target="_blank" class="btn btn-outline" data-tooltip="Verify CompTIA A+ Prep PDF Certificate" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 0.5rem; width: fit-content;">View Certificate <span class="arrow-icon">↗</span></a>
                 </div>
 
             </div>
@@ -560,7 +638,7 @@
                             <li>Focus areas included advanced network design, enterprise security systems, infrastructure deployment, and server configurations.</li>
                         </ul>
                     </div>
-                    <a href="https://drive.google.com/file/d/1BPWZB4ujJtkqQgHxPVzUcjGWxRkiD9y2/view?usp=drive_link" target="_blank" class="btn btn-outline" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 1rem; width: fit-content;">View Diploma ↗</a>
+                    <a href="https://drive.google.com/file/d/1BPWZB4ujJtkqQgHxPVzUcjGWxRkiD9y2/view?usp=drive_link" target="_blank" class="btn btn-outline" data-tooltip="View Official St. Clair Graduation Diploma" style="padding: 0.45rem 0.9rem; font-size: 0.8rem; margin-top: 1rem; width: fit-content;">View Diploma <span class="arrow-icon">↗</span></a>
                 </div>
             </div>
         </div>
@@ -572,9 +650,9 @@
             <h2>Let's Connect</h2>
             <p class="subtitle">Based in Ahmedabad/Gandhinagar, India. Open to on-site and hybrid roles in IT infrastructure, cloud administration, and networking.</p>
             <div class="btn-group">
-                <a href="mailto:k.s.panchal7576@gmail.com" class="btn">Email Me ↗</a>
-                <a href="https://www.linkedin.com/in/kspanchal/" target="_blank" class="btn btn-outline">LinkedIn Profile ↗</a>
-                <a href="https://github.com/71Kishan" target="_blank" class="btn btn-outline">GitHub Profile ↗</a>
+                <a href="mailto:k.s.panchal7576@gmail.com" class="btn" data-tooltip="Send Direct Email">Email Me <span class="arrow-icon">↗</span></a>
+                <a href="https://www.linkedin.com/in/kspanchal/" target="_blank" class="btn btn-outline" data-tooltip="Open LinkedIn Profile">LinkedIn Profile <span class="arrow-icon">↗</span></a>
+                <a href="https://github.com/71Kishan" target="_blank" class="btn btn-outline" data-tooltip="Open GitHub Profile">GitHub Profile <span class="arrow-icon">↗</span></a>
             </div>
         </div>
     </section>
