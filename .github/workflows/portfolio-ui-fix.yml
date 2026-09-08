@@ -8,181 +8,129 @@ permissions:
   contents: write
 
 jobs:
-  fix-ui:
+  refine-ui:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
 
-      - name: Patch portfolio UI
+      - name: Apply current portfolio refinements
         shell: python
         run: |
           from pathlib import Path
-          import re
 
-          path = Path("index.html")
-          html = path.read_text(encoding="utf-8")
+          index_path = Path("index.html")
+          styles_path = Path("styles.css")
 
-          # Fix the hero/stage sizing so text never gets clipped at the bottom
-          # of a cinematic viewport.
-          css = r'''
+          html = index_path.read_text(encoding="utf-8")
+          css = styles_path.read_text(encoding="utf-8")
 
-        /* FINAL CINEMATIC FIT + NAVIGATION PATCH */
-        .hero {
-            min-height: auto;
-            padding-top: calc(var(--nav-h) + 38px);
-            padding-bottom: 88px;
-        }
+          old_rack = '''<div class="rack-top">SYSTEM RACK / LOCAL INFRASTRUCTURE</div>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 01</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 02</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 03</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 04</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 05</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 06</b></span>'''
 
-        .hero-grid {
-            min-height: calc(100svh - var(--nav-h) - 70px);
-        }
+          new_rack = '''<div class="rack-top">SYSTEM STACK / WHAT I WORK WITH</div>
+                <span class="rack-row"><i></i><i></i><i></i><b>OS / WIN + LINUX</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>SERVER / LOCAL</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>ENDPOINTS / PROTECTION</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NETWORK / CONNECTIVITY</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>DIAGNOSTICS / TROUBLESHOOTING</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>DOCS / OPERATIONS</b></span>'''
 
-        .story-stage {
-            padding-top: 64px;
-            padding-bottom: 40px;
-        }
+          if old_rack in html:
+              html = html.replace(old_rack, new_rack)
 
-        .stage-copy h2 {
-            font-size: clamp(2.9rem, 5.15vw, 6.2rem);
-            max-width: 720px;
-        }
+          tag_css = '''
 
-        .stage-copy p {
-            max-width: 610px;
-            font-size: clamp(13px, 1.12vw, 15px);
-            line-height: 1.72;
-        }
+/* --------------------------------------------------------------------------
+   Experience / project skill chips
+---------------------------------------------------------------------------- */
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
 
-        .story-stage[data-stage="3"] .stage-copy h2 {
-            max-width: 700px;
-            font-size: clamp(2.65rem, 4.55vw, 5.55rem);
-        }
+.tag-row span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 6px 10px;
+  border: 1px solid rgba(225, 235, 219, 0.14);
+  border-radius: 4px;
+  background: linear-gradient(180deg, rgba(215, 255, 154, 0.025), rgba(215, 255, 154, 0.008));
+  color: #8f998e;
+  font: 500 7px/1 "DM Mono", monospace;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 
-        .story-stage[data-stage="3"] .stage-copy p {
-            max-width: 590px;
-        }
+.tag-row span::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  margin-right: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: rgba(215, 255, 154, 0.62);
+  box-shadow: 0 0 8px rgba(215, 255, 154, 0.15);
+}
 
-        .nav-cut {
-            position: fixed;
-            inset: 0;
-            z-index: 300;
-            pointer-events: none;
-            opacity: 0;
-            background: #050505;
-            transition: opacity .18s ease;
-        }
+.project-card .tag-row {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+}
 
-        .nav-cut.active {
-            opacity: 1;
-        }
+.rack-row {
+  min-height: 48px;
+  height: auto;
+  margin-top: 8px;
+  padding: 9px 10px;
+  grid-template-columns: repeat(3, 1fr) minmax(145px, 1.2fr);
+}
 
-        @media (max-width: 1050px) {
-            .hero-grid {
-                min-height: 0;
-            }
+.rack-row b {
+  color: #8b9589;
+  font-size: 7px;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+}
 
-            .story-stage {
-                padding-top: 78px;
-                padding-bottom: 34px;
-            }
-        }
-
-        @media (max-width: 760px) {
-            .hero {
-                padding-top: calc(var(--nav-h) + 30px);
-                padding-bottom: 70px;
-            }
-
-            .story-stage {
-                padding-top: 72px;
-                padding-bottom: 28px;
-            }
-
-            .stage-copy h2,
-            .story-stage[data-stage="3"] .stage-copy h2 {
-                font-size: clamp(2.45rem, 12.5vw, 4.8rem);
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .nav-cut {
-                transition: none;
-            }
-        }
+@media (max-width: 780px) {
+  .tag-row { gap: 7px; margin-top: 14px; }
+  .tag-row span { min-height: 27px; padding: 6px 8px; }
+  .rack-row { grid-template-columns: repeat(3, 1fr) minmax(105px, 1.2fr); }
+  .rack-row b { font-size: 6px; }
+}
 '''
 
-          marker = '        @keyframes pulse {'
-          if '/* FINAL CINEMATIC FIT + NAVIGATION PATCH */' not in html:
-              html = html.replace(marker, css + '\n' + marker, 1)
+          if 'Experience / project skill chips' not in css:
+              css = css + tag_css
 
-          # Add a cinematic cut layer before the end of body.
-          if '<div class="nav-cut" id="navCut" aria-hidden="true"></div>' not in html:
-              html = html.replace('    <script>\n', '    <div class="nav-cut" id="navCut" aria-hidden="true"></div>\n\n    <script>\n', 1)
+          index_path.write_text(html, encoding="utf-8")
+          styles_path.write_text(css, encoding="utf-8")
 
-          # Direct navigation should not force users to travel through the long
-          # sticky story. Replace the browser's long smooth traversal with a
-          # brief cinematic cut + precise jump to the requested scene.
-          nav_script = r'''
-
-        // Cinematic direct-navigation: scroll naturally for the story experience,
-        // but use a short scene cut when a visitor chooses a menu/CTA target.
-        const navCut = document.getElementById("navCut");
-        const directNavLinks = document.querySelectorAll(
-            '.desktop-nav a[href^="#"], .mobile-menu a[href^="#"], .btn[href^="#"]'
-        );
-
-        directNavLinks.forEach((link) => {
-            link.addEventListener("click", (event) => {
-                const selector = link.getAttribute("href");
-                const target = selector ? document.querySelector(selector) : null;
-                if (!target || !navCut) return;
-
-                event.preventDefault();
-                navCut.classList.add("active");
-
-                window.setTimeout(() => {
-                    const navHeight = parseFloat(
-                        getComputedStyle(document.documentElement).getPropertyValue("--nav-h")
-                    ) || 74;
-                    const top = Math.max(
-                        0,
-                        target.getBoundingClientRect().top + window.scrollY - navHeight - 6
-                    );
-
-                    window.scrollTo({ top, behavior: "auto" });
-                    history.replaceState(null, "", selector);
-
-                    window.setTimeout(() => {
-                        navCut.classList.remove("active");
-                    }, 110);
-                }, 180);
-            });
-        });
-'''
-
-          if 'Cinematic direct-navigation: scroll naturally' not in html:
-              html = html.replace('\n    </script>', nav_script + '\n    </script>', 1)
-
-          path.write_text(html, encoding="utf-8")
-
-      - name: Commit patched portfolio
+      - name: Commit all fixes and remove one-time workflows
+        shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git diff --cached --quiet || git commit -m "fix cinematic scene overflow and direct navigation"
-          git push
 
-      - name: Remove one-time workflow
-        if: always()
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if [ -f .github/workflows/portfolio-ui-fix.yml ]; then
-            git rm .github/workflows/portfolio-ui-fix.yml
-            git commit -m "remove one-time portfolio UI fix workflow"
-            git push
+          git add index.html styles.css
+          git rm -f .github/workflows/portfolio-ui-fix.yml .github/workflows/refine-portfolio-layout.yml 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No portfolio changes were required."
+            exit 0
           fi
+
+          git commit -m "fix: clarify systems visual and restore skill chips"
+          git push
