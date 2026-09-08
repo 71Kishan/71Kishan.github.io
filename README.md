@@ -1,16 +1,27 @@
-# Kishan Panchal - Interactive Portfolio Website
+# Kishan Panchal - IT Systems, Networking & Automation Portfolio
 
-This repository contains the source code for my personal portfolio website, built as a modern, interactive presentation deck. It features a dark professional theme, smooth snap-scrolling navigation, and responsive layouts highlighting my background in networking, cybersecurity, and Python automation.
+Personal technical portfolio showcasing hands-on work across **IT systems, networking, security, and Python automation**.
 
-## 🚀 Live Site
-You can view the live portfolio here: [71kishan.github.io](https://71kishan.github.io/)
+## Live Site
 
-## 🛠️ Built With
-* **HTML5 & CSS3:** Custom styling utilizing CSS Grid, Flexbox, and Scroll Snap mechanics.
-* **JavaScript (ES6+):** Intersection Observer APIs for smooth, dynamic slide animations.
-* **Hosting:** GitHub Pages.
+[71kishan.github.io](https://71kishan.github.io/)
 
-## 📂 Project Structure
-```text
-├── index.html       # Main interactive portfolio page and stylesheet
-└── README.md        # Repository documentation
+## Focus Areas
+
+- Systems and infrastructure support
+- Networking and connectivity troubleshooting
+- Python/BASH automation
+- System hardening and endpoint security
+- Technical documentation and workflow improvement
+
+## Featured Projects
+
+- [Network Analyzer](https://github.com/71Kishan/network-analyzer) - cross-platform connectivity and latency monitoring utility.
+- [System Hardening Auditor](https://github.com/71Kishan/system-hardening) - Windows/Linux security-baseline and firewall audit utility.
+- [Job Search Automation](https://github.com/71Kishan/Job-Search-Automation) - Python/AI workflow for job discovery, matching, and tracking.
+
+## Built With
+
+- **HTML5 & CSS3** - responsive layout, CSS Grid, Flexbox, and Scroll Snap.
+- **JavaScript (ES6+)** - Intersection Observer APIs and interactive navigation.
+- **GitHub Pages** - hosting and deployment.
