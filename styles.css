@@ -1551,3 +1551,212 @@ img { display: block; max-width: 100%; }
     transition-duration: .001ms !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   UI refinements — merged from ui-fixes.css
+   Preserve the cinematic structure, but improve scanability and focus.
+---------------------------------------------------------------------------- */
+
+.rack {
+  width: min(76%, 560px);
+}
+
+.rack-top {
+  color: #7e897d;
+  font-size: 8px;
+}
+
+.rack-row {
+  min-height: 52px;
+  height: auto;
+  margin-top: 9px;
+  grid-template-columns: 8px minmax(0, 1fr);
+  gap: 10px;
+  padding: 9px 11px;
+  transition: border-color .25s ease, background-color .25s ease, transform .25s ease;
+}
+
+.rack-row i {
+  grid-column: 1;
+  grid-row: 1;
+  width: 5px;
+  height: 5px;
+  align-self: center;
+}
+
+.rack-row i:nth-child(2),
+.rack-row i:nth-child(3) {
+  display: none;
+}
+
+.rack-row b {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: left;
+  color: #b2bbae;
+  font-size: 8px;
+  line-height: 1.45;
+  letter-spacing: .08em;
+  white-space: normal;
+}
+
+.rack-row:hover,
+.rack-row:focus-within {
+  border-color: rgba(215,255,154,.24);
+  background: rgba(215,255,154,.045);
+  transform: translateX(3px);
+}
+
+.tag-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.tag-row span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 8px 10px;
+  border: 1px solid rgba(225, 235, 219, .14);
+  border-radius: 4px;
+  background: linear-gradient(180deg, rgba(215, 255, 154, .045), rgba(215, 255, 154, .012));
+  color: #b0baae;
+  font: 500 9px/1 "DM Mono", monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color .22s ease, border-color .22s ease, background-color .22s ease, transform .22s ease, box-shadow .22s ease;
+}
+
+.tag-row span::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: rgba(215, 255, 154, .68);
+  box-shadow: 0 0 8px rgba(215, 255, 154, .16);
+}
+
+.tag-row span:hover,
+.tag-row span:focus-visible {
+  color: #e5eadf;
+  border-color: rgba(215,255,154,.34);
+  background: rgba(215,255,154,.07);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.22), 0 0 18px rgba(215,255,154,.05);
+}
+
+.timeline-item .tag-row {
+  max-width: 100%;
+}
+
+.project-card .tag-row {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+}
+
+.scene-metrics span {
+  color: #8b958a;
+  font-size: 8px;
+  transition: color .22s ease, border-color .22s ease, background-color .22s ease, transform .22s ease;
+}
+
+.scene-metrics span:hover,
+.scene-metrics span:focus-visible {
+  color: #c4ccc1;
+  border-color: rgba(215,255,154,.24);
+  background: rgba(215,255,154,.045);
+  transform: translateY(-2px);
+}
+
+.project-top {
+  color: #7f897e;
+  font-size: 8px;
+}
+
+.automation-visual,
+.automation-visual span {
+  font-size: 8px;
+}
+
+.network-node small {
+  color: #7e887d;
+  font-size: 8px;
+}
+
+.telemetry {
+  color: #7f897c;
+  font-size: 8px;
+}
+
+.telemetry span { color: #788276; }
+
+.architect-label,
+.journey-progress,
+.journey-counter,
+.scroll-cue,
+.mono-note,
+.site-footer {
+  font-size: 8px;
+}
+
+.timeline-meta,
+.project-link,
+.trajectory-step span {
+  font-size: 9px;
+}
+
+.trajectory-step b {
+  font-size: 9px;
+}
+
+@media (max-width: 780px) {
+  .rack {
+    width: 86%;
+  }
+
+  .rack-row {
+    min-height: 47px;
+    padding: 8px 9px;
+  }
+
+  .rack-row b {
+    font-size: 7.5px;
+  }
+
+  .tag-row {
+    gap: 7px;
+    margin-top: 14px;
+  }
+
+  .tag-row span {
+    min-height: 28px;
+    padding: 7px 8px;
+    font-size: 8px;
+  }
+
+  .scene-metrics span {
+    font-size: 8px;
+  }
+
+  .project-top,
+  .automation-visual,
+  .automation-visual span {
+    font-size: 7.5px;
+  }
+}
+
+@media (max-width: 460px) {
+  .tag-row span {
+    font-size: 7.5px;
+  }
+
+  .rack-row b {
+    font-size: 7px;
+  }
+}
