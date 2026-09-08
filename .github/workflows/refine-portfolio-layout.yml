@@ -1,0 +1,109 @@
+name: Refine portfolio layout
+
+on:
+  push:
+    paths:
+      - '.github/workflows/refine-portfolio-layout.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Apply layout fixes
+        shell: python
+        run: |
+          from pathlib import Path
+
+          index = Path('index.html')
+          styles = Path('styles.css')
+
+          html = index.read_text(encoding='utf-8')
+          css = styles.read_text(encoding='utf-8')
+
+          old_rack = '''<div class="rack-top">SYSTEM RACK / LOCAL INFRASTRUCTURE</div>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 01</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 02</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 03</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 04</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 05</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 06</b></span>'''
+
+          new_rack = '''<div class="rack-top">SYSTEM STACK / WHAT I WORK WITH</div>
+                <span class="rack-row"><i></i><i></i><i></i><b>OS / WIN + LINUX</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>SERVER / LOCAL</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>ENDPOINTS / PROTECTION</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NETWORK / CONNECTIVITY</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>DIAGNOSTICS / TROUBLESHOOTING</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>DOCS / OPERATIONS</b></span>'''
+
+          if old_rack in html:
+              html = html.replace(old_rack, new_rack)
+
+          tag_css = '''
+/* Skill / technology chips — readable on desktop, tablet and touch screens. */
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.tag-row span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 6px 10px;
+  border: 1px solid rgba(225, 235, 219, 0.14);
+  border-radius: 4px;
+  background: linear-gradient(180deg, rgba(215, 255, 154, 0.025), rgba(215, 255, 154, 0.008));
+  color: #8f998e;
+  font: 500 7px/1 "DM Mono", monospace;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tag-row span::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: rgba(215, 255, 154, 0.62);
+  box-shadow: 0 0 8px rgba(215, 255, 154, 0.15);
+}
+
+.project-card .tag-row {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+}
+
+@media (max-width: 780px) {
+  .tag-row { gap: 7px; margin-top: 14px; }
+  .tag-row span { min-height: 27px; padding: 6px 8px; }
+}
+'''
+
+          if '/* Skill / technology chips — readable on desktop, tablet and touch screens. */' not in css:
+              css = css.replace('/* Projects */', tag_css + '\n/* Projects */', 1)
+
+          index.write_text(html, encoding='utf-8')
+          styles.write_text(css, encoding='utf-8')
+
+      - name: Commit fixes and remove temporary workflow
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html styles.css
+          git rm .github/workflows/refine-portfolio-layout.yml
+          git commit -m "fix: clarify systems visual and restore skill chips"
+          git push
