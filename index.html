@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#050605">
+  <meta name="theme-color" content="#050705">
   <meta name="color-scheme" content="dark">
   <meta name="description" content="Kishan Panchal — IT Systems & Infrastructure, networking, automation and security.">
   <title>Kishan Panchal | IT Systems & Infrastructure</title>
@@ -12,1480 +12,442 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-  <style>
-    :root {
-      --bg: #050605;
-      --panel: rgba(10, 14, 11, 0.78);
-      --ink: #f4f1e8;
-      --muted: #9a9e96;
-      --line: rgba(230, 238, 225, 0.12);
-      --accent: #d7ff9a;
-      --accent-soft: #98c6a1;
-      --warm: #e9b968;
-      --nav: 72px;
-      --pad: clamp(18px, 4vw, 72px);
-      --max: 1580px;
-    }
-
-    * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      background: var(--bg);
-    }
-
-    body {
-      margin: 0;
-      min-width: 320px;
-      overflow-x: hidden;
-      background:
-        radial-gradient(circle at 55% 12%, rgba(152, 198, 161, 0.045), transparent 28%),
-        linear-gradient(180deg, #050605 0%, #080a08 50%, #030403 100%);
-      color: var(--ink);
-      font-family: Manrope, system-ui, sans-serif;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; }
-    img { display: block; max-width: 100%; }
-    ::selection { background: var(--accent); color: #071006; }
-
-    #system-canvas,
-    .ambient,
-    .grain,
-    .vignette,
-    .page-flash {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    #system-canvas { z-index: -5; }
-    .ambient { z-index: -6; filter: blur(70px); }
-    .ambient-one { background: radial-gradient(circle at 18% 22%, rgba(215, 255, 154, 0.025), transparent 25%); }
-    .ambient-two { background: radial-gradient(circle at 82% 68%, rgba(152, 198, 161, 0.04), transparent 28%); }
-    .grain { z-index: 80; opacity: 0.02; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-    .vignette { z-index: 79; background: radial-gradient(circle, transparent 45%, rgba(0, 0, 0, 0.5) 100%); }
-    .page-flash { z-index: 120; opacity: 0; background: rgba(2, 4, 3, 0.72); transition: opacity 180ms ease; }
-    .page-flash.active { opacity: 1; }
-
-    .topbar {
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 110;
-      height: var(--nav);
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 20px;
-      padding: 10px var(--pad);
-      border-bottom: 1px solid var(--line);
-      background: rgba(4, 6, 5, 0.8);
-      backdrop-filter: blur(18px);
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 11px;
-      font: 700 10px "DM Mono", monospace;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .brand-mark {
-      width: 9px;
-      height: 9px;
-      border: 1px solid var(--accent);
-      transform: rotate(45deg);
-      box-shadow: 0 0 20px rgba(215, 255, 154, 0.15);
-    }
-
-    .desktop-nav {
-      display: flex;
-      gap: clamp(14px, 2vw, 30px);
-      justify-content: center;
-    }
-
-    .desktop-nav a {
-      position: relative;
-      padding: 8px 0;
-      color: #737b73;
-      font: 500 9px "DM Mono", monospace;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .desktop-nav a::after {
-      content: "";
-      position: absolute;
-      right: 100%;
-      bottom: 0;
-      left: 0;
-      height: 1px;
-      background: var(--accent);
-      transition: right 240ms ease;
-    }
-
-    .desktop-nav a:hover,
-    .desktop-nav a.active { color: var(--ink); }
-    .desktop-nav a:hover::after,
-    .desktop-nav a.active::after { right: 0; }
-
-    .availability {
-      justify-self: end;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #8ea48f;
-      font: 500 8px "DM Mono", monospace;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .availability-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 18px rgba(215, 255, 154, 0.35);
-      animation: pulse 2.2s ease-in-out infinite;
-    }
-
-    .menu-button {
-      display: none;
-      width: 42px;
-      height: 42px;
-      place-items: center;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(8, 11, 9, 0.9);
-      color: var(--ink);
-    }
-
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      inset: calc(var(--nav) + 9px) 12px auto;
-      z-index: 109;
-      padding: 10px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(4, 6, 5, 0.97);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(18px);
-    }
-
-    .mobile-nav.open { display: grid; }
-    .mobile-nav a { padding: 14px; color: #b7beb5; font: 500 11px "DM Mono", monospace; letter-spacing: 0.07em; text-transform: uppercase; }
-
-    .scroll-progress {
-      position: fixed;
-      top: var(--nav);
-      left: 0;
-      right: 0;
-      z-index: 108;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .scroll-progress span {
-      display: block;
-      width: 0;
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent-soft), var(--accent));
-    }
-
-    .container { width: min(var(--max), 100%); margin-inline: auto; }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin: 0;
-      color: var(--accent);
-      font: 500 9px "DM Mono", monospace;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 34px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent));
-    }
-
-    .display {
-      font-family: "Space Grotesk", sans-serif;
-      letter-spacing: -0.06em;
-      font-weight: 600;
-    }
-
-    .mono { font-family: "DM Mono", monospace; }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 850ms cubic-bezier(.2,.8,.2,1), transform 850ms cubic-bezier(.2,.8,.2,1);
-    }
-
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* HERO: name + actual portrait. 71K remains a small identity marker only. */
-    .hero {
-      min-height: 100svh;
-      position: relative;
-      display: flex;
-      align-items: center;
-      padding: calc(var(--nav) + 45px) var(--pad) 78px;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(rgba(215,255,154,.022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(215,255,154,.022) 1px, transparent 1px);
-      background-size: 84px 84px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,.65), transparent 88%);
-    }
-
-    .hero-layout {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(430px, .82fr);
-      gap: clamp(40px, 7vw, 120px);
-      align-items: center;
-    }
-
-    .hero-title {
-      margin: 20px 0 0;
-      font-size: clamp(4rem, 7.7vw, 9rem);
-      line-height: .86;
-    }
-
-    .hero-title span { display: block; }
-
-    .hero-role {
-      margin: 17px 0 0;
-      color: var(--accent);
-      font: 600 clamp(1.3rem, 2.4vw, 2.4rem)/1.08 "Space Grotesk", sans-serif;
-      letter-spacing: -.045em;
-    }
-
-    .hero-description {
-      max-width: 700px;
-      margin: 25px 0 0;
-      color: #9da49a;
-      font-size: clamp(14px, 1.18vw, 17px);
-      line-height: 1.85;
-    }
-
-    .hero-description strong { color: var(--ink); }
-
-    .hero-actions,
-    .contact-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .hero-actions { margin-top: 27px; }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      min-height: 45px;
-      padding: 11px 15px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: rgba(10, 13, 11, 0.76);
-      color: #d9ddd4;
-      font-size: 10px;
-      font-weight: 700;
-      transition: transform 320ms ease, border-color 320ms ease, box-shadow 320ms ease;
-    }
-
-    .button:hover { transform: translateY(-3px); border-color: rgba(215,255,154,.3); box-shadow: 0 18px 44px rgba(0,0,0,.3); }
-    .button-primary { color: #071006; background: linear-gradient(135deg, #e3ffa9, #b5dc82); border-color: transparent; }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 25px;
-      margin-top: 22px;
-      color: #687168;
-      font: 500 7px "DM Mono", monospace;
-      letter-spacing: .11em;
-      text-transform: uppercase;
-    }
-
-    .hero-meta strong { color: #acb5aa; font-weight: 500; }
-
-    .portrait-system {
-      position: relative;
-      min-height: min(68vh, 690px);
-      display: grid;
-      place-items: center;
-    }
-
-    .portrait-orbit {
-      position: absolute;
-      width: min(44vw, 620px);
-      aspect-ratio: 1;
-      border: 1px solid rgba(215,255,154,.11);
-      border-radius: 50%;
-      transform: rotate(18deg);
-    }
-
-    .portrait-orbit::before,
-    .portrait-orbit::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(152,198,161,.09);
-    }
-
-    .portrait-orbit::before { inset: 12%; }
-    .portrait-orbit::after { inset: 25%; }
-
-    .portrait-frame {
-      position: relative;
-      z-index: 3;
-      width: min(67%, 480px);
-      aspect-ratio: .78;
-      padding: 13px;
-      border: 1px solid rgba(215,255,154,.2);
-      background: linear-gradient(145deg, rgba(15,21,17,.86), rgba(5,8,6,.97));
-      box-shadow: 0 35px 100px rgba(0,0,0,.5), inset 0 0 70px rgba(215,255,154,.025);
-      clip-path: polygon(7% 0,93% 0,100% 7%,100% 93%,93% 100%,7% 100%,0 93%,0 7%);
-    }
-
-    .portrait-frame::before,
-    .portrait-frame::after {
-      content: "";
-      position: absolute;
-      pointer-events: none;
-      border: 1px solid rgba(152,198,161,.1);
-    }
-
-    .portrait-frame::before { inset: 5%; }
-    .portrait-frame::after { inset: 10%; border-color: rgba(215,255,154,.07); }
-
-    .portrait-image-wrap {
-      position: absolute;
-      inset: 10%;
-      overflow: hidden;
-      background: #0b0f0c;
-    }
-
-    .portrait-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 18%;
-      filter: saturate(.92) contrast(1.03);
-      transform: scale(1.02);
-    }
-
-    .portrait-scan {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 0 46%, rgba(215,255,154,.15) 50%, transparent 54%);
-      mix-blend-mode: screen;
-      animation: portrait-scan 5.5s linear infinite;
-    }
-
-    .portrait-tag {
-      position: absolute;
-      z-index: 5;
-      padding: 8px 10px;
-      border: 1px solid var(--line);
-      background: rgba(5,8,6,.86);
-      color: #6f7a70;
-      font: 500 7px "DM Mono", monospace;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      backdrop-filter: blur(10px);
-    }
-
-    .portrait-tag strong { display: block; margin-top: 3px; color: #c0cabf; font-size: 8px; font-weight: 500; }
-    .portrait-tag.top { top: 7%; right: 3%; }
-    .portrait-tag.bottom { bottom: 7%; left: 3%; }
-
-    .portrait-status {
-      position: absolute;
-      z-index: 5;
-      right: 0;
-      bottom: 0;
-      color: #667067;
-      font: 500 7px "DM Mono", monospace;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      writing-mode: vertical-rl;
-    }
-
-    .telemetry {
-      position: absolute;
-      z-index: 4;
-      display: grid;
-      gap: 3px;
-      padding: 8px 10px;
-      border: 1px solid var(--line);
-      background: rgba(5,8,6,.82);
-      color: #6e786f;
-      font: 500 7px "DM Mono", monospace;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .telemetry strong { color: #b6c0b5; font-size: 8px; font-weight: 500; }
-    .telemetry.one { top: 14%; left: 0; }
-    .telemetry.two { top: 36%; right: 0; }
-    .telemetry.three { bottom: 14%; right: 2%; }
-
-    .hero-footer {
-      position: absolute;
-      right: var(--pad);
-      bottom: 23px;
-      left: var(--pad);
-      z-index: 4;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 16px;
-      align-items: center;
-      color: #606960;
-      font: 500 7px "DM Mono", monospace;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-
-    .hero-footer-line { height: 1px; background: linear-gradient(90deg, rgba(215,255,154,.16), transparent); }
-
-    /* Cinematic story */
-    .story {
-      position: relative;
-      min-height: 310svh;
-      scroll-margin-top: var(--nav);
-    }
-
-    .story-pin {
-      position: sticky;
-      top: var(--nav);
-      height: calc(100svh - var(--nav));
-      min-height: 620px;
-      overflow: hidden;
-      border-block: 1px solid var(--line);
-    }
-
-    .story-backdrop {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 66% 46%, rgba(215,255,154,.05), transparent 24%);
-    }
-
-    .story-floor {
-      position: absolute;
-      right: -8%;
-      bottom: -10%;
-      left: 18%;
-      height: 52%;
-      transform: perspective(1200px) rotateX(66deg) rotateZ(-8deg);
-      transform-origin: center bottom;
-      border: 1px solid rgba(215,255,154,.1);
-      background-image:
-        linear-gradient(rgba(215,255,154,.032) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(215,255,154,.032) 1px, transparent 1px);
-      background-size: 54px 54px;
-    }
-
-    .story-stage {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      align-items: center;
-      opacity: 0;
-      transform: translateY(32px) scale(1.035);
-      transition: opacity 800ms cubic-bezier(.2,.8,.2,1), transform 1050ms cubic-bezier(.2,.8,.2,1);
-      pointer-events: none;
-    }
-
-    .story-stage.active { opacity: 1; transform: none; }
-
-    .story-grid {
-      width: min(var(--max), 100%);
-      margin-inline: auto;
-      padding: 60px var(--pad);
-      display: grid;
-      grid-template-columns: .78fr 1.22fr;
-      gap: clamp(35px, 7vw, 120px);
-      align-items: center;
-    }
-
-    .story-copy h2 {
-      max-width: 860px;
-      margin: 16px 0 19px;
-      font-size: clamp(3rem, 6.5vw, 7.6rem);
-      line-height: .9;
-    }
-
-    .story-copy p:not(.eyebrow) {
-      max-width: 660px;
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(14px, 1.18vw, 17px);
-      line-height: 1.85;
-    }
-
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 23px;
-    }
-
-    .stats div {
-      min-width: 116px;
-      padding: 9px 10px;
-      border: 1px solid var(--line);
-      background: rgba(5,8,6,.6);
-    }
-
-    .stats span,
-    .stats strong { display: block; }
-    .stats span { color: #6c766d; font: 500 7px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
-    .stats strong { margin-top: 4px; color: #bbc4ba; font: 500 9px "DM Mono", monospace; text-transform: uppercase; }
-
-    .story-visual { position: relative; min-height: min(66vh, 680px); display: grid; place-items: center; }
-
-    .network-visual .ring {
-      position: absolute;
-      width: min(30vw, 320px);
-      aspect-ratio: 1;
-      border: 1px solid rgba(215,255,154,.2);
-      border-radius: 50%;
-    }
-
-    .network-visual .ring::before,
-    .network-visual .ring::after {
-      content: "";
-      position: absolute;
-      border: 1px solid rgba(152,198,161,.11);
-      border-radius: 50%;
-    }
-
-    .network-visual .ring::before { inset: 18%; }
-    .network-visual .ring::after { inset: 36%; }
-
-    .net-node {
-      position: absolute;
-      width: clamp(58px, 6vw, 82px);
-      aspect-ratio: 1;
-      display: grid;
-      place-items: center;
-      gap: 5px;
-      border: 1px solid rgba(215,255,154,.22);
-      border-radius: 14px;
-      background: rgba(5,8,6,.88);
-    }
-
-    .net-node i { color: var(--accent); }
-    .net-node span { color: #758076; font: 500 6px "DM Mono", monospace; letter-spacing: .1em; }
-    .net-a { left: 8%; top: 20%; }
-    .net-b { left: 42%; top: 5%; }
-    .net-c { right: 7%; top: 22%; }
-    .net-d { left: 14%; bottom: 14%; }
-    .net-e { right: 17%; bottom: 11%; }
-
-    .network-visual::before,
-    .network-visual::after {
-      content: "";
-      position: absolute;
-      left: 18%;
-      width: 64%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(215,255,154,.25), transparent);
-      transform-origin: left center;
-      transform: rotate(17deg);
-    }
-
-    .network-visual::after { transform: rotate(-26deg); }
-
-    .server-box {
-      position: relative;
-      width: min(50%, 420px);
-      height: 70%;
-      padding: 28px;
-      border: 1px solid rgba(215,255,154,.2);
-      background: linear-gradient(180deg, rgba(13,18,14,.9), rgba(5,8,6,.96));
-      box-shadow: 0 30px 90px rgba(0,0,0,.42);
-      clip-path: polygon(5% 0,95% 0,100% 5%,100% 95%,95% 100%,5% 100%,0 95%,0 5%);
-    }
-
-    .server-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      height: 11%;
-      margin-bottom: 9px;
-      padding: 9px;
-      border: 1px solid rgba(215,255,154,.08);
-    }
-
-    .server-row span { border: 1px solid rgba(215,255,154,.06); background: rgba(152,198,161,.03); }
-
-    .command-box {
-      width: min(88%, 700px);
-      padding: 18px;
-      border: 1px solid rgba(215,255,154,.19);
-      background: rgba(5,8,6,.92);
-      box-shadow: 0 30px 90px rgba(0,0,0,.42);
-    }
-
-    .command-top {
-      display: flex;
-      justify-content: space-between;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--line);
-      color: #778178;
-      font: 500 8px "DM Mono", monospace;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .command-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 12px; }
-    .command-cell { padding: 14px; border: 1px solid var(--line); }
-    .command-cell span { display: block; color: #6d776e; font: 500 7px "DM Mono", monospace; text-transform: uppercase; }
-    .command-cell strong { display: block; margin-top: 6px; color: #c0cac0; font: 500 17px "Space Grotesk", sans-serif; }
-    .command-cell i { display: block; position: relative; height: 3px; margin-top: 11px; background: #131914; }
-    .command-cell i::after { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--level); background: linear-gradient(90deg,var(--accent-soft),var(--accent)); }
-    .console { margin-top: 11px; padding: 11px; border: 1px solid var(--line); color: #717b72; font: 400 8px/1.9 "DM Mono", monospace; }
-    .console p { margin: 0; }
-    .console b { color: var(--accent-soft); font-weight: 500; }
-
-    /* Normal sections */
-    .section {
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-      padding: calc(var(--nav) + 85px) var(--pad) 95px;
-      scroll-margin-top: var(--nav);
-    }
-
-    .split-layout {
-      display: grid;
-      grid-template-columns: minmax(250px, .6fr) minmax(0, 1.4fr);
-      gap: clamp(45px, 8vw, 130px);
-      align-items: start;
-    }
-
-    .section-heading h2 { margin: 15px 0 18px; font-size: clamp(3.2rem, 6vw, 7rem); line-height: .9; }
-    .section-heading > p:not(.eyebrow) { max-width: 520px; color: var(--muted); font-size: 14px; line-height: 1.85; }
-
-    .experience-list { border-left: 1px solid var(--line); }
-    .experience-card { position: relative; display: grid; grid-template-columns: 46px 1fr; gap: 16px; padding: 5px 0 60px 28px; }
-    .experience-card::before { content: ""; position: absolute; left: -4px; top: 6px; width: 7px; height: 7px; border: 1px solid var(--accent); background: var(--bg); transform: rotate(45deg); }
-    .experience-index { color: #677168; font: 500 8px "DM Mono", monospace; }
-    .experience-meta { display: flex; flex-wrap: wrap; gap: 8px 17px; color: #758076; font: 500 8px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
-    .experience-card h3 { margin: 11px 0 9px; font: 500 clamp(1.8rem, 3vw, 2.8rem)/1 "Space Grotesk", sans-serif; letter-spacing: -.045em; }
-    .experience-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.84; }
-    .tag-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
-    .tag-row span { padding: 6px 8px; border: 1px solid var(--line); color: #7b857c; font: 500 7px "DM Mono", monospace; text-transform: uppercase; }
-
-    .proof-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 44px; }
-    .proof-heading h2 { margin: 15px 0 0; font-size: clamp(3.3rem, 6.5vw, 7.6rem); line-height: .88; }
-    .proof-note { color: #667067; font-size: 8px; letter-spacing: .13em; text-transform: uppercase; }
-    .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-    .project-card { position: relative; min-height: 390px; padding: 27px; overflow: hidden; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(13,18,14,.9), rgba(5,8,6,.95)); transition: transform 400ms ease, border-color 400ms ease; }
-    .project-card:hover { transform: translateY(-6px); border-color: rgba(215,255,154,.25); }
-    .project-card.wide { grid-column: 1 / -1; min-height: 260px; }
-    .project-topline { display: flex; justify-content: space-between; gap: 15px; color: #7c877e; font: 500 8px "DM Mono", monospace; letter-spacing: .13em; text-transform: uppercase; }
-    .project-topline i { color: var(--accent-soft); }
-    .project-card h3 { max-width: 700px; margin: 72px 0 14px; font: 500 clamp(2rem, 3.3vw, 3.3rem)/.95 "Space Grotesk", sans-serif; letter-spacing: -.05em; }
-    .project-card p { max-width: 720px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.82; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
-    .project-tags span { padding: 6px 8px; border: 1px solid var(--line); color: #7d877d; font: 500 7px "DM Mono", monospace; text-transform: uppercase; }
-    .project-link { position: absolute; right: 27px; bottom: 24px; display: inline-flex; gap: 8px; align-items: center; color: #c6cdc3; font-size: 10px; font-weight: 700; }
-    .wide-content { display: flex; justify-content: space-between; gap: 35px; align-items: end; }
-
-    .direction-layout { display: grid; grid-template-columns: minmax(250px,.72fr) minmax(0,1.28fr); gap: clamp(45px,8vw,120px); align-items: center; }
-    .trajectory { position: relative; min-height: 500px; padding: 38px 30px; overflow: hidden; border: 1px solid var(--line); background: radial-gradient(circle at 50% 50%, rgba(215,255,154,.05), transparent 35%), rgba(7,10,8,.85); }
-    .trajectory::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(215,255,154,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(215,255,154,.025) 1px, transparent 1px); background-size: 48px 48px; }
-    .trajectory-line { position: absolute; top: 50%; right: 11%; left: 11%; height: 1px; background: linear-gradient(90deg, transparent, var(--accent-soft), var(--accent), var(--accent-soft), transparent); }
-    .trajectory-points { position: relative; z-index: 2; min-height: 360px; display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; }
-    .trajectory-point { display: grid; justify-items: center; gap: 10px; text-align: center; }
-    .trajectory-point small { color: #687269; font: 500 7px "DM Mono", monospace; }
-    .trajectory-point i { width: 55px; height: 55px; display: grid; place-items: center; border: 1px solid rgba(215,255,154,.22); border-radius: 50%; background: #070a08; color: var(--accent); }
-    .trajectory-point.current i { border-color: rgba(215,255,154,.45); box-shadow: 0 0 34px rgba(215,255,154,.08); transform: scale(1.06); }
-    .trajectory-point strong { color: #aeb7ad; font: 500 8px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
-    .trajectory-note { position: relative; z-index: 2; margin: 0; color: #687268; font-size: 7px; letter-spacing: .11em; text-align: right; text-transform: uppercase; }
-
-    .contact-panel { position: relative; min-height: 540px; padding: clamp(30px,6vw,74px); overflow: hidden; border: 1px solid var(--line); background: radial-gradient(circle at 78% 40%, rgba(215,255,154,.06), transparent 27%), linear-gradient(145deg, rgba(13,18,14,.9), rgba(5,8,6,.95)); }
-    .contact-panel::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(215,255,154,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(215,255,154,.025) 1px, transparent 1px); background-size: 58px 58px; mask-image: radial-gradient(circle at 75% 50%, black, transparent 58%); }
-    .contact-copy { position: relative; z-index: 2; max-width: 900px; }
-    .contact-copy h2 { margin: 15px 0 20px; font-size: clamp(3.6rem, 7.5vw, 8.6rem); line-height: .85; }
-    .contact-copy > p:not(.eyebrow) { max-width: 680px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.84; }
-    .contact-actions { margin-top: 27px; }
-
-    footer { display: flex; justify-content: space-between; gap: 20px; padding: 25px var(--pad) 30px; border-top: 1px solid var(--line); color: #5f675f; font: 500 7px "DM Mono", monospace; letter-spacing: .11em; text-transform: uppercase; }
-    footer strong { color: #879188; font-weight: 500; }
-
-    @keyframes pulse { 0%,100%{opacity:.7;transform:scale(.9)} 50%{opacity:1;transform:scale(1.12)} }
-    @keyframes portrait-scan { 0%{transform:translateY(-115%)} 100%{transform:translateY(115%)} }
-
-    @media (max-width: 1160px) {
-      .hero-layout,
-      .story-grid,
-      .split-layout,
-      .direction-layout { grid-template-columns: 1fr; }
-      .hero-copy { max-width: 900px; }
-      .portrait-system { min-height: 540px; max-width: 820px; margin-inline: auto; width: 100%; }
-      .story-grid { gap: 10px; }
-      .story-visual { min-height: 44vh; }
-    }
-
-    @media (max-width: 820px) {
-      :root { --nav: 64px; --pad: 18px; }
-      .topbar { grid-template-columns: 1fr auto; }
-      .desktop-nav, .availability { display: none; }
-      .menu-button { display: grid; }
-      .hero { padding-top: calc(var(--nav) + 40px); }
-      .hero-title { font-size: clamp(3.4rem, 15vw, 6.2rem); }
-      .hero-role { font-size: clamp(1.15rem, 5vw, 1.9rem); }
-      .hero-description { font-size: 13px; }
-      .portrait-system { min-height: 430px; }
-      .portrait-frame { width: min(72vw, 390px); }
-      .portrait-orbit { width: 90vw; }
-      .hero-footer { grid-template-columns: 1fr auto; }
-      .hero-footer-line { display: none; }
-      .story { min-height: 340svh; }
-      .story-pin { min-height: calc(100svh - var(--nav)); }
-      .story-stage { align-items: start; }
-      .story-grid { padding-top: 62px; }
-      .story-copy h2 { font-size: clamp(2.8rem, 13vw, 5rem); }
-      .story-copy p:not(.eyebrow) { font-size: 13px; }
-      .command-grid { grid-template-columns: 1fr; }
-      .server-box { width: min(58%, 360px); }
-      .project-grid { grid-template-columns: 1fr; }
-      .project-card.wide { grid-column: auto; }
-      .wide-content { display: block; }
-      .project-link { right: 24px; bottom: 22px; }
-      .project-card { min-height: 390px; }
-      .trajectory-points { grid-template-columns: 1fr; grid-template-rows: repeat(5, 1fr); min-height: 405px; }
-      .trajectory-line { top: 13%; right: auto; bottom: 13%; left: 48px; width: 1px; height: auto; background: linear-gradient(180deg, transparent, var(--accent-soft), var(--accent), var(--accent-soft), transparent); }
-      .trajectory-point { grid-template-columns: 42px 50px 1fr; justify-items: start; align-items: center; text-align: left; gap: 12px; }
-      .trajectory-point i { width: 44px; height: 44px; }
-      footer { flex-direction: column; }
-    }
-
-    @media (max-width: 480px) {
-      .hero-actions .button,
-      .contact-actions .button { width: 100%; }
-      .portrait-frame { width: min(78vw, 350px); }
-      .telemetry { transform: scale(.9); }
-      .telemetry.one { left: -4px; }
-      .telemetry.two { right: -4px; }
-      .telemetry.three { right: 0; }
-      .net-node { width: 52px; }
-      .experience-card { grid-template-columns: 1fr; padding-left: 22px; }
-      .project-card { padding: 24px; }
-      .project-card h3 { margin-top: 56px; }
-      .trajectory { min-height: 530px; padding-inline: 22px; }
-      .contact-panel { min-height: 520px; padding: 28px 22px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <canvas id="system-canvas" aria-hidden="true"></canvas>
-  <div class="ambient ambient-one" aria-hidden="true"></div>
-  <div class="ambient ambient-two" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
-  <div class="page-flash" id="page-flash" aria-hidden="true"></div>
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient-glow ambient-glow-a"></div>
+    <div class="ambient-glow ambient-glow-b"></div>
+    <div class="grain"></div>
+    <canvas id="systemCanvas"></canvas>
+  </div>
 
-  <header class="topbar">
-    <a class="brand" href="#profile" aria-label="Return to profile">
-      <span class="brand-mark"></span>
-      <span>71K / SYSTEMS</span>
+  <div class="scene-cut" id="sceneCut" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="#home" aria-label="Kishan Panchal home">
+      <span class="brand-mark">KP</span>
+      <span>Kishan <b>/</b> Systems</span>
     </a>
 
     <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="#profile">Profile</a>
-      <a href="#system">System</a>
+      <a href="#home">Profile</a>
+      <a href="#journey">System</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Proof</a>
       <a href="#direction">Direction</a>
       <a href="#contact">Contact</a>
     </nav>
 
-    <div class="availability">
-      <span class="availability-dot"></span>
+    <div class="header-state">
+      <span class="state-dot"></span>
       <span>Open to opportunities</span>
     </div>
 
-    <button class="menu-button" id="menu-button" type="button" aria-label="Open navigation" aria-expanded="false">
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">
       <i class="fa-solid fa-bars"></i>
+      <span class="sr-only">Open navigation</span>
     </button>
   </header>
 
-  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
-    <a href="#profile">Profile</a>
-    <a href="#system">System</a>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <a href="#home">Profile</a>
+    <a href="#journey">System</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Proof</a>
     <a href="#direction">Direction</a>
     <a href="#contact">Contact</a>
   </nav>
 
-  <div class="scroll-progress" aria-hidden="true">
-    <span id="scroll-progress-bar"></span>
-  </div>
-
   <main>
-    <section class="hero" id="profile">
-      <div class="hero-layout container">
+    <section class="hero scene-section" id="home">
+      <div class="hero-architecture" aria-hidden="true">
+        <span class="architect-line line-1"></span>
+        <span class="architect-line line-2"></span>
+        <span class="architect-line line-3"></span>
+        <span class="architect-label label-1">SYSTEM / 01</span>
+        <span class="architect-label label-2">NETWORK / ACTIVE</span>
+        <span class="architect-label label-3">INDIA / ONLINE</span>
+      </div>
+
+      <div class="hero-shell">
         <div class="hero-copy reveal">
-          <p class="eyebrow">Identity / Systems / Infrastructure</p>
-          <h1 class="display hero-title">
+          <p class="eyebrow">IT SYSTEMS &amp; INFRASTRUCTURE · NETWORKING · AUTOMATION</p>
+          <h1 class="hero-title">
             <span>Kishan</span>
             <span>Panchal</span>
           </h1>
-          <p class="hero-role">IT Systems &amp; Infrastructure</p>
-          <p class="hero-description">
-            IT professional with <strong>2+ years of hands-on experience</strong>
-            across technical support, systems troubleshooting, networking,
-            infrastructure deployment, and technical operations. Building toward
-            <strong>System Administration and Network Engineering</strong>, then
-            deeper into cloud infrastructure, automation, and security.
+          <p class="hero-role">Systems &amp; Infrastructure</p>
+          <p class="hero-lead">
+            IT professional with <strong>2+ years of hands-on experience</strong> across technical support,
+            systems troubleshooting, networking, infrastructure deployment, and technical operations.
+            Building toward <strong>System Administration and Network Engineering</strong>, then deeper into
+            cloud infrastructure, automation, and security.
           </p>
 
           <div class="hero-actions">
-            <a class="button button-primary" href="#system">
+            <a class="button button-primary" href="#journey">
               <i class="fa-solid fa-arrow-down"></i>
               Enter the system
             </a>
-            <a class="button" href="https://github.com/71Kishan" target="_blank" rel="noopener">
+            <a class="button" href="https://github.com/71Kishan" target="_blank" rel="noopener noreferrer">
               <i class="fa-brands fa-github"></i>
               GitHub
             </a>
-            <a class="button" href="https://www.linkedin.com/in/kspanchal/" target="_blank" rel="noopener">
+            <a class="button" href="https://www.linkedin.com/in/kspanchal/" target="_blank" rel="noopener noreferrer">
               <i class="fa-brands fa-linkedin"></i>
               LinkedIn
             </a>
           </div>
 
           <div class="hero-meta">
-            <span>Base <strong>India</strong></span>
-            <span>Focus <strong>Systems / Networking</strong></span>
-            <span>Mode <strong>Build / Troubleshoot / Automate</strong></span>
+            <span><b>Base</b> India</span>
+            <span><b>Focus</b> Systems / Networking</span>
+            <span><b>Mode</b> Build · Troubleshoot · Automate</span>
           </div>
         </div>
 
-        <div class="portrait-system reveal">
-          <div class="portrait-orbit" aria-hidden="true"></div>
+        <div class="hero-portrait reveal">
+          <div class="portrait-stage">
+            <div class="portrait-rail rail-a"></div>
+            <div class="portrait-rail rail-b"></div>
+            <div class="portrait-orbit orbit-a"></div>
+            <div class="portrait-orbit orbit-b"></div>
 
-          <div class="portrait-frame">
-            <div class="portrait-image-wrap">
-              <img
-                class="portrait-image"
-                src="Profile_Pic%20-%20Kishan%20Panchal.png"
-                alt="Kishan Panchal"
-              >
-              <div class="portrait-scan" aria-hidden="true"></div>
+            <div class="portrait-frame">
+              <img src="Profile_Pic - Kishan Panchal.png" alt="Kishan Panchal" class="portrait-image">
+              <div class="portrait-overlay"></div>
+              <div class="portrait-corner corner-tl"></div>
+              <div class="portrait-corner corner-br"></div>
+              <div class="portrait-tag tag-top">PROFILE / VERIFIED</div>
+              <div class="portrait-tag tag-bottom">KISHAN PANCHAL</div>
             </div>
 
-            <div class="portrait-tag top">
-              IDENTITY
-              <strong>VERIFIED</strong>
+            <div class="logo-chip">
+              <img src="LOGO.png" alt="KP logo">
             </div>
 
-            <div class="portrait-tag bottom">
-              DOMAIN
-              <strong>SYSTEMS / NETWORK</strong>
+            <div class="telemetry telemetry-a">
+              <span>Network</span>
+              <strong>Stable</strong>
             </div>
-
-            <div class="portrait-status">PROFILE / ACTIVE</div>
-          </div>
-
-          <div class="telemetry one">
-            NETWORK
-            <strong>STABLE</strong>
-          </div>
-          <div class="telemetry two">
-            SECURITY
-            <strong>HARDENED</strong>
-          </div>
-          <div class="telemetry three">
-            AUTOMATION
-            <strong>ACTIVE</strong>
+            <div class="telemetry telemetry-b">
+              <span>Systems</span>
+              <strong>Operational</strong>
+            </div>
+            <div class="telemetry telemetry-c">
+              <span>Automation</span>
+              <strong>Active</strong>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="hero-footer container">
-        <span>Scroll to explore the system</span>
-        <span class="hero-footer-line"></span>
-        <span>01 / 07</span>
+      <div class="scroll-cue" aria-hidden="true">
+        <span>Scroll to explore</span>
+        <i class="fa-solid fa-arrow-down"></i>
       </div>
     </section>
 
-    <section class="story" id="system" aria-label="Technical journey">
-      <div class="story-pin">
-        <div class="story-backdrop" aria-hidden="true">
-          <div class="story-floor"></div>
+    <section class="journey" id="journey" aria-label="Technical journey">
+      <div class="journey-sticky">
+        <div class="journey-background" aria-hidden="true">
+          <div class="floor-grid"></div>
+          <div class="scene-architecture architecture-network"></div>
+          <div class="scene-architecture architecture-systems"></div>
+          <div class="scene-architecture architecture-control"></div>
         </div>
 
-        <div class="story-stage active">
-          <div class="story-grid">
-            <div class="story-copy">
-              <p class="eyebrow">Scene 01 / Network</p>
-              <h2 class="display">Everything starts with the connection.</h2>
-              <p>
-                Hands-on networking work across physical deployment, connectivity
-                troubleshooting, cabling, DNS, DHCP, VLANs, router configuration,
-                and bandwidth optimization.
-              </p>
-              <div class="stats">
-                <div><span>Topology</span><strong>Mapped</strong></div>
-                <div><span>Traffic</span><strong>Observed</strong></div>
-                <div><span>Latency</span><strong>Diagnosed</strong></div>
-              </div>
-            </div>
-
-            <div class="story-visual network-visual" aria-hidden="true">
-              <div class="ring"></div>
-              <div class="net-node net-a"><i class="fa-solid fa-laptop"></i><span>ENDPOINT</span></div>
-              <div class="net-node net-b"><i class="fa-solid fa-route"></i><span>ROUTER</span></div>
-              <div class="net-node net-c"><i class="fa-solid fa-globe"></i><span>INTERNET</span></div>
-              <div class="net-node net-d"><i class="fa-solid fa-diagram-project"></i><span>SEGMENT</span></div>
-              <div class="net-node net-e"><i class="fa-solid fa-server"></i><span>SERVICES</span></div>
-            </div>
-          </div>
+        <div class="journey-progress" aria-hidden="true">
+          <span class="progress-line"></span>
+          <span class="progress-label">Technical journey</span>
         </div>
 
-        <div class="story-stage">
-          <div class="story-grid">
-            <div class="story-copy">
-              <p class="eyebrow">Scene 02 / Systems</p>
-              <h2 class="display">Then the infrastructure becomes a living system.</h2>
-              <p>
-                Windows and Linux environments, endpoint protection, hardware
-                troubleshooting, local server environments, documentation, and
-                operational support — with reliability and maintainability at the center.
-              </p>
-              <div class="stats">
-                <div><span>Platforms</span><strong>Windows / Linux</strong></div>
-                <div><span>Endpoints</span><strong>Protected</strong></div>
-                <div><span>Operations</span><strong>Documented</strong></div>
-              </div>
-            </div>
-
-            <div class="story-visual" aria-hidden="true">
-              <div class="server-box">
-                <div class="server-row"><span></span><span></span><span></span><span></span></div>
-                <div class="server-row"><span></span><span></span><span></span><span></span></div>
-                <div class="server-row"><span></span><span></span><span></span><span></span></div>
-                <div class="server-row"><span></span><span></span><span></span><span></span></div>
-                <div class="server-row"><span></span><span></span><span></span><span></span></div>
-                <div class="server-row"><span></span><span></span><span></span><span></span></div>
-              </div>
-            </div>
-          </div>
+        <div class="journey-counter">
+          <span id="journeyCounter">01</span>
+          <b>/ 03</b>
         </div>
 
-        <div class="story-stage">
-          <div class="story-grid">
-            <div class="story-copy">
-              <p class="eyebrow">Scene 03 / Automation + Security</p>
-              <h2 class="display">Make the system smarter. Make it harder to break.</h2>
+        <div class="journey-scenes">
+          <article class="journey-scene active" data-scene="1">
+            <div class="journey-copy reveal-scene">
+              <p class="scene-number">01 · NETWORK</p>
+              <h2>Understand the connections.</h2>
               <p>
-                Python and Bash automation, network diagnostics, system-hardening
-                audits, scheduled workflows, and practical security checks form the
-                bridge from support work toward infrastructure engineering.
+                Hands-on networking work across physical deployment, logical design, connectivity troubleshooting,
+                cabling, router configuration, DNS, DHCP, VLANs, and bandwidth optimization.
               </p>
-              <div class="stats">
-                <div><span>Automation</span><strong>Python / Bash</strong></div>
-                <div><span>Security</span><strong>Audited</strong></div>
-                <div><span>Future</span><strong>Cloud</strong></div>
+              <div class="scene-metrics">
+                <span><b>Topology</b> mapped</span>
+                <span><b>Traffic</b> observed</span>
+                <span><b>Latency</b> diagnosed</span>
               </div>
             </div>
 
-            <div class="story-visual" aria-hidden="true">
-              <div class="command-box">
-                <div class="command-top">
-                  <span>INFRASTRUCTURE CONTROL</span>
-                  <span>LIVE</span>
+            <div class="journey-visual network-visual" aria-hidden="true">
+              <svg class="network-lines" viewBox="0 0 700 500" preserveAspectRatio="none">
+                <line x1="80" y1="115" x2="330" y2="210"></line>
+                <line x1="330" y1="210" x2="590" y2="120"></line>
+                <line x1="330" y1="210" x2="235" y2="405"></line>
+                <line x1="330" y1="210" x2="515" y2="390"></line>
+              </svg>
+              <span class="network-node node-a"><i class="fa-solid fa-laptop"></i><small>Endpoint</small></span>
+              <span class="network-node node-b"><i class="fa-solid fa-network-wired"></i><small>Core</small></span>
+              <span class="network-node node-c"><i class="fa-solid fa-globe"></i><small>Internet</small></span>
+              <span class="network-node node-d"><i class="fa-solid fa-server"></i><small>Services</small></span>
+              <span class="network-node node-e"><i class="fa-solid fa-route"></i><small>Router</small></span>
+              <span class="packet packet-a"></span>
+              <span class="packet packet-b"></span>
+            </div>
+          </article>
+
+          <article class="journey-scene" data-scene="2">
+            <div class="journey-copy reveal-scene">
+              <p class="scene-number">02 · SYSTEMS</p>
+              <h2>Make the infrastructure dependable.</h2>
+              <p>
+                Windows and Linux environments, endpoint protection, hardware troubleshooting, local server
+                environments, documentation, and operational support — with reliability and maintainability at the center.
+              </p>
+              <div class="scene-metrics">
+                <span><b>Platforms</b> Windows / Linux</span>
+                <span><b>Endpoints</b> protected</span>
+                <span><b>Operations</b> documented</span>
+              </div>
+            </div>
+
+            <div class="journey-visual systems-visual" aria-hidden="true">
+              <div class="rack">
+                <div class="rack-top">SYSTEM RACK / LOCAL INFRASTRUCTURE</div>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 01</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 02</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 03</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 04</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 05</b></span>
+                <span class="rack-row"><i></i><i></i><i></i><b>NODE 06</b></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="journey-scene" data-scene="3">
+            <div class="journey-copy reveal-scene">
+              <p class="scene-number">03 · AUTOMATION + SECURITY</p>
+              <h2>Make the system smarter. Make it harder to break.</h2>
+              <p>
+                Python and Bash automation, network diagnostics, system-hardening audits, scheduled workflows,
+                and practical security checks form the bridge from support work toward infrastructure engineering.
+              </p>
+              <div class="scene-metrics">
+                <span><b>Automation</b> Python / Bash</span>
+                <span><b>Security</b> audited</span>
+                <span><b>Future</b> cloud</span>
+              </div>
+            </div>
+
+            <div class="journey-visual control-visual" aria-hidden="true">
+              <div class="control-panel">
+                <div class="panel-head">
+                  <span>Infrastructure control</span>
+                  <b>NODE / ONLINE</b>
                 </div>
-                <div class="command-grid">
-                  <div class="command-cell">
-                    <span>Automation</span>
-                    <strong>ACTIVE</strong>
-                    <i style="--level:82%"></i>
-                  </div>
-                  <div class="command-cell">
-                    <span>Hardening</span>
-                    <strong>92%</strong>
-                    <i style="--level:92%"></i>
-                  </div>
-                  <div class="command-cell">
-                    <span>Diagnostics</span>
-                    <strong>READY</strong>
-                    <i style="--level:76%"></i>
-                  </div>
+                <div class="control-grid">
+                  <div class="control-cell"><span>Automation</span><strong>ACTIVE</strong><em style="--load: 78%"></em></div>
+                  <div class="control-cell"><span>Hardening</span><strong>92%</strong><em style="--load: 92%"></em></div>
+                  <div class="control-cell"><span>Diagnostics</span><strong>READY</strong><em style="--load: 84%"></em></div>
                 </div>
-                <div class="console">
-                  <p>[01] route consistency verified</p>
-                  <p>[02] security baseline checked</p>
-                  <p>[03] scheduled workflow <b>online</b></p>
+                <div class="control-console">
+                  <p><b>[01]</b> route consistency verified</p>
+                  <p><b>[02]</b> endpoint baseline checked</p>
+                  <p><b>[03]</b> scheduled workflow <mark>online</mark></p>
                 </div>
               </div>
             </div>
-          </div>
+          </article>
+        </div>
+
+        <div class="journey-dots" aria-label="Journey scenes">
+          <button class="journey-dot active" type="button" data-scene-index="0" aria-label="Network"></button>
+          <button class="journey-dot" type="button" data-scene-index="1" aria-label="Systems"></button>
+          <button class="journey-dot" type="button" data-scene-index="2" aria-label="Automation and security"></button>
         </div>
       </div>
     </section>
 
-    <section class="section" id="experience">
-      <div class="container split-layout">
+    <section class="scene-section experience-section" id="experience">
+      <div class="section-inner split-layout">
         <div class="section-heading reveal">
-          <p class="eyebrow">Scene 04 / Experience</p>
-          <h2 class="display">Experience that compounds.</h2>
+          <p class="eyebrow">Scene 04 · Real-world systems</p>
+          <h2>Experience<br>that compounds.</h2>
           <p>
-            Real support, infrastructure, troubleshooting, and technical operations
-            work — building depth one system at a time.
+            Technical work becomes useful when troubleshooting, documentation, and systems thinking turn into repeatable operational habits.
           </p>
         </div>
 
-        <div class="experience-list">
-          <article class="experience-card reveal">
-            <div class="experience-index">01</div>
-            <div>
-              <div class="experience-meta">
-                <span>Feb 2025 — Present</span>
-                <span>Self-Employed</span>
-              </div>
-              <h3>Independent IT Consultant &amp; Systems Administrator</h3>
-              <p>
-                Architected local media-server environments, resolved network buffering
-                and bandwidth-allocation issues, provisioned privacy-focused mobile
-                environments, and troubleshot wireless connectivity and latency.
-              </p>
-              <div class="tag-row">
-                <span>Systems</span>
-                <span>Networking</span>
-                <span>Endpoint</span>
-                <span>Troubleshooting</span>
-              </div>
-            </div>
+        <div class="timeline reveal">
+          <article class="timeline-item">
+            <div class="timeline-meta">Feb 2025 — Present · Self-Employed</div>
+            <h3>Independent IT Consultant &amp; Systems Administrator</h3>
+            <p>
+              Architected local media-server environments, resolved network buffering and bandwidth-allocation issues,
+              provisioned privacy-focused GrapheneOS environments, and troubleshot wireless connectivity and latency bottlenecks.
+            </p>
+            <div class="tag-row"><span>Systems</span><span>Networking</span><span>Endpoint</span><span>Troubleshooting</span></div>
           </article>
 
-          <article class="experience-card reveal">
-            <div class="experience-index">02</div>
-            <div>
-              <div class="experience-meta">
-                <span>Nov 2024 — Feb 2025</span>
-                <span>Concentrix · Canada</span>
-              </div>
-              <h3>Advisor II — Tech Support</h3>
-              <p>
-                Delivered technical support with a 90% First-Call Resolution rate and
-                95% Customer Satisfaction, while improving workflows through internal
-                documentation that reduced average response time by 30%.
-              </p>
-              <div class="tag-row">
-                <span>Technical Support</span>
-                <span>FCR 90%</span>
-                <span>CSAT 95%</span>
-                <span>Documentation</span>
-              </div>
-            </div>
+          <article class="timeline-item">
+            <div class="timeline-meta">Nov 2024 — Feb 2025 · Concentrix · Canada</div>
+            <h3>Advisor II — Tech Support</h3>
+            <p>
+              Delivered technical support with a 90% First-Call Resolution rate and 95% Customer Satisfaction,
+              while improving team workflows through internal documentation that reduced average response time by 30%.
+            </p>
+            <div class="tag-row"><span>Support</span><span>FCR 90%</span><span>CSAT 95%</span><span>Documentation</span></div>
           </article>
 
-          <article class="experience-card reveal">
-            <div class="experience-index">03</div>
-            <div>
-              <div class="experience-meta">
-                <span>Apr 2024 — Nov 2024</span>
-                <span>Onsite Computer Solutions · Canada</span>
-              </div>
-              <h3>IT Support Technician</h3>
-              <p>
-                Executed physical and logical network redesign work covering cabling,
-                rack layouts, router configurations, hardware troubleshooting, and
-                connectivity optimization.
-              </p>
-              <div class="tag-row">
-                <span>Infrastructure</span>
-                <span>Cabling</span>
-                <span>Routers</span>
-                <span>Hardware</span>
-              </div>
-            </div>
+          <article class="timeline-item">
+            <div class="timeline-meta">Apr 2024 — Nov 2024 · Onsite Computer Solutions · Canada</div>
+            <h3>IT Support Technician</h3>
+            <p>
+              Executed physical and logical network redesign work covering cabling, rack layouts, and router configurations,
+              while diagnosing hardware failures and improving internet connectivity and operational reliability.
+            </p>
+            <div class="tag-row"><span>Infrastructure</span><span>Cabling</span><span>Routers</span><span>Hardware</span></div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="projects">
-      <div class="container">
-        <div class="proof-heading reveal">
+    <section class="scene-section projects-section" id="projects">
+      <div class="section-inner">
+        <div class="projects-header reveal">
           <div>
-            <p class="eyebrow">Scene 05 / Proof of Work</p>
-            <h2 class="display">Built systems, not just slides.</h2>
+            <p class="eyebrow">Scene 05 · Proof of work</p>
+            <h2>Built, tested,<br>documented.</h2>
           </div>
-          <span class="mono proof-note">GitHub / Practical Builds</span>
+          <p class="mono-note">GitHub-backed / practical systems focus</p>
         </div>
 
         <div class="project-grid">
           <article class="project-card reveal">
-            <div class="project-topline">
-              <span>01 / Automation</span>
-              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <div class="project-top"><span>01 / AUTOMATION</span><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div class="project-visual automation-visual" aria-hidden="true">
+              <span>COLLECT</span><i>→</i><span>FILTER</span><i>→</i><span>AI</span><i>→</i><span>TRACK</span>
             </div>
             <h3>Job Search Automation Pipeline</h3>
             <p>
-              Python automation using Playwright, Google Gemini, Pandas, gspread,
-              and Windows Task Scheduler to discover, score, deduplicate, and track jobs.
+              Python automation using Playwright, Google Gemini, Pandas, gspread, and Windows Task Scheduler to discover,
+              score, deduplicate, and track IT/Cybersecurity job leads.
             </p>
-            <div class="project-tags">
-              <span>Python</span>
-              <span>Playwright</span>
-              <span>Gemini</span>
-              <span>Google Sheets</span>
-            </div>
-            <a class="project-link" href="https://github.com/71Kishan/Job-Search-Automation" target="_blank" rel="noopener">
+            <div class="tag-row"><span>Python</span><span>Playwright</span><span>Gemini</span><span>Google Sheets</span></div>
+            <a href="https://github.com/71Kishan/Job-Search-Automation" target="_blank" rel="noopener noreferrer" class="project-link">
               Open repository <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
           </article>
 
           <article class="project-card reveal">
-            <div class="project-topline">
-              <span>02 / Networking</span>
-              <i class="fa-solid fa-network-wired"></i>
+            <div class="project-top"><span>02 / NETWORKING</span><i class="fa-solid fa-network-wired"></i></div>
+            <div class="project-visual network-card-visual" aria-hidden="true">
+              <span class="mini-node"></span><span class="mini-line"></span><span class="mini-node"></span><span class="mini-line"></span><span class="mini-node"></span>
             </div>
             <h3>Network Analyzer Tool</h3>
             <p>
-              Cross-platform Python utility for connectivity monitoring and round-trip
-              latency analysis with configurable thresholds and timestamped logging.
+              Cross-platform Python utility for connectivity monitoring and round-trip latency analysis with configurable thresholds and timestamped diagnostics.
             </p>
-            <div class="project-tags">
-              <span>Python</span>
-              <span>Bash</span>
-              <span>Networking</span>
-              <span>Monitoring</span>
-            </div>
-            <a class="project-link" href="https://github.com/71Kishan/network-analyzer" target="_blank" rel="noopener">
+            <div class="tag-row"><span>Python</span><span>Bash</span><span>Networking</span><span>Monitoring</span></div>
+            <a href="https://github.com/71Kishan/network-analyzer" target="_blank" rel="noopener noreferrer" class="project-link">
               Open repository <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
           </article>
 
           <article class="project-card reveal">
-            <div class="project-topline">
-              <span>03 / Security</span>
-              <i class="fa-solid fa-shield-halved"></i>
+            <div class="project-top"><span>03 / SECURITY</span><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="project-visual security-card-visual" aria-hidden="true">
+              <span class="shield-ring"></span><span class="shield-core"><i class="fa-solid fa-check"></i></span>
+              <small>BASELINE / VERIFIED</small>
             </div>
             <h3>System Hardening Auditor</h3>
             <p>
-              Python audit utility for Windows and Linux checking privileges,
-              operating-system details, and local firewall status as practical hardening verification.
+              Python audit utility for Windows and Linux that checks administrative/root privileges, operating-system details,
+              and local firewall status as practical hardening verification.
             </p>
-            <div class="project-tags">
-              <span>Python</span>
-              <span>Windows</span>
-              <span>Linux</span>
-              <span>Hardening</span>
-            </div>
-            <a class="project-link" href="https://github.com/71Kishan/system-hardening" target="_blank" rel="noopener">
+            <div class="tag-row"><span>Python</span><span>Windows</span><span>Linux</span><span>Hardening</span></div>
+            <a href="https://github.com/71Kishan/system-hardening" target="_blank" rel="noopener noreferrer" class="project-link">
               Open repository <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
           </article>
 
-          <article class="project-card wide reveal">
-            <div class="project-topline">
-              <span>04 / This Interface</span>
-              <i class="fa-solid fa-cube"></i>
+          <article class="project-card reveal">
+            <div class="project-top"><span>04 / THIS INTERFACE</span><img src="LOGO.png" alt="KP logo" class="project-logo"></div>
+            <div class="project-visual portfolio-card-visual" aria-hidden="true">
+              <span class="window-bar"></span><span class="window-line"></span><span class="window-line short"></span><span class="window-line mid"></span>
             </div>
-            <div class="wide-content">
-              <div>
-                <h3>Technical Portfolio</h3>
-                <p>
-                  A responsive cinematic technical interface built to present systems
-                  work, infrastructure thinking, project evidence, and the direction behind it.
-                </p>
-              </div>
-              <a class="project-link" href="https://71kishan.github.io/" target="_blank" rel="noopener">
-                Open portfolio <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            </div>
+            <h3>Technical Portfolio</h3>
+            <p>
+              A responsive cinematic interface designed to present systems work, infrastructure thinking,
+              projects, and the direction behind the work.
+            </p>
+            <div class="tag-row"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span></div>
+            <a href="https://71Kishan.github.io/" target="_blank" rel="noopener noreferrer" class="project-link">
+              Open portfolio <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="direction">
-      <div class="container direction-layout">
+    <section class="scene-section direction-section" id="direction">
+      <div class="section-inner direction-layout">
         <div class="section-heading reveal">
-          <p class="eyebrow">Scene 06 / Direction</p>
-          <h2 class="display">Build deeper. Then build bigger.</h2>
+          <p class="eyebrow">Scene 06 · The road ahead</p>
+          <h2>Build deeper.<br>Then build bigger.</h2>
           <p>
-            The immediate goal is stronger capability in System Administration and
-            Network Engineering. From there, the trajectory expands into cloud
-            infrastructure, automation, and security through real labs and documented work.
+            The immediate goal is stronger capability in System Administration and Network Engineering.
+            From there, the trajectory expands into cloud infrastructure, automation, and security through real labs, documented projects, and increasingly responsible technical work.
           </p>
         </div>
 
         <div class="trajectory reveal">
-          <div class="trajectory-line"></div>
-          <div class="trajectory-points">
-            <div class="trajectory-point">
-              <small>01</small>
-              <i class="fa-solid fa-network-wired"></i>
-              <strong>Networking</strong>
-            </div>
-            <div class="trajectory-point">
-              <small>02</small>
-              <i class="fa-solid fa-server"></i>
-              <strong>Systems</strong>
-            </div>
-            <div class="trajectory-point current">
-              <small>03</small>
-              <i class="fa-solid fa-cloud"></i>
-              <strong>Cloud</strong>
-            </div>
-            <div class="trajectory-point">
-              <small>04</small>
-              <i class="fa-solid fa-gears"></i>
-              <strong>Automation</strong>
-            </div>
-            <div class="trajectory-point">
-              <small>05</small>
-              <i class="fa-solid fa-shield-halved"></i>
-              <strong>Security</strong>
-            </div>
-          </div>
-          <p class="trajectory-note mono">Next node / Cloud Infrastructure</p>
+          <div class="trajectory-grid"></div>
+          <div class="trajectory-route"></div>
+          <div class="trajectory-step"><span>01</span><b>Networking</b><i class="fa-solid fa-network-wired"></i></div>
+          <div class="trajectory-step"><span>02</span><b>Systems</b><i class="fa-solid fa-server"></i></div>
+          <div class="trajectory-step"><span>03</span><b>Cloud</b><i class="fa-solid fa-cloud"></i></div>
+          <div class="trajectory-step"><span>04</span><b>Automation</b><i class="fa-solid fa-gears"></i></div>
+          <div class="trajectory-step"><span>05</span><b>Security</b><i class="fa-solid fa-shield-halved"></i></div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="contact-panel reveal">
-          <div class="contact-copy">
-            <p class="eyebrow">Scene 07 / Connect</p>
-            <h2 class="display">Let's build what's next.</h2>
+    <section class="scene-section contact-section" id="contact">
+      <div class="section-inner">
+        <div class="contact-frame reveal">
+          <div class="contact-scan" aria-hidden="true"></div>
+          <div class="contact-content">
+            <p class="eyebrow">Scene 07 · Connect</p>
+            <h2>Let's build what comes next.</h2>
             <p>
-              Open to opportunities in Systems, Networking, IT Infrastructure,
-              and technical operations — especially roles where strong troubleshooting
-              fundamentals can grow into deeper infrastructure responsibility.
+              Open to opportunities in Systems, Networking, IT Infrastructure, and technical operations — especially roles where strong troubleshooting fundamentals can grow into deeper infrastructure responsibility.
             </p>
-            <div class="contact-actions">
-              <a class="button button-primary" href="mailto:k.s.panchal7576@gmail.com">
-                <i class="fa-solid fa-envelope"></i>
-                Email me
-              </a>
-              <a class="button" href="https://www.linkedin.com/in/kspanchal/" target="_blank" rel="noopener">
-                <i class="fa-brands fa-linkedin"></i>
-                LinkedIn
-              </a>
-              <a class="button" href="https://github.com/71Kishan" target="_blank" rel="noopener">
-                <i class="fa-brands fa-github"></i>
-                GitHub
-              </a>
+            <div class="hero-actions">
+              <a class="button button-primary" href="mailto:k.s.panchal7576@gmail.com"><i class="fa-solid fa-envelope"></i> Email me</a>
+              <a class="button" href="https://www.linkedin.com/in/kspanchal/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+              <a class="button" href="https://github.com/71Kishan" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
             </div>
+          </div>
+          <div class="contact-logo" aria-hidden="true">
+            <img src="LOGO.png" alt="">
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <span>© 2026 Kishan Panchal</span>
-    <span><strong>Systems</strong> · Networking · Automation · Security</span>
+    <span><b>Systems</b> · Networking · Automation · Security</span>
   </footer>
 
-  <script>
-    (() => {
-      "use strict";
-
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const menuButton = document.getElementById("menu-button");
-      const mobileNav = document.getElementById("mobile-nav");
-      const flash = document.getElementById("page-flash");
-      const progressBar = document.getElementById("scroll-progress-bar");
-      const story = document.getElementById("system");
-      const storyStages = [...document.querySelectorAll(".story-stage")];
-      const navLinks = [...document.querySelectorAll(".desktop-nav a")];
-      const sections = [...document.querySelectorAll("main > section")];
-      let rafPending = false;
-
-      const closeMenu = () => {
-        mobileNav?.classList.remove("open");
-        menuButton?.setAttribute("aria-expanded", "false");
-        if (menuButton) menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
-      };
-
-      menuButton?.addEventListener("click", () => {
-        const open = !mobileNav.classList.contains("open");
-        mobileNav.classList.toggle("open", open);
-        menuButton.setAttribute("aria-expanded", String(open));
-        menuButton.innerHTML = open
-          ? '<i class="fa-solid fa-xmark"></i>'
-          : '<i class="fa-solid fa-bars"></i>';
-      });
-
-      function navigateTo(selector) {
-        const target = document.querySelector(selector);
-        if (!target) return;
-        closeMenu();
-        flash?.classList.add("active");
-        const top = target.getBoundingClientRect().top + window.scrollY - 6;
-        window.setTimeout(() => {
-          window.scrollTo({
-            top,
-            behavior: reducedMotion ? "auto" : "smooth"
-          });
-          window.setTimeout(() => flash?.classList.remove("active"), 220);
-        }, reducedMotion ? 0 : 80);
-      }
-
-      document.querySelectorAll('a[href^="#"]').forEach((link) => {
-        link.addEventListener("click", (event) => {
-          const href = link.getAttribute("href");
-          if (!href || href === "#") return;
-          event.preventDefault();
-          navigateTo(href);
-        });
-      });
-
-      const revealObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              revealObserver.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.12 }
-      );
-
-      document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
-
-      function update() {
-        if (rafPending) return;
-        rafPending = true;
-        requestAnimationFrame(() => {
-          const scrollTop = window.scrollY;
-          const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-          if (progressBar) progressBar.style.width = `${(scrollTop / maxScroll) * 100}%`;
-
-          if (story && storyStages.length) {
-            const travel = Math.max(1, story.offsetHeight - window.innerHeight);
-            const p = Math.min(0.999, Math.max(0, -story.getBoundingClientRect().top / travel));
-            const index = Math.min(storyStages.length - 1, Math.floor(p * storyStages.length));
-            storyStages.forEach((stage, i) => stage.classList.toggle("active", i === index));
-          }
-
-          let activeId = "profile";
-          sections.forEach((section) => {
-            if (section.getBoundingClientRect().top <= window.innerHeight * 0.38) {
-              activeId = section.id;
-            }
-          });
-          navLinks.forEach((link) => link.classList.toggle("active", link.getAttribute("href") === `#${activeId}`));
-          rafPending = false;
-        });
-      }
-
-      window.addEventListener("scroll", update, { passive: true });
-      window.addEventListener("resize", update);
-      update();
-
-      const canvas = document.getElementById("system-canvas");
-      const context = canvas?.getContext("2d");
-      let dots = [];
-      const pointer = { x: 0.5, y: 0.5 };
-
-      function resizeCanvas() {
-        if (!canvas || !context) return;
-        const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
-        canvas.width = window.innerWidth * ratio;
-        canvas.height = window.innerHeight * ratio;
-        canvas.style.width = `${window.innerWidth}px`;
-        canvas.style.height = `${window.innerHeight}px`;
-        context.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-        const count = window.innerWidth < 600 ? 18 : window.innerWidth < 1100 ? 30 : 48;
-        dots = Array.from({ length: count }, () => ({
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-          vx: (Math.random() - 0.5) * 0.05,
-          vy: (Math.random() - 0.5) * 0.05,
-          r: Math.random() > 0.85 ? 1.4 : 0.75
-        }));
-      }
-
-      function draw() {
-        if (!canvas || !context) return;
-        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
-        dots.forEach((dot) => {
-          if (!reducedMotion) {
-            dot.x += dot.vx;
-            dot.y += dot.vy;
-          }
-          if (dot.x < 0 || dot.x > window.innerWidth) dot.vx *= -1;
-          if (dot.y < 0 || dot.y > window.innerHeight) dot.vy *= -1;
-        });
-
-        for (let i = 0; i < dots.length; i += 1) {
-          for (let j = i + 1; j < dots.length; j += 1) {
-            const a = dots[i];
-            const b = dots[j];
-            const distance = Math.hypot(a.x - b.x, a.y - b.y);
-            if (distance < 145) {
-              context.strokeStyle = `rgba(215,255,154,${(1 - distance / 145) * 0.09})`;
-              context.beginPath();
-              context.moveTo(a.x, a.y);
-              context.lineTo(b.x, b.y);
-              context.stroke();
-            }
-          }
-        }
-
-        dots.forEach((dot) => {
-          context.fillStyle = dot.r > 1 ? "rgba(215,255,154,.28)" : "rgba(215,255,154,.13)";
-          context.beginPath();
-          context.arc(dot.x, dot.y, dot.r, 0, Math.PI * 2);
-          context.fill();
-        });
-
-        if (!reducedMotion) requestAnimationFrame(draw);
-      }
-
-      window.addEventListener("pointermove", (event) => {
-        pointer.x = event.clientX / window.innerWidth;
-        pointer.y = event.clientY / window.innerHeight;
-      }, { passive: true });
-
-      window.addEventListener("resize", resizeCanvas);
-      resizeCanvas();
-      if (!reducedMotion) draw();
-    })();
-  </script>
+  <script src="script.js" defer></script>
 </body>
 </html>
