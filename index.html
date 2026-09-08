@@ -3,9 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#090a09">
+    <meta name="theme-color" content="#080908">
     <meta name="description" content="Kishan Panchal — IT Systems & Infrastructure professional focused on networking, system administration, automation, and security.">
-    <meta name="color-scheme" content="dark">
     <title>Kishan Panchal | Systems & Infrastructure</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,119 +14,101 @@
 
     <style>
         :root {
-            --ink: #efede6;
-            --muted: #a8a49a;
-            --soft: #c8c4ba;
-            --bg: #090a09;
-            --bg-2: #10110f;
-            --panel: rgba(18, 19, 17, 0.74);
-            --panel-strong: rgba(12, 13, 12, 0.92);
-            --line: rgba(232, 225, 211, 0.12);
-            --line-strong: rgba(232, 180, 103, 0.35);
+            --bg: #080908;
+            --bg-soft: #0e100e;
+            --ink: #f1eee6;
+            --muted: #a39f95;
+            --soft: #c9c4b9;
             --amber: #e2ad64;
-            --amber-soft: rgba(226, 173, 100, 0.16);
-            --sage: #89a49a;
-            --max: 1380px;
-            --pad: clamp(22px, 4vw, 72px);
+            --sage: #91a99f;
+            --line: rgba(235, 227, 211, .12);
+            --line-strong: rgba(226, 173, 100, .35);
+            --max: 1440px;
+            --pad: clamp(20px, 4vw, 72px);
             --nav-h: 74px;
         }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { box-sizing: border-box; }
 
         html {
             min-width: 0;
-            scroll-behavior: smooth;
             background: var(--bg);
+            scroll-behavior: smooth;
         }
 
         body {
             margin: 0;
             overflow-x: hidden;
             color: var(--ink);
-            background: var(--bg);
+            background:
+                radial-gradient(circle at 17% 8%, rgba(226,173,100,.045), transparent 26%),
+                radial-gradient(circle at 84% 42%, rgba(145,169,159,.035), transparent 30%),
+                linear-gradient(180deg, #090a09 0%, #080908 50%, #050605 100%);
             font-family: "Manrope", system-ui, sans-serif;
             text-rendering: optimizeLegibility;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+        a { color: inherit; text-decoration: none; }
+        button, a { -webkit-tap-highlight-color: transparent; }
+        ::selection { color: #17140e; background: var(--amber); }
 
-        button,
-        a {
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        ::selection {
-            color: #11100d;
-            background: var(--amber);
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            z-index: -4;
-            pointer-events: none;
-            background:
-                radial-gradient(circle at 18% 12%, rgba(226, 173, 100, 0.055), transparent 23%),
-                radial-gradient(circle at 82% 36%, rgba(137, 164, 154, 0.045), transparent 28%),
-                linear-gradient(180deg, #0a0b0a 0%, #090a09 48%, #060706 100%);
-        }
-
-        .atmosphere,
         .grain,
         .scanlines,
-        #topology {
+        #topology,
+        .ambient-architecture {
             position: fixed;
             inset: 0;
             pointer-events: none;
         }
 
-        .atmosphere {
-            z-index: -3;
+        .ambient-architecture {
+            z-index: -4;
             overflow: hidden;
+            opacity: .72;
             background:
-                radial-gradient(ellipse at 50% 105%, rgba(226, 173, 100, 0.09), transparent 46%),
-                linear-gradient(116deg, transparent 20%, rgba(226, 173, 100, 0.028) 50%, transparent 78%);
-            animation: atmosphereDrift 22s ease-in-out infinite alternate;
+                linear-gradient(116deg, transparent 22%, rgba(226,173,100,.025) 49%, transparent 74%),
+                linear-gradient(68deg, transparent 35%, rgba(145,169,159,.022) 60%, transparent 78%);
+            animation: atmosphere 24s ease-in-out infinite alternate;
         }
 
+        #topology { z-index: -3; opacity: .38; }
+
         .grain {
-            z-index: 80;
-            opacity: 0.035;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+            z-index: 90;
+            opacity: .028;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
         }
 
         .scanlines {
-            z-index: 79;
-            opacity: 0.06;
-            background: repeating-linear-gradient(180deg, transparent 0 7px, rgba(255,255,255,.018) 8px);
+            z-index: 89;
+            opacity: .035;
+            background: repeating-linear-gradient(180deg, transparent 0 8px, rgba(255,255,255,.02) 9px);
         }
 
-        #topology {
-            z-index: -2;
-            width: 100%;
-            height: 100%;
-            opacity: 0.54;
+        .nav-cut {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            pointer-events: none;
+            opacity: 0;
+            background: #030403;
+            transition: opacity .18s ease;
         }
+        .nav-cut.active { opacity: 1; }
 
         .site-nav {
             position: fixed;
             inset: 0 0 auto;
-            z-index: 100;
+            z-index: 120;
             min-height: var(--nav-h);
             display: grid;
             grid-template-columns: auto 1fr auto;
             align-items: center;
             gap: 24px;
-            padding: 14px var(--pad);
+            padding: 12px var(--pad);
             border-bottom: 1px solid var(--line);
-            background: linear-gradient(180deg, rgba(7,8,7,.94), rgba(7,8,7,.60));
-            backdrop-filter: blur(18px) saturate(120%);
+            background: linear-gradient(180deg, rgba(6,7,6,.96), rgba(6,7,6,.64));
+            backdrop-filter: blur(18px) saturate(115%);
         }
 
         .brand {
@@ -137,83 +118,69 @@
             font-family: "Space Grotesk", sans-serif;
             font-size: 13px;
             font-weight: 700;
-            letter-spacing: .19em;
+            letter-spacing: .18em;
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .brand-mark {
             width: 9px;
             height: 9px;
             border: 1px solid var(--amber);
-            background: var(--amber-soft);
+            background: rgba(226,173,100,.14);
             transform: rotate(45deg);
         }
 
-        .desktop-nav {
-            justify-self: center;
-            display: flex;
-            gap: clamp(16px, 2.2vw, 34px);
-        }
-
+        .desktop-nav { justify-self: center; display: flex; gap: clamp(16px, 2.3vw, 34px); }
         .desktop-nav a {
             position: relative;
             padding: 6px 0;
-            color: #8f8b83;
+            color: #85817a;
             font-size: 11px;
-            letter-spacing: .04em;
-            transition: color .25s ease;
         }
-
         .desktop-nav a::after {
             content: "";
             position: absolute;
-            left: 0;
             right: 100%;
             bottom: 0;
+            left: 0;
             height: 1px;
             background: var(--amber);
-            transition: right .3s ease;
+            transition: right .28s ease;
         }
-
         .desktop-nav a:hover,
-        .desktop-nav a:focus-visible {
-            color: var(--ink);
-        }
-
+        .desktop-nav a:focus-visible { color: var(--ink); }
         .desktop-nav a:hover::after,
-        .desktop-nav a:focus-visible::after {
-            right: 0;
-        }
+        .desktop-nav a:focus-visible::after { right: 0; }
 
         .opportunity {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: #adc0b9;
-            font-family: "DM Mono", monospace;
-            font-size: 9px;
+            color: #aac1b8;
+            font: 500 9px/1 "DM Mono", monospace;
             letter-spacing: .14em;
             text-transform: uppercase;
             white-space: nowrap;
         }
-
         .opportunity i {
             width: 7px;
             height: 7px;
             border-radius: 50%;
-            background: #88b1a4;
-            box-shadow: 0 0 18px rgba(136,177,164,.45);
-            animation: pulse 2.4s ease-in-out infinite;
+            background: #82aa9b;
+            box-shadow: 0 0 16px rgba(130,170,155,.45);
+            animation: pulse 2.6s ease-in-out infinite;
         }
 
         .menu-btn {
             display: none;
             width: 42px;
             height: 42px;
+            place-items: center;
             border: 1px solid var(--line);
             border-radius: 12px;
+            background: rgba(15,16,14,.88);
             color: var(--ink);
-            background: rgba(20,21,19,.8);
             cursor: pointer;
         }
 
@@ -223,70 +190,49 @@
             top: calc(var(--nav-h) + 8px);
             right: 12px;
             left: 12px;
-            z-index: 99;
+            z-index: 119;
             padding: 10px;
             border: 1px solid var(--line);
             border-radius: 16px;
-            background: rgba(9,10,9,.96);
+            background: rgba(7,8,7,.97);
             backdrop-filter: blur(18px);
         }
+        .mobile-menu.open { display: grid; }
+        .mobile-menu a { padding: 14px 12px; border-radius: 10px; color: #b8b3a9; font-size: 13px; }
+        .mobile-menu a:hover { color: var(--ink); background: rgba(226,173,100,.06); }
 
-        .mobile-menu.open {
-            display: grid;
-        }
-
-        .mobile-menu a {
-            padding: 13px 12px;
-            border-radius: 10px;
-            color: #bcb8af;
-            font-size: 13px;
-        }
-
-        .mobile-menu a:hover,
-        .mobile-menu a:focus-visible {
-            color: var(--ink);
-            background: rgba(226,173,100,.07);
-        }
-
-        .container {
-            width: min(var(--max), calc(100% - 2 * var(--pad)));
-            margin-inline: auto;
-        }
+        .container { width: min(var(--max), calc(100% - 2 * var(--pad))); margin-inline: auto; }
 
         .scene {
             position: relative;
             min-height: 100svh;
             display: grid;
             align-items: center;
-            padding: calc(var(--nav-h) + 54px) 0 72px;
+            padding: calc(var(--nav-h) + 72px) 0 86px;
             isolation: isolate;
         }
-
         .scene::before {
             content: attr(data-scene);
             position: absolute;
-            top: calc(var(--nav-h) + 22px);
+            top: calc(var(--nav-h) + 20px);
             right: var(--pad);
-            color: rgba(227,221,210,.24);
-            font-family: "DM Mono", monospace;
-            font-size: 9px;
+            color: rgba(226,221,210,.22);
+            font: 500 9px/1 "DM Mono", monospace;
             letter-spacing: .18em;
         }
 
         .scene-label {
             display: inline-flex;
             align-items: center;
-            gap: 11px;
+            gap: 10px;
             color: var(--amber);
-            font-family: "DM Mono", monospace;
-            font-size: 10px;
-            letter-spacing: .2em;
+            font: 500 10px/1 "DM Mono", monospace;
+            letter-spacing: .19em;
             text-transform: uppercase;
         }
-
         .scene-label::before {
             content: "";
-            width: 34px;
+            width: 32px;
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--amber));
         }
@@ -294,1005 +240,268 @@
         .display {
             font-family: "Space Grotesk", sans-serif;
             font-weight: 600;
-            letter-spacing: -.065em;
+            letter-spacing: -.06em;
         }
 
         /* HERO */
-        .hero {
-            min-height: 100svh;
-        }
-
         .hero-grid {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(380px, .82fr);
-            gap: clamp(44px, 8vw, 120px);
+            grid-template-columns: minmax(0, 1fr) minmax(340px, .86fr);
+            gap: clamp(50px, 8vw, 120px);
             align-items: center;
         }
-
-        .hero-copy {
-            position: relative;
-            z-index: 4;
-        }
-
+        .hero-copy { max-width: 920px; }
         .hero h1 {
-            margin: 24px 0 0;
-            max-width: 900px;
-            font-size: clamp(4.2rem, 9.4vw, 10.5rem);
-            line-height: .87;
+            margin: 22px 0 0;
+            font-size: clamp(4rem, 8.3vw, 9.2rem);
+            line-height: .88;
         }
-
-        .hero h1 span {
-            display: block;
-        }
-
+        .hero h1 span { display: block; }
         .hero h1 .role {
-            margin-top: .12em;
+            margin-top: .14em;
             color: var(--amber);
-            font-size: .35em;
+            font-size: .33em;
             line-height: 1;
-            letter-spacing: -.035em;
+            letter-spacing: -.025em;
             text-transform: uppercase;
         }
-
         .hero-lead {
-            max-width: 720px;
-            margin-top: 34px;
-            color: #aaa69c;
-            font-size: clamp(14px, 1.28vw, 17px);
-            line-height: 1.9;
+            max-width: 700px;
+            margin: 30px 0 0;
+            color: #aaa69e;
+            font-size: clamp(14px, 1.22vw, 17px);
+            line-height: 1.86;
         }
-
-        .hero-lead strong {
-            color: var(--ink);
-            font-weight: 700;
-        }
-
-        .actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 28px;
-        }
-
+        .hero-lead strong { color: var(--ink); }
+        .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
             min-height: 46px;
-            padding: 12px 16px;
+            padding: 11px 15px;
             border: 1px solid var(--line);
             border-radius: 11px;
-            color: #d2cec5;
-            background: rgba(18,19,17,.62);
+            background: rgba(17,18,16,.7);
+            color: #d4d0c7;
             font-size: 12px;
             font-weight: 700;
-            transition: transform .35s ease, border-color .35s ease, background .35s ease, box-shadow .35s ease;
-            touch-action: manipulation;
+            transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
         }
+        .btn-primary { color: #17130d; background: linear-gradient(135deg,#efc37e,#c79650); border-color: transparent; }
+        .btn:hover,.btn:focus-visible { transform: translateY(-3px); border-color: var(--line-strong); box-shadow: 0 18px 42px rgba(0,0,0,.25); }
+        .hero-meta { display: flex; flex-wrap: wrap; gap: 14px 26px; margin-top: 28px; color: #727067; font: 500 9px/1.4 "DM Mono",monospace; letter-spacing:.09em; text-transform:uppercase; }
+        .hero-meta strong { color:#c4bfb4; font-weight:500; }
 
-        .btn:hover,
-        .btn:focus-visible {
-            transform: translateY(-3px);
-            border-color: var(--line-strong);
-            box-shadow: 0 18px 45px rgba(0,0,0,.28);
+        .hero-architecture { position: relative; min-height: 620px; display: grid; place-items: center; }
+        .architecture-frame { position:absolute; inset:7% 5%; border:1px solid rgba(226,173,100,.16); clip-path:polygon(0 8%,8% 0,92% 0,100% 8%,100% 92%,92% 100%,8% 100%,0 92%); }
+        .architecture-frame::before { content:""; position:absolute; inset:13% 10%; border:1px solid rgba(145,169,159,.1); transform:perspective(900px) rotateX(60deg); }
+        .architecture-frame::after { content:""; position:absolute; top:14%; bottom:7%; right:18%; width:1px; background:linear-gradient(transparent,rgba(226,173,100,.35),transparent); }
+        .architecture-glow { position:absolute; width:min(82%,540px); aspect-ratio:1; border-radius:50%; background:radial-gradient(circle,rgba(226,173,100,.12),transparent 65%); filter:blur(10px); }
+        .portrait-shell { position:relative; z-index:3; width:min(64%,390px); aspect-ratio:.82; padding:12px; }
+        .portrait-shell::before,.portrait-shell::after { content:""; position:absolute; inset:0; border:1px solid rgba(226,173,100,.27); clip-path:polygon(0 10%,10% 0,90% 0,100% 10%,100% 90%,90% 100%,10% 100%,0 90%); }
+        .portrait-shell::after { inset:8% -10%; border-color:rgba(145,169,159,.12); }
+        .portrait-frame { position:relative; height:100%; overflow:hidden; border:1px solid rgba(226,173,100,.18); background:#131411; clip-path:polygon(0 10%,10% 0,90% 0,100% 10%,100% 90%,90% 100%,10% 100%,0 90%); box-shadow:0 30px 90px rgba(0,0,0,.4); }
+        .portrait-frame img { width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(.78) contrast(1.05); transform:scale(1.035); }
+        .portrait-tag { position:absolute; z-index:5; padding:8px 10px; border:1px solid var(--line); background:rgba(7,8,7,.86); color:#aaa69c; font:500 8px/1 "DM Mono",monospace; letter-spacing:.12em; text-transform:uppercase; backdrop-filter:blur(10px); }
+        .portrait-tag.one { top:9%; right:-13%; }
+        .portrait-tag.two { bottom:11%; left:-14%; }
+        .scrollcue { position:absolute; bottom:26px; left:50%; display:flex; align-items:center; gap:9px; transform:translateX(-50%); color:#736f67; font:500 8px/1 "DM Mono",monospace; letter-spacing:.17em; text-transform:uppercase; }
+        .scrollcue span { width:40px; height:1px; background:linear-gradient(90deg,transparent,var(--amber),transparent); animation:scan 2.4s ease-in-out infinite; }
+
+        /* CINEMATIC CHAPTERS — normal document flow, no long sticky trap */
+        .chapters { position:relative; }
+        .chapter {
+            position:relative;
+            min-height:100svh;
+            display:grid;
+            align-items:center;
+            padding:calc(var(--nav-h) + 66px) 0 84px;
+            border-top:1px solid var(--line);
+            overflow:hidden;
+            isolation:isolate;
         }
-
-        .btn-primary {
-            color: #17130e;
-            background: linear-gradient(135deg, #edbe78, #ca9750);
-            border-color: transparent;
+        .chapter::before {
+            content:"";
+            position:absolute;
+            inset:0;
+            z-index:-2;
+            background:radial-gradient(circle at 76% 42%, rgba(226,173,100,.045), transparent 35%);
         }
+        .chapter-grid { display:grid; grid-template-columns:.84fr 1.16fr; gap:clamp(42px,7vw,110px); align-items:center; }
+        .chapter-copy h2 { max-width:760px; margin:16px 0 18px; font-size:clamp(3rem,6vw,7rem); line-height:.9; }
+        .chapter-copy p { max-width:610px; margin:0; color:var(--muted); font-size:clamp(14px,1.2vw,16px); line-height:1.8; }
+        .chapter-number { margin-top:26px; color:#6d6a63; font:500 9px/1 "DM Mono",monospace; letter-spacing:.14em; }
 
-        .hero-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px 28px;
-            margin-top: 34px;
-            color: #77746d;
-            font-family: "DM Mono", monospace;
-            font-size: 9px;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-        }
+        .architectural-scene { position:relative; min-height:560px; display:grid; place-items:center; perspective:1200px; }
+        .floor { position:absolute; width:92%; height:66%; border:1px solid rgba(226,173,100,.15); background:linear-gradient(rgba(226,173,100,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(226,173,100,.04) 1px,transparent 1px); background-size:46px 46px; transform:rotateX(63deg) rotateZ(-11deg) translateY(12%); transform-origin:center; }
+        .structure-ring { position:absolute; width:70%; height:34%; border:1px solid rgba(145,169,159,.14); border-radius:50%; transform:rotateX(71deg) rotateZ(-9deg); }
+        .structure-ring.two { width:84%; height:48%; transform:rotateX(71deg) rotateZ(19deg); border-color:rgba(226,173,100,.12); }
+        .core { position:relative; z-index:3; width:min(42%,280px); aspect-ratio:1; border:1px solid rgba(226,173,100,.3); background:linear-gradient(135deg,rgba(26,27,24,.94),rgba(10,11,10,.95)); box-shadow:0 40px 100px rgba(0,0,0,.32); display:grid; place-items:center; }
+        .core::before,.core::after { content:""; position:absolute; border:1px solid rgba(145,169,159,.12); }
+        .core::before { inset:16%; }
+        .core::after { inset:28%; border-color:rgba(226,173,100,.13); }
+        .core i { position:relative; z-index:2; color:var(--amber); font-size:clamp(28px,4vw,50px); }
+        .callout { position:absolute; padding:8px 10px; border:1px solid var(--line); color:#969188; background:rgba(8,9,8,.85); font:500 8px/1 "DM Mono",monospace; letter-spacing:.12em; text-transform:uppercase; }
+        .callout.a { top:12%; left:8%; }
+        .callout.b { top:23%; right:7%; }
+        .callout.c { bottom:14%; left:16%; }
+        .callout.d { bottom:10%; right:10%; }
 
-        .hero-meta strong {
-            color: #c4c0b6;
-            font-weight: 500;
-        }
+        .network-art { position:relative; width:min(92%,720px); min-height:520px; }
+        .network-art .node { position:absolute; width:72px; aspect-ratio:1; display:grid; place-items:center; border:1px solid rgba(226,173,100,.32); border-radius:16px; background:rgba(11,12,11,.9); box-shadow:0 18px 45px rgba(0,0,0,.25); }
+        .network-art .node i { color:var(--amber); }
+        .network-art .node small { position:absolute; top:calc(100% + 8px); left:50%; transform:translateX(-50%); white-space:nowrap; color:#858078; font:500 8px/1 "DM Mono",monospace; letter-spacing:.1em; text-transform:uppercase; }
+        .network-art .node.n1 { left:7%; top:17%; }
+        .network-art .node.n2 { left:42%; top:4%; }
+        .network-art .node.n3 { right:6%; top:20%; }
+        .network-art .node.n4 { left:18%; bottom:14%; }
+        .network-art .node.n5 { right:19%; bottom:11%; }
+        .network-art .node.core-node { left:42%; top:39%; width:94px; background:rgba(226,173,100,.08); }
+        .network-art svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+        .network-art line { stroke:rgba(226,173,100,.28); stroke-width:1.2; stroke-dasharray:7 10; animation:dash 11s linear infinite; }
+        .packet { position:absolute; width:6px; height:6px; border-radius:50%; background:var(--amber); box-shadow:0 0 18px rgba(226,173,100,.5); animation:packet 4.2s linear infinite; }
+        .packet.p1 { left:20%; top:25%; }
+        .packet.p2 { left:49%; top:44%; animation-delay:1.1s; }
+        .packet.p3 { right:19%; bottom:25%; animation-delay:2.1s; }
 
-        .hero-structure {
-            position: relative;
-            min-height: 620px;
-            display: grid;
-            place-items: center;
-        }
-
-        .structure-plane {
-            position: absolute;
-            width: 92%;
-            height: 72%;
-            border: 1px solid rgba(226,173,100,.18);
-            transform: perspective(900px) rotateX(64deg) rotateZ(-17deg);
-            box-shadow: 0 0 60px rgba(226,173,100,.035);
-        }
-
-        .structure-plane::before,
-        .structure-plane::after {
-            content: "";
-            position: absolute;
-            border: 1px solid rgba(137,164,154,.11);
-        }
-
-        .structure-plane::before {
-            inset: 11% 10%;
-        }
-
-        .structure-plane::after {
-            inset: 22% 21%;
-        }
-
-        .structure-line {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, rgba(226,173,100,.45), transparent);
-            opacity: .45;
-        }
-
-        .structure-line.a { width: 62%; height: 1px; top: 22%; left: 12%; transform: rotate(-11deg); }
-        .structure-line.b { width: 52%; height: 1px; bottom: 24%; right: 7%; transform: rotate(17deg); }
-        .structure-line.c { width: 1px; height: 66%; top: 17%; right: 24%; transform: rotate(8deg); }
-
-        .portrait-wrap {
-            position: relative;
-            z-index: 3;
-            width: min(66%, 390px);
-            aspect-ratio: .82;
-            padding: 12px;
-        }
-
-        .portrait-wrap::before,
-        .portrait-wrap::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border: 1px solid rgba(226,173,100,.28);
-            clip-path: polygon(0 10%, 10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%);
-        }
-
-        .portrait-wrap::after {
-            inset: 8% -9% 8% 9%;
-            border-color: rgba(137,164,154,.14);
-        }
-
-        .portrait-frame {
-            position: relative;
-            height: 100%;
-            overflow: hidden;
-            border: 1px solid rgba(226,173,100,.18);
-            background: #141412;
-            clip-path: polygon(0 10%, 10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%);
-            box-shadow: 0 26px 90px rgba(0,0,0,.38);
-        }
-
-        .portrait-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            filter: saturate(.78) contrast(1.04);
-            transform: scale(1.035);
-        }
-
-        .tech-tag {
-            position: absolute;
-            z-index: 5;
-            padding: 8px 10px;
-            border: 1px solid var(--line);
-            background: rgba(7,8,7,.84);
-            color: #aaa69b;
-            font-family: "DM Mono", monospace;
-            font-size: 8px;
-            letter-spacing: .13em;
-            text-transform: uppercase;
-            backdrop-filter: blur(10px);
-        }
-
-        .tech-tag.one { top: 9%; right: -13%; }
-        .tech-tag.two { left: -14%; bottom: 12%; }
-
-        .scrollcue {
-            position: absolute;
-            bottom: 28px;
-            left: 50%;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: #74716a;
-            font-family: "DM Mono", monospace;
-            font-size: 8px;
-            letter-spacing: .2em;
-            text-transform: uppercase;
-            transform: translateX(-50%);
-        }
-
-        .scrollcue span {
-            display: block;
-            width: 46px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--amber), transparent);
-            animation: scan 2.3s ease-in-out infinite;
-        }
-
-        /* CINEMATIC STORY SCENES */
-        .story {
-            min-height: 240svh;
-            padding-block: 0;
-        }
-
-        .story-shell {
-            position: sticky;
-            top: var(--nav-h);
-            height: calc(100svh - var(--nav-h));
-            display: grid;
-            align-items: center;
-            overflow: hidden;
-            border-top: 1px solid var(--line);
-            border-bottom: 1px solid var(--line);
-        }
-
-        .story-track {
-            position: absolute;
-            inset: 0;
-        }
-
-        .story-stage {
-            position: absolute;
-            inset: 0;
-            padding: 56px var(--pad);
-            display: grid;
-            align-items: center;
-            opacity: 0;
-            transform: scale(1.04);
-            transition: opacity .8s cubic-bezier(.2,.7,.25,1), transform 1.1s cubic-bezier(.2,.7,.25,1);
-            pointer-events: none;
-        }
-
-        .story-stage.active {
-            opacity: 1;
-            transform: none;
-        }
-
-        .stage-rail {
-            position: absolute;
-            top: 30px;
-            left: var(--pad);
-            right: var(--pad);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: rgba(227,221,210,.26);
-            font-family: "DM Mono", monospace;
-            font-size: 8px;
-            letter-spacing: .15em;
-            text-transform: uppercase;
-        }
-
-        .stage-grid {
-            display: grid;
-            grid-template-columns: .8fr 1.15fr;
-            gap: clamp(40px, 8vw, 120px);
-            align-items: center;
-            width: min(var(--max), 100%);
-            margin-inline: auto;
-        }
-
-        .stage-copy h2 {
-            margin: 16px 0 18px;
-            max-width: 780px;
-            font-size: clamp(3rem, 6vw, 7.3rem);
-            line-height: .9;
-        }
-
-        .stage-copy p {
-            max-width: 640px;
-            color: var(--muted);
-            font-size: clamp(14px, 1.35vw, 17px);
-            line-height: 1.85;
-        }
-
-        .stage-visual {
-            position: relative;
-            min-height: min(64vh, 640px);
-            display: grid;
-            place-items: center;
-        }
-
-        .blueprint {
-            position: absolute;
-            inset: 8%;
-            border: 1px solid rgba(226,173,100,.12);
-            background:
-                linear-gradient(rgba(226,173,100,.045) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(226,173,100,.045) 1px, transparent 1px);
-            background-size: 44px 44px;
-            transform: perspective(900px) rotateX(66deg) rotateZ(-10deg);
-        }
-
-        .network-diagram {
-            position: relative;
-            z-index: 3;
-            width: 82%;
-            max-width: 720px;
-            aspect-ratio: 1.12;
-        }
-
-        .node {
-            position: absolute;
-            width: clamp(54px, 6vw, 78px);
-            aspect-ratio: 1;
-            display: grid;
-            place-items: center;
-            border: 1px solid rgba(226,173,100,.34);
-            border-radius: 16px;
-            background: rgba(12,13,12,.82);
-            box-shadow: 0 18px 40px rgba(0,0,0,.25);
-        }
-
-        .node i {
-            color: var(--amber);
-            font-size: clamp(15px, 2vw, 21px);
-        }
-
-        .node::after {
-            content: attr(data-label);
-            position: absolute;
-            top: calc(100% + 8px);
-            left: 50%;
-            transform: translateX(-50%);
-            color: #8e8a81;
-            font-family: "DM Mono", monospace;
-            font-size: 8px;
-            letter-spacing: .1em;
-            white-space: nowrap;
-            text-transform: uppercase;
-        }
-
-        .n1 { left: 12%; top: 17%; }
-        .n2 { left: 43%; top: 7%; }
-        .n3 { left: 72%; top: 22%; }
-        .n4 { left: 25%; top: 59%; }
-        .n5 { left: 61%; top: 64%; }
-        .n6 { left: 45%; top: 39%; width: clamp(66px, 7vw, 92px); background: rgba(226,173,100,.09); }
-
-        .network-lines {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            overflow: visible;
-        }
-
-        .network-lines line {
-            stroke: rgba(226,173,100,.27);
-            stroke-width: 1.15;
-            stroke-dasharray: 6 9;
-            animation: dash 10s linear infinite;
-        }
-
-        .packet {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--amber);
-            box-shadow: 0 0 18px rgba(226,173,100,.45);
-            animation: packetMove 3.8s linear infinite;
-        }
-
-        .packet.p1 { top: 25%; left: 25%; }
-        .packet.p2 { top: 43%; left: 52%; animation-delay: 1.1s; }
-        .packet.p3 { top: 62%; left: 67%; animation-delay: 2.1s; }
+        .automation-console { width:min(92%,760px); padding:28px; border:1px solid var(--line); background:linear-gradient(145deg,rgba(19,20,18,.92),rgba(8,9,8,.96)); box-shadow:0 35px 90px rgba(0,0,0,.3); }
+        .console-head { display:flex; justify-content:space-between; gap:20px; padding-bottom:16px; border-bottom:1px solid var(--line); font:500 8px/1 "DM Mono",monospace; letter-spacing:.14em; color:#8f8a80; text-transform:uppercase; }
+        .console-body { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; padding-top:18px; }
+        .console-step { min-height:128px; padding:16px; border:1px solid var(--line); background:rgba(15,16,14,.78); display:flex; flex-direction:column; justify-content:space-between; }
+        .console-step i { color:var(--amber); font-size:18px; }
+        .console-step strong { margin-top:18px; font:600 11px/1.1 "Space Grotesk",sans-serif; }
+        .console-step span { margin-top:5px; color:#78756c; font:500 7px/1.4 "DM Mono",monospace; letter-spacing:.08em; text-transform:uppercase; }
 
         /* EXPERIENCE */
-        .experience-layout {
-            display: grid;
-            grid-template-columns: .55fr 1.45fr;
-            gap: clamp(44px, 8vw, 120px);
-            align-items: start;
-        }
-
-        .section-title {
-            margin: 16px 0 0;
-            max-width: 560px;
-            font-size: clamp(3rem, 6vw, 7rem);
-            line-height: .92;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: clamp(22px, 3vw, 42px);
-            border-left: 1px solid var(--line);
-        }
-
-        .role-card {
-            position: relative;
-            padding: 0 0 58px;
-        }
-
-        .role-card:last-child {
-            padding-bottom: 0;
-        }
-
-        .role-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: calc(clamp(22px, 3vw, 42px) * -1 - 4px);
-            width: 7px;
-            height: 7px;
-            border: 1px solid var(--amber);
-            background: var(--bg);
-            transform: rotate(45deg);
-        }
-
-        .role-kicker {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px 18px;
-            color: #a7a39a;
-            font-family: "DM Mono", monospace;
-            font-size: 9px;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-        }
-
-        .role-card h3 {
-            margin: 11px 0 9px;
-            font-family: "Space Grotesk", sans-serif;
-            font-size: clamp(1.6rem, 2.6vw, 2.6rem);
-            font-weight: 500;
-            letter-spacing: -.04em;
-        }
-
-        .role-card p {
-            max-width: 760px;
-            margin: 0;
-            color: var(--muted);
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        .role-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-top: 15px;
-        }
-
-        .role-tags span {
-            padding: 6px 8px;
-            border: 1px solid var(--line);
-            color: #928e86;
-            font-family: "DM Mono", monospace;
-            font-size: 8px;
-        }
+        .experience-layout { display:grid; grid-template-columns:.56fr 1.44fr; gap:clamp(44px,8vw,120px); align-items:start; }
+        .section-title { margin:16px 0 0; max-width:570px; font-size:clamp(3rem,6vw,7rem); line-height:.9; }
+        .timeline { position:relative; padding-left:clamp(22px,3vw,42px); border-left:1px solid var(--line); }
+        .role-card { position:relative; padding:0 0 58px; }
+        .role-card:last-child { padding-bottom:0; }
+        .role-card::before { content:""; position:absolute; top:3px; left:calc(clamp(22px,3vw,42px) * -1 - 4px); width:7px; height:7px; border:1px solid var(--amber); background:var(--bg); transform:rotate(45deg); }
+        .role-kicker { display:flex; flex-wrap:wrap; gap:8px 18px; color:#a19c92; font:500 9px/1.5 "DM Mono",monospace; letter-spacing:.12em; text-transform:uppercase; }
+        .role-card h3 { margin:11px 0 8px; font:500 clamp(1.6rem,2.4vw,2.55rem)/1.02 "Space Grotesk",sans-serif; letter-spacing:-.04em; }
+        .role-card p { max-width:780px; margin:0; color:var(--muted); font-size:14px; line-height:1.8; }
+        .role-tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:15px; }
+        .role-tags span { padding:6px 8px; border:1px solid var(--line); color:#918d84; font:500 8px/1 "DM Mono",monospace; }
 
         /* PROJECTS */
-        .projects {
-            background: linear-gradient(180deg, transparent, rgba(226,173,100,.015), transparent);
-        }
-
-        .projects-head {
-            display: flex;
-            align-items: end;
-            justify-content: space-between;
-            gap: 30px;
-            margin-bottom: 46px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 16px;
-        }
-
-        .project-card {
-            position: relative;
-            min-height: 420px;
-            overflow: hidden;
-            padding: clamp(24px, 3vw, 38px);
-            border: 1px solid var(--line);
-            background: linear-gradient(145deg, rgba(22,23,21,.86), rgba(11,12,11,.88));
-            isolation: isolate;
-            transition: transform .6s cubic-bezier(.2,.75,.2,1), border-color .4s ease;
-        }
-
-        .project-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            background: radial-gradient(circle at var(--mx, 50%) var(--my, 30%), rgba(226,173,100,.12), transparent 34%);
-            opacity: 0;
-            transition: opacity .4s ease;
-        }
-
-        .project-card:hover,
-        .project-card:focus-within {
-            transform: translateY(-6px);
-            border-color: var(--line-strong);
-        }
-
-        .project-card:hover::before,
-        .project-card:focus-within::before {
-            opacity: 1;
-        }
-
-        .project-index {
-            color: rgba(226,173,100,.5);
-            font-family: "DM Mono", monospace;
-            font-size: 9px;
-            letter-spacing: .15em;
-        }
-
-        .project-icon {
-            position: absolute;
-            top: 30px;
-            right: 32px;
-            color: #8d988f;
-            font-size: 20px;
-        }
-
-        .project-card h3 {
-            max-width: 600px;
-            margin: 68px 0 14px;
-            font-family: "Space Grotesk", sans-serif;
-            font-size: clamp(2rem, 3.5vw, 3.3rem);
-            font-weight: 500;
-            line-height: .96;
-            letter-spacing: -.045em;
-        }
-
-        .project-card p {
-            max-width: 650px;
-            color: var(--muted);
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-top: 22px;
-        }
-
-        .project-tech span {
-            padding: 6px 8px;
-            border: 1px solid var(--line);
-            color: #8f8b83;
-            font-family: "DM Mono", monospace;
-            font-size: 8px;
-        }
-
-        .project-link {
-            position: absolute;
-            right: 30px;
-            bottom: 28px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #c9c5bc;
-            font-size: 11px;
-            font-weight: 700;
-        }
+        .projects { background:linear-gradient(180deg,transparent,rgba(226,173,100,.015),transparent); }
+        .projects-head { display:flex; align-items:end; justify-content:space-between; gap:28px; margin-bottom:44px; }
+        .project-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+        .project-card { position:relative; min-height:410px; padding:30px; overflow:hidden; border:1px solid var(--line); background:linear-gradient(145deg,rgba(21,22,19,.9),rgba(9,10,9,.95)); transition:transform .6s cubic-bezier(.2,.75,.2,1),border-color .35s ease; }
+        .project-card::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at var(--mx,50%) var(--my,30%),rgba(226,173,100,.13),transparent 34%); opacity:0; transition:opacity .35s ease; }
+        .project-card:hover,.project-card:focus-within { transform:translateY(-5px); border-color:var(--line-strong); }
+        .project-card:hover::before,.project-card:focus-within::before { opacity:1; }
+        .project-index { color:rgba(226,173,100,.52); font:500 9px/1 "DM Mono",monospace; letter-spacing:.14em; }
+        .project-icon { position:absolute; top:27px; right:28px; color:#8c978f; }
+        .project-card h3 { max-width:600px; margin:66px 0 12px; font:500 clamp(1.9rem,3vw,3.2rem)/.98 "Space Grotesk",sans-serif; letter-spacing:-.045em; }
+        .project-card p { max-width:650px; color:var(--muted); font-size:14px; line-height:1.8; }
+        .project-tech { display:flex; flex-wrap:wrap; gap:7px; margin-top:20px; }
+        .project-tech span { padding:6px 8px; border:1px solid var(--line); color:#8b877e; font:500 8px/1 "DM Mono",monospace; }
+        .project-link { position:absolute; right:28px; bottom:26px; display:inline-flex; gap:8px; align-items:center; color:#c9c4b9; font-size:11px; font-weight:700; }
 
         /* DIRECTION */
-        .direction {
-            min-height: 120svh;
-        }
-
-        .direction-hero {
-            display: grid;
-            grid-template-columns: .72fr 1.28fr;
-            gap: clamp(44px, 8vw, 120px);
-            align-items: center;
-        }
-
-        .direction-copy p {
-            max-width: 650px;
-            color: var(--muted);
-            font-size: clamp(15px, 1.4vw, 18px);
-            line-height: 1.9;
-        }
-
-        .journey {
-            position: relative;
-            min-height: 520px;
-            padding: 40px;
-            border: 1px solid var(--line);
-            overflow: hidden;
-            background: linear-gradient(135deg, rgba(17,18,16,.88), rgba(9,10,9,.92));
-        }
-
-        .journey-line {
-            position: absolute;
-            left: 14%;
-            right: 14%;
-            top: 50%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--amber), rgba(137,164,154,.7), transparent);
-        }
-
-        .journey-nodes {
-            position: relative;
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            align-items: center;
-            gap: 14px;
-        }
-
-        .journey-node {
-            position: relative;
-            display: grid;
-            justify-items: center;
-            gap: 14px;
-        }
-
-        .journey-dot {
-            width: clamp(42px, 5vw, 60px);
-            height: clamp(42px, 5vw, 60px);
-            display: grid;
-            place-items: center;
-            border: 1px solid rgba(226,173,100,.34);
-            border-radius: 50%;
-            background: rgba(13,14,13,.92);
-            box-shadow: 0 0 0 8px rgba(226,173,100,.025);
-        }
-
-        .journey-node:nth-child(3) .journey-dot {
-            border-color: rgba(137,164,154,.38);
-            box-shadow: 0 0 0 8px rgba(137,164,154,.03), 0 0 40px rgba(137,164,154,.06);
-        }
-
-        .journey-dot i {
-            color: var(--amber);
-            font-size: 15px;
-        }
-
-        .journey-node span {
-            color: #b3afa5;
-            font-family: "DM Mono", monospace;
-            font-size: 8px;
-            letter-spacing: .14em;
-            text-align: center;
-            text-transform: uppercase;
-        }
+        .direction-layout { display:grid; grid-template-columns:.72fr 1.28fr; gap:clamp(44px,8vw,120px); align-items:center; }
+        .direction-copy p { max-width:640px; color:var(--muted); font-size:clamp(15px,1.35vw,18px); line-height:1.86; }
+        .journey { position:relative; min-height:420px; padding:42px; border:1px solid var(--line); background:linear-gradient(135deg,rgba(17,18,16,.9),rgba(8,9,8,.96)); overflow:hidden; }
+        .journey::before { content:"SYSTEM EVOLUTION"; position:absolute; top:20px; left:22px; color:rgba(226,173,100,.3); font:500 8px/1 "DM Mono",monospace; letter-spacing:.14em; }
+        .journey-line { position:absolute; left:12%; right:12%; top:50%; height:1px; background:linear-gradient(90deg,transparent,var(--amber),rgba(145,169,159,.7),transparent); }
+        .journey-nodes { position:relative; height:100%; display:grid; grid-template-columns:repeat(5,1fr); align-items:center; gap:12px; }
+        .journey-node { display:grid; justify-items:center; gap:13px; }
+        .journey-dot { width:56px; height:56px; display:grid; place-items:center; border:1px solid rgba(226,173,100,.34); border-radius:50%; background:rgba(12,13,12,.92); box-shadow:0 0 0 8px rgba(226,173,100,.022); }
+        .journey-dot i { color:var(--amber); }
+        .journey-node span { color:#aaa59b; font:500 8px/1 "DM Mono",monospace; letter-spacing:.14em; text-align:center; text-transform:uppercase; }
 
         /* CONTACT */
-        .contact {
-            min-height: 100svh;
-        }
-
-        .contact-shell {
-            position: relative;
-            padding: clamp(34px, 5vw, 62px);
-            border: 1px solid var(--line);
-            overflow: hidden;
-            background:
-                radial-gradient(circle at 84% 25%, rgba(226,173,100,.10), transparent 30%),
-                linear-gradient(135deg, rgba(18,19,17,.92), rgba(10,11,10,.95));
-        }
-
-        .contact-shell::before,
-        .contact-shell::after {
-            content: "";
-            position: absolute;
-            pointer-events: none;
-            border: 1px solid rgba(226,173,100,.09);
-        }
-
-        .contact-shell::before {
-            inset: 9%;
-            transform: rotate(4deg);
-        }
-
-        .contact-shell::after {
-            inset: 15%;
-            transform: rotate(-4deg);
-            border-color: rgba(137,164,154,.08);
-        }
-
-        .contact-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-        }
-
-        .contact-content h2 {
-            margin: 16px 0 18px;
-            font-size: clamp(3.8rem, 8vw, 9rem);
-            line-height: .88;
-        }
-
-        .contact-content p {
-            max-width: 650px;
-            color: var(--muted);
-            font-size: 15px;
-            line-height: 1.85;
-        }
-
-        .contact-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 26px;
-        }
-
-        .footer {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 24px var(--pad) 28px;
-            border-top: 1px solid var(--line);
-            color: #77736b;
-            font-family: "DM Mono", monospace;
-            font-size: 8px;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-        }
-
-        .footer span:last-child {
-            color: #9a958c;
-        }
+        .contact-shell { position:relative; padding:clamp(34px,5vw,62px); overflow:hidden; border:1px solid var(--line); background:radial-gradient(circle at 82% 22%,rgba(226,173,100,.08),transparent 30%),linear-gradient(135deg,rgba(18,19,17,.94),rgba(8,9,8,.96)); }
+        .contact-shell::before,.contact-shell::after { content:""; position:absolute; pointer-events:none; border:1px solid rgba(226,173,100,.08); }
+        .contact-shell::before { inset:9%; transform:rotate(4deg); }
+        .contact-shell::after { inset:15%; transform:rotate(-4deg); border-color:rgba(145,169,159,.07); }
+        .contact-content { position:relative; z-index:2; }
+        .contact-content h2 { margin:16px 0 18px; max-width:1000px; font-size:clamp(3.8rem,8vw,9rem); line-height:.87; }
+        .contact-content p { max-width:660px; color:var(--muted); font-size:15px; line-height:1.84; }
+        .contact-links { display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; }
+        .footer { display:flex; justify-content:space-between; gap:20px; padding:24px var(--pad) 28px; border-top:1px solid var(--line); color:#6f6c65; font:500 8px/1.4 "DM Mono",monospace; letter-spacing:.1em; text-transform:uppercase; }
+        .footer span:last-child { color:#969188; }
 
         /* RESPONSIVE */
         @media (min-width: 1800px) {
-            :root { --max: 1540px; }
-            .hero h1 { font-size: clamp(7rem, 8.5vw, 11rem); }
-            .hero-structure { min-height: 700px; }
-            .portrait-wrap { width: min(61%, 430px); }
+            :root { --max: 1580px; }
+            .hero h1 { font-size:clamp(7rem,7.8vw,11rem); }
+            .hero-architecture { min-height:700px; }
+            .portrait-shell { width:min(60%,440px); }
         }
-
         @media (max-width: 1050px) {
-            .hero-grid,
-            .direction-hero,
-            .experience-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-structure {
-                min-height: 500px;
-                max-width: 680px;
-                margin-inline: auto;
-            }
-
-            .stage-grid {
-                grid-template-columns: 1fr;
-                gap: 22px;
-            }
-
-            .story-stage {
-                padding-block: 38px;
-            }
-
-            .stage-visual {
-                min-height: 44vh;
-                max-width: 720px;
-                width: 100%;
-                margin-inline: auto;
-            }
+            .hero-grid,.chapter-grid,.experience-layout,.direction-layout { grid-template-columns:1fr; }
+            .hero-architecture { min-height:500px; max-width:720px; margin-inline:auto; }
+            .architectural-scene,.network-art { min-height:460px; max-width:820px; margin-inline:auto; }
+            .chapter-copy p { max-width:720px; }
         }
-
         @media (max-width: 760px) {
-            :root {
-                --nav-h: 68px;
-                --pad: max(18px, env(safe-area-inset-left));
-            }
-
-            .site-nav {
-                grid-template-columns: 1fr auto;
-                padding-right: max(18px, env(safe-area-inset-right));
-                padding-top: max(11px, env(safe-area-inset-top));
-            }
-
-            .desktop-nav,
-            .opportunity {
-                display: none;
-            }
-
-            .menu-btn {
-                display: inline-grid;
-                place-items: center;
-                justify-self: end;
-            }
-
-            .scene,
-            .story-stage {
-                padding-right: max(18px, env(safe-area-inset-right));
-                padding-left: max(18px, env(safe-area-inset-left));
-            }
-
-            .scene::before {
-                right: 18px;
-            }
-
-            .hero h1 {
-                font-size: clamp(3.45rem, 16vw, 6rem);
-            }
-
-            .hero-structure {
-                min-height: 430px;
-            }
-
-            .portrait-wrap {
-                width: min(69%, 290px);
-            }
-
-            .tech-tag.one { right: -5%; }
-            .tech-tag.two { left: -5%; }
-
-            .story {
-                min-height: 310svh;
-            }
-
-            .story-shell {
-                height: calc(100svh - var(--nav-h));
-            }
-
-            .stage-copy h2,
-            .section-title {
-                font-size: clamp(2.8rem, 14vw, 5rem);
-            }
-
-            .stage-copy p,
-            .direction-copy p,
-            .role-card p,
-            .project-card p {
-                font-size: 13px;
-                line-height: 1.78;
-            }
-
-            .stage-visual {
-                min-height: 38vh;
-            }
-
-            .network-diagram {
-                width: 100%;
-            }
-
-            .blueprint {
-                inset: 6%;
-            }
-
-            .projects-head {
-                align-items: start;
-                flex-direction: column;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .project-card {
-                min-height: 390px;
-            }
-
-            .journey {
-                min-height: 420px;
-                padding: 24px 16px;
-            }
-
-            .journey-line {
-                top: 14%;
-                bottom: 14%;
-                left: 50%;
-                right: auto;
-                width: 1px;
-                height: auto;
-                background: linear-gradient(180deg, transparent, var(--amber), rgba(137,164,154,.7), transparent);
-            }
-
-            .journey-nodes {
-                grid-template-columns: 1fr;
-                grid-template-rows: repeat(5, 1fr);
-                height: 100%;
-            }
-
-            .journey-node {
-                grid-template-columns: 56px 1fr;
-                justify-items: start;
-                align-items: center;
-                gap: 16px;
-                text-align: left;
-            }
-
-            .journey-node span {
-                text-align: left;
-            }
-
-            .contact-content h2 {
-                font-size: clamp(3.4rem, 15vw, 6.5rem);
-            }
-
-            .footer {
-                flex-direction: column;
-                padding-right: max(18px, env(safe-area-inset-right));
-                padding-left: max(18px, env(safe-area-inset-left));
-            }
+            :root { --nav-h:68px; --pad:max(18px,env(safe-area-inset-left)); }
+            .site-nav { grid-template-columns:1fr auto; padding-right:max(18px,env(safe-area-inset-right)); padding-top:max(11px,env(safe-area-inset-top)); }
+            .desktop-nav,.opportunity { display:none; }
+            .menu-btn { display:grid; justify-self:end; }
+            .scene { padding-right:max(18px,env(safe-area-inset-right)); padding-left:max(18px,env(safe-area-inset-left)); padding-top:calc(var(--nav-h) + 48px); padding-bottom:70px; }
+            .scene::before { right:18px; }
+            .hero { min-height:auto; }
+            .hero h1 { font-size:clamp(3.2rem,16vw,5.8rem); }
+            .hero-lead { font-size:13px; line-height:1.78; }
+            .hero-architecture { min-height:390px; }
+            .portrait-shell { width:min(70%,300px); }
+            .portrait-tag.one { right:-4%; }
+            .portrait-tag.two { left:-4%; }
+            .chapter { min-height:auto; padding-top:90px; padding-bottom:80px; }
+            .chapter-copy h2,.section-title { font-size:clamp(2.7rem,13vw,5rem); }
+            .architectural-scene,.network-art { min-height:350px; }
+            .network-art .node { width:54px; border-radius:12px; }
+            .network-art .node.core-node { width:70px; }
+            .network-art .node small { font-size:7px; }
+            .automation-console { padding:18px; }
+            .console-body { grid-template-columns:repeat(2,1fr); }
+            .console-step { min-height:110px; }
+            .projects-head { align-items:flex-start; flex-direction:column; }
+            .project-grid { grid-template-columns:1fr; }
+            .project-card { min-height:360px; padding:24px; }
+            .project-link { right:24px; bottom:23px; }
+            .journey { min-height:420px; padding:38px 20px 24px; }
+            .journey-line { top:12%; bottom:12%; left:51px; right:auto; width:1px; height:auto; background:linear-gradient(180deg,transparent,var(--amber),rgba(145,169,159,.7),transparent); }
+            .journey-nodes { grid-template-columns:1fr; grid-template-rows:repeat(5,1fr); }
+            .journey-node { grid-template-columns:56px 1fr; display:grid; justify-items:start; align-items:center; gap:16px; }
+            .journey-node span { text-align:left; }
+            .footer { flex-direction:column; padding-right:max(18px,env(safe-area-inset-right)); padding-left:max(18px,env(safe-area-inset-left)); }
         }
-
-        @media (max-width: 420px) {
-            .hero h1 {
-                font-size: clamp(3.05rem, 17vw, 4.4rem);
-            }
-
-            .hero-lead {
-                font-size: 13px;
-            }
-
-            .hero-structure {
-                min-height: 360px;
-            }
-
-            .node {
-                border-radius: 12px;
-            }
+        @media (max-width: 430px) {
+            .hero h1 { font-size:clamp(3rem,17vw,4.3rem); }
+            .hero-architecture { min-height:340px; }
+            .portrait-shell { width:min(73%,275px); }
+            .console-body { gap:8px; }
+            .console-step { padding:12px; min-height:100px; }
         }
-
         @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            *, *::before, *::after {
-                animation-duration: .001ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: .001ms !important;
-            }
+            html { scroll-behavior:auto; }
+            *,*::before,*::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(.92); opacity: .72; }
-            50% { transform: scale(1.18); opacity: 1; }
-        }
-
-        @keyframes atmosphereDrift {
-            0% { transform: translate3d(-2%, -1%, 0) scale(1); }
-            100% { transform: translate3d(3%, 2%, 0) scale(1.04); }
-        }
-
-        @keyframes scan {
-            0%, 100% { opacity: .35; transform: scaleX(.7); }
-            50% { opacity: 1; transform: scaleX(1); }
-        }
-
-        @keyframes dash {
-            to { stroke-dashoffset: -60; }
-        }
-
-        @keyframes packetMove {
-            0% { transform: translate3d(-26px, 12px, 0); opacity: 0; }
-            12% { opacity: 1; }
-            72% { opacity: 1; }
-            100% { transform: translate3d(180px, -130px, 0); opacity: 0; }
-        }
+        @keyframes pulse { 0%,100%{transform:scale(.9);opacity:.7} 50%{transform:scale(1.18);opacity:1} }
+        @keyframes atmosphere { 0%{transform:translate3d(-2%,-1%,0) scale(1)} 100%{transform:translate3d(3%,2%,0) scale(1.04)} }
+        @keyframes scan { 0%,100%{opacity:.3;transform:scaleX(.75)} 50%{opacity:1;transform:scaleX(1)} }
+        @keyframes dash { to{stroke-dashoffset:-70} }
+        @keyframes packet { 0%{transform:translate3d(-18px,12px,0);opacity:0} 12%{opacity:1} 74%{opacity:1} 100%{transform:translate3d(185px,-130px,0);opacity:0} }
     </style>
 </head>
 
 <body>
-    <div class="atmosphere" aria-hidden="true"></div>
+    <div class="ambient-architecture" aria-hidden="true"></div>
     <canvas id="topology" aria-hidden="true"></canvas>
     <div class="grain" aria-hidden="true"></div>
     <div class="scanlines" aria-hidden="true"></div>
+    <div class="nav-cut" id="navCut" aria-hidden="true"></div>
 
     <header class="site-nav">
-        <a class="brand" href="#top" aria-label="Kishan Panchal home">
-            <span class="brand-mark" aria-hidden="true"></span>
-            KISHAN.DEV
-        </a>
-
+        <a class="brand" href="#top" aria-label="Kishan Panchal home"><span class="brand-mark" aria-hidden="true"></span>KISHAN.DEV</a>
         <nav class="desktop-nav" aria-label="Primary navigation">
             <a href="#profile">Profile</a>
             <a href="#experience">Experience</a>
@@ -1300,12 +509,8 @@
             <a href="#direction">Direction</a>
             <a href="#contact">Contact</a>
         </nav>
-
-        <div class="opportunity"><i aria-hidden="true"></i> Open to opportunities</div>
-
-        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+        <div class="opportunity"><i aria-hidden="true"></i>Open to opportunities</div>
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
     </header>
 
     <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
@@ -1326,20 +531,17 @@
                         <span>Panchal</span>
                         <span class="role">IT Systems &amp; Infrastructure</span>
                     </h1>
-
                     <p class="hero-lead">
                         IT professional with <strong>2+ years of hands-on experience</strong> across technical support,
                         systems troubleshooting, networking, infrastructure deployment, and technical operations.
                         Building toward <strong>System Administration and Network Engineering</strong>, then deeper into
                         cloud infrastructure, automation, and security.
                     </p>
-
                     <div class="actions">
-                        <a class="btn btn-primary" href="#projects"><i class="fa-solid fa-arrow-down"></i> Explore the work</a>
-                        <a class="btn" href="https://github.com/71Kishan" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
-                        <a class="btn" href="https://www.linkedin.com/in/kspanchal/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                        <a class="btn btn-primary" href="#projects"><i class="fa-solid fa-arrow-down"></i>Explore the work</a>
+                        <a class="btn" href="https://github.com/71Kishan" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i>GitHub</a>
+                        <a class="btn" href="https://www.linkedin.com/in/kspanchal/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
                     </div>
-
                     <div class="hero-meta">
                         <span>Base <strong>India</strong></span>
                         <span>Focus <strong>Systems / Networking</strong></span>
@@ -1347,182 +549,129 @@
                     </div>
                 </div>
 
-                <div class="hero-structure" aria-label="Architectural portrait environment">
-                    <div class="structure-plane"></div>
-                    <div class="structure-line a"></div>
-                    <div class="structure-line b"></div>
-                    <div class="structure-line c"></div>
-
-                    <div class="portrait-wrap">
-                        <div class="tech-tag one">SYSTEM NODE / 71K</div>
-                        <div class="tech-tag two">NETWORK → SYSTEMS → FUTURE</div>
-                        <div class="portrait-frame">
-                            <img src="Profile_Pic - Kishan Panchal.png" alt="Kishan Panchal">
-                        </div>
+                <div class="hero-architecture" aria-label="Architectural portrait environment">
+                    <div class="architecture-frame"></div>
+                    <div class="architecture-glow"></div>
+                    <div class="structure-ring"></div>
+                    <div class="structure-ring two"></div>
+                    <div class="portrait-shell">
+                        <div class="portrait-tag one">SYSTEM NODE / 71K</div>
+                        <div class="portrait-tag two">NETWORK → SYSTEMS → FUTURE</div>
+                        <div class="portrait-frame"><img src="Profile_Pic - Kishan Panchal.png" alt="Kishan Panchal"></div>
                     </div>
                 </div>
             </div>
-
-            <div class="scrollcue"><span></span> Enter the system <span></span></div>
+            <div class="scrollcue"><span></span>Enter the system<span></span></div>
         </section>
 
-        <section class="story" id="story" aria-label="Technical journey">
-            <div class="story-shell">
-                <div class="stage-rail"><span>ARCHITECTURAL FIELD</span><span id="stageCounter">01 / 03</span></div>
+        <div class="chapters" aria-label="Technical story">
+            <section class="chapter" aria-label="Networking chapter">
+                <div class="container chapter-grid">
+                    <div class="chapter-copy reveal">
+                        <div class="scene-label">Scene 01 · Network</div>
+                        <h2 class="display">The infrastructure underneath.</h2>
+                        <p>
+                            Hands-on networking experience across physical deployment, logical design, connectivity
+                            troubleshooting, cabling, router configuration, DNS, DHCP, VLANs, and bandwidth optimization.
+                            The work starts with understanding how the pieces connect.
+                        </p>
+                        <div class="chapter-number">01 / 03</div>
+                    </div>
+                    <div class="network-art reveal" aria-hidden="true">
+                        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <line x1="17" y1="23" x2="45" y2="10"></line>
+                            <line x1="45" y1="10" x2="83" y2="25"></line>
+                            <line x1="17" y1="23" x2="25" y2="80"></line>
+                            <line x1="25" y1="80" x2="68" y2="82"></line>
+                            <line x1="68" y1="82" x2="46" y2="46"></line>
+                            <line x1="46" y1="46" x2="83" y2="25"></line>
+                            <line x1="45" y1="10" x2="46" y2="46"></line>
+                        </svg>
+                        <div class="node n1"><i class="fa-solid fa-laptop"></i><small>Endpoint</small></div>
+                        <div class="node n2"><i class="fa-solid fa-route"></i><small>Router</small></div>
+                        <div class="node n3"><i class="fa-solid fa-globe"></i><small>Internet</small></div>
+                        <div class="node n4"><i class="fa-solid fa-diagram-project"></i><small>Segment</small></div>
+                        <div class="node n5"><i class="fa-solid fa-server"></i><small>Services</small></div>
+                        <div class="node core-node"><i class="fa-solid fa-network-wired"></i><small>Core</small></div>
+                        <span class="packet p1"></span><span class="packet p2"></span><span class="packet p3"></span>
+                    </div>
+                </div>
+            </section>
 
-                <article class="story-stage active" data-stage="1">
-                    <div class="stage-grid">
-                        <div class="stage-copy">
-                            <div class="scene-label">Scene 01 · Network</div>
-                            <h2 class="display">The infrastructure underneath.</h2>
-                            <p>
-                                Hands-on networking experience across physical deployment, logical design, connectivity
-                                troubleshooting, cabling, router configuration, DNS, DHCP, VLANs, and bandwidth optimization.
-                                The work starts with understanding how the pieces connect.
-                            </p>
-                        </div>
+            <section class="chapter" aria-label="Systems chapter">
+                <div class="container chapter-grid">
+                    <div class="chapter-copy reveal">
+                        <div class="scene-label">Scene 02 · Systems</div>
+                        <h2 class="display">Then the machines become the system.</h2>
+                        <p>
+                            From local server environments and operating-system provisioning to Windows and Linux
+                            troubleshooting, endpoint protection, documentation, and operational support. The goal is
+                            reliability: systems that stay understandable, maintainable, and useful.
+                        </p>
+                        <div class="chapter-number">02 / 03</div>
+                    </div>
+                    <div class="architectural-scene reveal" aria-hidden="true">
+                        <div class="floor"></div>
+                        <div class="structure-ring"></div>
+                        <div class="structure-ring two"></div>
+                        <div class="core"><i class="fa-solid fa-server"></i></div>
+                        <div class="callout a">WINDOWS</div>
+                        <div class="callout b">LINUX</div>
+                        <div class="callout c">ENDPOINT</div>
+                        <div class="callout d">OPERATIONS</div>
+                    </div>
+                </div>
+            </section>
 
-                        <div class="stage-visual">
-                            <div class="blueprint" aria-hidden="true"></div>
-                            <div class="network-diagram" aria-hidden="true">
-                                <svg class="network-lines" viewBox="0 0 100 90" preserveAspectRatio="none">
-                                    <line x1="18" y1="24" x2="48" y2="13"></line>
-                                    <line x1="48" y1="13" x2="77" y2="29"></line>
-                                    <line x1="18" y1="24" x2="31" y2="64"></line>
-                                    <line x1="31" y1="64" x2="64" y2="68"></line>
-                                    <line x1="64" y1="68" x2="48" y2="48"></line>
-                                    <line x1="48" y1="48" x2="77" y2="29"></line>
-                                    <line x1="48" y1="13" x2="48" y2="48"></line>
-                                </svg>
-                                <div class="node n1" data-label="Endpoint"><i class="fa-solid fa-laptop"></i></div>
-                                <div class="node n2" data-label="Router"><i class="fa-solid fa-route"></i></div>
-                                <div class="node n3" data-label="Internet"><i class="fa-solid fa-globe"></i></div>
-                                <div class="node n4" data-label="Segment"><i class="fa-solid fa-diagram-project"></i></div>
-                                <div class="node n5" data-label="Services"><i class="fa-solid fa-server"></i></div>
-                                <div class="node n6" data-label="Core"><i class="fa-solid fa-network-wired"></i></div>
-                                <span class="packet p1"></span>
-                                <span class="packet p2"></span>
-                                <span class="packet p3"></span>
-                            </div>
+            <section class="chapter" aria-label="Automation and security chapter">
+                <div class="container chapter-grid">
+                    <div class="chapter-copy reveal">
+                        <div class="scene-label">Scene 03 · Automation + Security</div>
+                        <h2 class="display">Make the system smarter. Make it harder to break.</h2>
+                        <p>
+                            Python and Bash automation, network diagnostics, system-hardening audits, scheduled workflows,
+                            and practical security checks are the bridge from support work toward infrastructure engineering.
+                            The long-term destination is cloud infrastructure, automation, and security.
+                        </p>
+                        <div class="chapter-number">03 / 03</div>
+                    </div>
+                    <div class="automation-console reveal" aria-label="Automation pipeline">
+                        <div class="console-head"><span>AUTOMATION CONTROL</span><span>PYTHON · BASH · AUDIT · SCHEDULER</span></div>
+                        <div class="console-body">
+                            <div class="console-step"><i class="fa-brands fa-python"></i><strong>Build</strong><span>Python tooling</span></div>
+                            <div class="console-step"><i class="fa-solid fa-terminal"></i><strong>Execute</strong><span>Shell workflows</span></div>
+                            <div class="console-step"><i class="fa-solid fa-shield-halved"></i><strong>Harden</strong><span>Security checks</span></div>
+                            <div class="console-step"><i class="fa-regular fa-clock"></i><strong>Schedule</strong><span>Repeatable runs</span></div>
                         </div>
                     </div>
-                </article>
-
-                <article class="story-stage" data-stage="2">
-                    <div class="stage-grid">
-                        <div class="stage-copy">
-                            <div class="scene-label">Scene 02 · Systems</div>
-                            <h2 class="display">Then the machines become the system.</h2>
-                            <p>
-                                From local server environments and operating-system provisioning to Windows and Linux
-                                troubleshooting, endpoint protection, documentation, and operational support. The goal is
-                                reliability: systems that stay understandable, maintainable, and useful.
-                            </p>
-                        </div>
-
-                        <div class="stage-visual">
-                            <div class="blueprint" aria-hidden="true"></div>
-                            <div class="network-diagram" aria-hidden="true">
-                                <div class="node n1" data-label="Windows"><i class="fa-brands fa-windows"></i></div>
-                                <div class="node n2" data-label="Linux"><i class="fa-brands fa-linux"></i></div>
-                                <div class="node n3" data-label="Server"><i class="fa-solid fa-server"></i></div>
-                                <div class="node n4" data-label="Endpoint"><i class="fa-solid fa-shield-halved"></i></div>
-                                <div class="node n5" data-label="Operations"><i class="fa-solid fa-gears"></i></div>
-                                <div class="node n6" data-label="System Core"><i class="fa-solid fa-microchip"></i></div>
-                                <svg class="network-lines" viewBox="0 0 100 90" preserveAspectRatio="none">
-                                    <line x1="18" y1="24" x2="48" y2="13"></line>
-                                    <line x1="48" y1="13" x2="77" y2="29"></line>
-                                    <line x1="18" y1="24" x2="31" y2="64"></line>
-                                    <line x1="31" y1="64" x2="64" y2="68"></line>
-                                    <line x1="64" y1="68" x2="48" y2="48"></line>
-                                    <line x1="48" y1="48" x2="77" y2="29"></line>
-                                    <line x1="48" y1="13" x2="48" y2="48"></line>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="story-stage" data-stage="3">
-                    <div class="stage-grid">
-                        <div class="stage-copy">
-                            <div class="scene-label">Scene 03 · Automation + Security</div>
-                            <h2 class="display">Make the system smarter. Make it harder to break.</h2>
-                            <p>
-                                Python and Bash automation, network diagnostics, system-hardening audits, scheduled workflows,
-                                and practical security checks are the bridge from support work toward infrastructure engineering.
-                                The long-term destination is cloud infrastructure, automation, and security.
-                            </p>
-                        </div>
-
-                        <div class="stage-visual">
-                            <div class="blueprint" aria-hidden="true"></div>
-                            <div class="network-diagram" aria-hidden="true">
-                                <div class="node n1" data-label="Python"><i class="fa-brands fa-python"></i></div>
-                                <div class="node n2" data-label="Bash"><i class="fa-solid fa-terminal"></i></div>
-                                <div class="node n3" data-label="Audit"><i class="fa-solid fa-shield-halved"></i></div>
-                                <div class="node n4" data-label="Scheduler"><i class="fa-regular fa-clock"></i></div>
-                                <div class="node n5" data-label="Cloud"><i class="fa-solid fa-cloud"></i></div>
-                                <div class="node n6" data-label="Control"><i class="fa-solid fa-sliders"></i></div>
-                                <svg class="network-lines" viewBox="0 0 100 90" preserveAspectRatio="none">
-                                    <line x1="18" y1="24" x2="48" y2="13"></line>
-                                    <line x1="48" y1="13" x2="77" y2="29"></line>
-                                    <line x1="18" y1="24" x2="31" y2="64"></line>
-                                    <line x1="31" y1="64" x2="64" y2="68"></line>
-                                    <line x1="64" y1="68" x2="48" y2="48"></line>
-                                    <line x1="48" y1="48" x2="77" y2="29"></line>
-                                    <line x1="48" y1="13" x2="48" y2="48"></line>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
+                </div>
+            </section>
+        </div>
 
         <section class="scene" id="experience" data-scene="SCENE 04 / EXPERIENCE">
             <div class="container experience-layout">
-                <div>
+                <div class="reveal">
                     <div class="scene-label">Real-world systems</div>
                     <h2 class="display section-title">Experience that compounds.</h2>
                 </div>
-
-                <div class="timeline">
+                <div class="timeline reveal">
                     <article class="role-card">
                         <div class="role-kicker"><span>Feb 2025 — Present</span><span>Self-Employed</span></div>
                         <h3>Independent IT Consultant &amp; Systems Administrator</h3>
-                        <p>
-                            Architected local media-server environments, resolved network buffering and bandwidth-allocation
-                            issues, provisioned privacy-focused GrapheneOS environments, and troubleshot wireless connectivity
-                            and latency bottlenecks.
-                        </p>
-                        <div class="role-tags">
-                            <span>Systems</span><span>Networking</span><span>Endpoint</span><span>Troubleshooting</span>
-                        </div>
+                        <p>Architected local media-server environments, resolved network buffering and bandwidth-allocation issues, provisioned privacy-focused GrapheneOS environments, and troubleshot wireless connectivity and latency bottlenecks.</p>
+                        <div class="role-tags"><span>Systems</span><span>Networking</span><span>Endpoint</span><span>Troubleshooting</span></div>
                     </article>
-
                     <article class="role-card">
                         <div class="role-kicker"><span>Nov 2024 — Feb 2025</span><span>Concentrix · Canada</span></div>
                         <h3>Advisor II — Tech Support</h3>
-                        <p>
-                            Delivered technical support with a 90% First-Call Resolution rate and 95% Customer Satisfaction,
-                            while improving team workflows through internal documentation that reduced average response time by 30%.
-                        </p>
-                        <div class="role-tags">
-                            <span>Technical Support</span><span>FCR 90%</span><span>CSAT 95%</span><span>Documentation</span>
-                        </div>
+                        <p>Delivered technical support with a 90% First-Call Resolution rate and 95% Customer Satisfaction, while improving team workflows through internal documentation that reduced average response time by 30%.</p>
+                        <div class="role-tags"><span>Technical Support</span><span>FCR 90%</span><span>CSAT 95%</span><span>Documentation</span></div>
                     </article>
-
                     <article class="role-card">
                         <div class="role-kicker"><span>Apr 2024 — Nov 2024</span><span>Onsite Computer Solutions · Canada</span></div>
                         <h3>IT Support Technician</h3>
-                        <p>
-                            Executed physical and logical network redesign work covering cabling, rack layouts, and router
-                            configurations, while diagnosing hardware failures and improving internet connectivity and operational reliability.
-                        </p>
-                        <div class="role-tags">
-                            <span>Infrastructure</span><span>Cabling</span><span>Routers</span><span>Hardware</span>
-                        </div>
+                        <p>Executed physical and logical network redesign work covering cabling, rack layouts, and router configurations, while diagnosing hardware failures and improving internet connectivity and operational reliability.</p>
+                        <div class="role-tags"><span>Infrastructure</span><span>Cabling</span><span>Routers</span><span>Hardware</span></div>
                     </article>
                 </div>
             </div>
@@ -1530,59 +679,36 @@
 
         <section class="scene projects" id="projects" data-scene="SCENE 05 / PROOF OF WORK">
             <div class="container">
-                <div class="projects-head">
-                    <div>
-                        <div class="scene-label">Builds, not buzzwords</div>
-                        <h2 class="display section-title">Proof of work.</h2>
-                    </div>
+                <div class="projects-head reveal">
+                    <div><div class="scene-label">Builds, not buzzwords</div><h2 class="display section-title">Proof of work.</h2></div>
                     <div class="role-kicker"><span>GitHub-backed projects</span><span>Practical systems focus</span></div>
                 </div>
-
-                <div class="projects-grid">
-                    <article class="project-card" tabindex="0">
-                        <span class="project-index">01 / AUTOMATION</span>
-                        <span class="project-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                <div class="project-grid">
+                    <article class="project-card reveal" tabindex="0">
+                        <span class="project-index">01 / AUTOMATION</span><span class="project-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
                         <h3>Job Search Automation Pipeline</h3>
-                        <p>
-                            Python automation using Playwright, Google Gemini, Pandas, gspread, and Windows Task Scheduler
-                            to discover, score, deduplicate, and track IT/Cybersecurity job leads.
-                        </p>
+                        <p>Python automation using Playwright, Google Gemini, Pandas, gspread, and Windows Task Scheduler to discover, score, deduplicate, and track IT/Cybersecurity job leads.</p>
                         <div class="project-tech"><span>Python</span><span>Playwright</span><span>Gemini</span><span>Google Sheets</span></div>
                         <a class="project-link" href="https://github.com/71Kishan/Job-Search-Automation" target="_blank" rel="noopener">View repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </article>
-
-                    <article class="project-card" tabindex="0">
-                        <span class="project-index">02 / NETWORKING</span>
-                        <span class="project-icon"><i class="fa-solid fa-network-wired"></i></span>
+                    <article class="project-card reveal" tabindex="0">
+                        <span class="project-index">02 / NETWORKING</span><span class="project-icon"><i class="fa-solid fa-network-wired"></i></span>
                         <h3>Network Analyzer Tool</h3>
-                        <p>
-                            Cross-platform Python utility for connectivity monitoring and round-trip latency analysis,
-                            with configurable thresholds and timestamped diagnostic logging.
-                        </p>
+                        <p>Cross-platform Python utility for connectivity monitoring and round-trip latency analysis, with configurable thresholds and timestamped diagnostic logging.</p>
                         <div class="project-tech"><span>Python</span><span>Bash</span><span>Networking</span><span>Monitoring</span></div>
                         <a class="project-link" href="https://github.com/71Kishan/network-analyzer" target="_blank" rel="noopener">View repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </article>
-
-                    <article class="project-card" tabindex="0">
-                        <span class="project-index">03 / SECURITY</span>
-                        <span class="project-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                    <article class="project-card reveal" tabindex="0">
+                        <span class="project-index">03 / SECURITY</span><span class="project-icon"><i class="fa-solid fa-shield-halved"></i></span>
                         <h3>System Hardening Auditor</h3>
-                        <p>
-                            Python audit utility for Windows and Linux that checks administrative/root privileges, operating-system
-                            details, and local firewall status as practical hardening verification.
-                        </p>
+                        <p>Python audit utility for Windows and Linux that checks administrative/root privileges, operating-system details, and local firewall status as practical hardening verification.</p>
                         <div class="project-tech"><span>Python</span><span>Windows</span><span>Linux</span><span>Hardening</span></div>
                         <a class="project-link" href="https://github.com/71Kishan/system-hardening" target="_blank" rel="noopener">View repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </article>
-
-                    <article class="project-card" tabindex="0">
-                        <span class="project-index">04 / PORTFOLIO</span>
-                        <span class="project-icon"><i class="fa-solid fa-cube"></i></span>
+                    <article class="project-card reveal" tabindex="0">
+                        <span class="project-index">04 / PORTFOLIO</span><span class="project-icon"><i class="fa-solid fa-cube"></i></span>
                         <h3>Technical Portfolio</h3>
-                        <p>
-                            This site — a cinematic, responsive technical portfolio built to present systems work, infrastructure
-                            thinking, projects, and the direction behind the work.
-                        </p>
+                        <p>This site — a cinematic, responsive technical portfolio built to present systems work, infrastructure thinking, projects, and the direction behind the work.</p>
                         <div class="project-tech"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span></div>
                         <a class="project-link" href="https://71kishan.github.io/" target="_blank" rel="noopener">Open portfolio <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </article>
@@ -1590,19 +716,14 @@
             </div>
         </section>
 
-        <section class="scene direction" id="direction" data-scene="SCENE 06 / DIRECTION">
-            <div class="container direction-hero">
-                <div class="direction-copy">
+        <section class="scene" id="direction" data-scene="SCENE 06 / DIRECTION">
+            <div class="container direction-layout">
+                <div class="direction-copy reveal">
                     <div class="scene-label">The road ahead</div>
                     <h2 class="display section-title">Build deeper. Then build bigger.</h2>
-                    <p>
-                        The immediate goal is stronger capability in System Administration and Network Engineering.
-                        From there, the trajectory expands into cloud infrastructure, automation, and security — built through
-                        real labs, documented projects, and increasingly responsible technical work.
-                    </p>
+                    <p>The immediate goal is stronger capability in System Administration and Network Engineering. From there, the trajectory expands into cloud infrastructure, automation, and security — built through real labs, documented projects, and increasingly responsible technical work.</p>
                 </div>
-
-                <div class="journey" aria-label="Career development path">
+                <div class="journey reveal" aria-label="Career development path">
                     <div class="journey-line" aria-hidden="true"></div>
                     <div class="journey-nodes">
                         <div class="journey-node"><div class="journey-dot"><i class="fa-solid fa-network-wired"></i></div><span>Networking</span></div>
@@ -1617,18 +738,15 @@
 
         <section class="scene contact" id="contact" data-scene="SCENE 07 / CONNECT">
             <div class="container">
-                <div class="contact-shell">
+                <div class="contact-shell reveal">
                     <div class="contact-content">
                         <div class="scene-label">Connect</div>
                         <h2 class="display">Let's build what comes next.</h2>
-                        <p>
-                            Open to opportunities in Systems, Networking, IT Infrastructure, and technical operations — especially
-                            roles where strong troubleshooting fundamentals can grow into deeper infrastructure responsibility.
-                        </p>
+                        <p>Open to opportunities in Systems, Networking, IT Infrastructure, and technical operations — especially roles where strong troubleshooting fundamentals can grow into deeper infrastructure responsibility.</p>
                         <div class="contact-links">
-                            <a class="btn btn-primary" href="mailto:k.s.panchal7576@gmail.com"><i class="fa-solid fa-envelope"></i> Email me</a>
-                            <a class="btn" href="https://www.linkedin.com/in/kspanchal/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-                            <a class="btn" href="https://github.com/71Kishan" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a class="btn btn-primary" href="mailto:k.s.panchal7576@gmail.com"><i class="fa-solid fa-envelope"></i>Email me</a>
+                            <a class="btn" href="https://www.linkedin.com/in/kspanchal/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
+                            <a class="btn" href="https://github.com/71Kishan" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i>GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -1636,10 +754,7 @@
         </section>
     </main>
 
-    <footer class="footer">
-        <span>© 2026 Kishan Panchal</span>
-        <span>Systems · Networking · Automation · Security</span>
-    </footer>
+    <footer class="footer"><span>© 2026 Kishan Panchal</span><span>Systems · Networking · Automation · Security</span></footer>
 
     <script>
         const menuButton = document.getElementById("menuBtn");
@@ -1648,101 +763,96 @@
         menuButton?.addEventListener("click", () => {
             const open = mobileMenu.classList.toggle("open");
             menuButton.setAttribute("aria-expanded", String(open));
-            menuButton.innerHTML = open
-                ? '<i class="fa-solid fa-xmark"></i>'
-                : '<i class="fa-solid fa-bars"></i>';
+            menuButton.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
         });
 
-        mobileMenu?.querySelectorAll("a").forEach((link) => {
-            link.addEventListener("click", () => {
-                mobileMenu.classList.remove("open");
-                menuButton.setAttribute("aria-expanded", "false");
-                menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        function closeMenu() {
+            mobileMenu?.classList.remove("open");
+            menuButton?.setAttribute("aria-expanded", "false");
+            if (menuButton) menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        }
+
+        /* Direct navigation uses a short cinematic cut instead of forcing the visitor
+           through the multi-screen story. Natural scrolling still reveals the chapters. */
+        const navCut = document.getElementById("navCut");
+        document.querySelectorAll('.desktop-nav a[href^="#"], .mobile-menu a[href^="#"], .btn[href^="#"]').forEach((link) => {
+            link.addEventListener("click", (event) => {
+                const selector = link.getAttribute("href");
+                const target = selector ? document.querySelector(selector) : null;
+                if (!target || !navCut) return;
+                event.preventDefault();
+                closeMenu();
+                navCut.classList.add("active");
+                window.setTimeout(() => {
+                    const navHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 74;
+                    const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - navHeight - 6);
+                    window.scrollTo({ top, behavior: "auto" });
+                    history.replaceState(null, "", selector);
+                    window.setTimeout(() => navCut.classList.remove("active"), 120);
+                }, 170);
             });
         });
 
-        const story = document.querySelector(".story");
-        const stages = [...document.querySelectorAll(".story-stage")];
-        const counter = document.getElementById("stageCounter");
+        /* Scroll reveals: visual storytelling without locking the page in a sticky scene. */
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) entry.target.classList.add("active");
+            });
+        }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
 
-        function updateStory() {
-            if (!story || !stages.length) return;
-            const rect = story.getBoundingClientRect();
-            const travel = Math.max(1, story.offsetHeight - window.innerHeight);
-            const progress = Math.min(0.999, Math.max(0, -rect.top / travel));
-            const index = Math.min(stages.length - 1, Math.floor(progress * stages.length));
+        document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
-            stages.forEach((stage, i) => stage.classList.toggle("active", i === index));
-            counter.textContent = `${String(index + 1).padStart(2, "0")} / ${String(stages.length).padStart(2, "0")}`;
-        }
-
-        window.addEventListener("scroll", updateStory, { passive: true });
-        window.addEventListener("resize", updateStory);
-        updateStory();
-
+        /* Project-card pointer lighting, disabled on touch devices. */
         document.querySelectorAll(".project-card").forEach((card) => {
             card.addEventListener("pointermove", (event) => {
                 if (window.matchMedia("(pointer: coarse)").matches) return;
                 const rect = card.getBoundingClientRect();
-                const x = ((event.clientX - rect.left) / rect.width) * 100;
-                const y = ((event.clientY - rect.top) / rect.height) * 100;
-                card.style.setProperty("--mx", `${x}%`);
-                card.style.setProperty("--my", `${y}%`);
-            });
+                card.style.setProperty("--mx", `${((event.clientX - rect.left) / rect.width) * 100}%`);
+                card.style.setProperty("--my", `${((event.clientY - rect.top) / rect.height) * 100}%`);
+            }, { passive: true });
         });
 
+        /* Ambient network: lower density on small screens to preserve performance. */
         const canvas = document.getElementById("topology");
         const ctx = canvas?.getContext("2d");
-        const pointer = { x: 0.5, y: 0.5 };
+        const pointer = { x: .5, y: .5 };
         let nodes = [];
-        let rafId = 0;
+        let raf = 0;
 
-        function resizeCanvas() {
+        function resizeTopology() {
             if (!canvas || !ctx) return;
-            const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
-            canvas.width = Math.floor(window.innerWidth * dpr);
-            canvas.height = Math.floor(window.innerHeight * dpr);
-            canvas.style.width = `${window.innerWidth}px`;
-            canvas.style.height = `${window.innerHeight}px`;
+            const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+            canvas.width = Math.floor(innerWidth * dpr);
+            canvas.height = Math.floor(innerHeight * dpr);
+            canvas.style.width = `${innerWidth}px`;
+            canvas.style.height = `${innerHeight}px`;
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            const count = window.innerWidth < 700 ? 28 : window.innerWidth < 1100 ? 42 : 62;
-            nodes = Array.from({ length: count }, (_, i) => ({
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                vx: (Math.random() - .5) * .08,
-                vy: (Math.random() - .5) * .08,
-                r: i % 7 === 0 ? 1.7 : .9,
+            const count = innerWidth < 700 ? 18 : innerWidth < 1100 ? 30 : 46;
+            nodes = Array.from({ length: count }, () => ({
+                x: Math.random() * innerWidth,
+                y: Math.random() * innerHeight,
+                vx: (Math.random() - .5) * .06,
+                vy: (Math.random() - .5) * .06,
+                r: Math.random() > .82 ? 1.5 : .8
             }));
         }
 
         function drawTopology() {
-            if (!ctx || !canvas) return;
-            const w = window.innerWidth;
-            const h = window.innerHeight;
-            ctx.clearRect(0, 0, w, h);
-
-            for (const node of nodes) {
-                node.x += node.vx;
-                node.y += node.vy;
-                if (node.x < -30 || node.x > w + 30) node.vx *= -1;
-                if (node.y < -30 || node.y > h + 30) node.vy *= -1;
-
-                const dx = node.x - pointer.x * w;
-                const dy = node.y - pointer.y * h;
-                const d = Math.hypot(dx, dy);
-                const influence = Math.max(0, 1 - d / 360);
-                node.x += (pointer.x * w - node.x) * influence * .0007;
-                node.y += (pointer.y * h - node.y) * influence * .0007;
-            }
+            if (!canvas || !ctx) return;
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            nodes.forEach((n) => {
+                n.x += n.vx;
+                n.y += n.vy;
+                if (n.x < -20 || n.x > innerWidth + 20) n.vx *= -1;
+                if (n.y < -20 || n.y > innerHeight + 20) n.vy *= -1;
+            });
 
             for (let i = 0; i < nodes.length; i++) {
-                const a = nodes[i];
                 for (let j = i + 1; j < nodes.length; j++) {
-                    const b = nodes[j];
+                    const a = nodes[i], b = nodes[j];
                     const d = Math.hypot(a.x - b.x, a.y - b.y);
-                    if (d < 145) {
-                        const alpha = (1 - d / 145) * .18;
-                        ctx.strokeStyle = `rgba(226,173,100,${alpha})`;
+                    if (d < 155) {
+                        ctx.strokeStyle = `rgba(226,173,100,${(1 - d / 155) * .12})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(a.x, a.y);
@@ -1752,26 +862,22 @@
                 }
             }
 
-            for (const node of nodes) {
-                ctx.fillStyle = node.r > 1 ? "rgba(226,173,100,.42)" : "rgba(226,173,100,.24)";
+            nodes.forEach((n) => {
+                ctx.fillStyle = n.r > 1 ? "rgba(226,173,100,.36)" : "rgba(226,173,100,.19)";
                 ctx.beginPath();
-                ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
+                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
                 ctx.fill();
-            }
-
-            rafId = requestAnimationFrame(drawTopology);
+            });
+            raf = requestAnimationFrame(drawTopology);
         }
 
         window.addEventListener("pointermove", (event) => {
-            pointer.x = event.clientX / window.innerWidth;
-            pointer.y = event.clientY / window.innerHeight;
+            pointer.x = event.clientX / innerWidth;
+            pointer.y = event.clientY / innerHeight;
         }, { passive: true });
-
-        window.addEventListener("resize", resizeCanvas);
-        resizeCanvas();
-        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            drawTopology();
-        }
+        window.addEventListener("resize", resizeTopology);
+        resizeTopology();
+        if (!matchMedia("(prefers-reduced-motion: reduce)").matches) drawTopology();
     </script>
 </body>
 </html>
