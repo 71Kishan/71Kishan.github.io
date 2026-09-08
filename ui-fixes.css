@@ -1,0 +1,123 @@
+/* --------------------------------------------------------------------------
+   UI refinements
+   Keeps the cinematic layout while making system details and skill metadata
+   immediately understandable and easy to scan.
+---------------------------------------------------------------------------- */
+
+/* Systems scene: turn the rack rows into meaningful infrastructure layers. */
+.rack {
+  width: min(76%, 560px);
+}
+
+.rack-top {
+  color: #7e897d;
+  font-size: 7px;
+}
+
+.rack-row {
+  min-height: 52px;
+  height: auto;
+  margin-top: 9px;
+  grid-template-columns: 8px minmax(0, 1fr);
+  gap: 10px;
+  padding: 9px 11px;
+}
+
+.rack-row i {
+  grid-column: 1;
+  grid-row: 1;
+  width: 5px;
+  height: 5px;
+  align-self: center;
+}
+
+.rack-row i:nth-child(2),
+.rack-row i:nth-child(3) {
+  display: none;
+}
+
+.rack-row b {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: left;
+  color: #9da79a;
+  font-size: 7px;
+  line-height: 1.45;
+  letter-spacing: .08em;
+  white-space: normal;
+}
+
+/* Experience + project metadata: readable technical chips instead of a text blob. */
+.tag-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.tag-row span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 7px 10px;
+  border: 1px solid rgba(225, 235, 219, .14);
+  border-radius: 4px;
+  background: linear-gradient(180deg, rgba(215, 255, 154, .035), rgba(215, 255, 154, .01));
+  color: #8f9a8d;
+  font: 500 7px/1 "DM Mono", monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tag-row span::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: rgba(215, 255, 154, .68);
+  box-shadow: 0 0 8px rgba(215, 255, 154, .16);
+}
+
+.timeline-item .tag-row {
+  max-width: 100%;
+}
+
+.project-card .tag-row {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+}
+
+@media (max-width: 780px) {
+  .rack {
+    width: 86%;
+  }
+
+  .rack-row {
+    min-height: 47px;
+    padding: 8px 9px;
+  }
+
+  .rack-row b {
+    font-size: 6.5px;
+  }
+
+  .tag-row {
+    gap: 7px;
+    margin-top: 14px;
+  }
+
+  .tag-row span {
+    min-height: 27px;
+    padding: 6px 8px;
+  }
+}
+
+@media (max-width: 460px) {
+  .tag-row span {
+    font-size: 6px;
+  }
+}
