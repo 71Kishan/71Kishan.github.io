@@ -1,0 +1,159 @@
+name: Mobile journey fix
+
+on:
+  push:
+    paths:
+      - .github/workflows/mobile-journey-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fix mobile journey overflow
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("styles.css")
+          css = path.read_text(encoding="utf-8")
+          marker = "/* MOBILE JOURNEY SAFETY FIX */"
+
+          if marker not in css:
+              css += r'''
+
+          /* MOBILE JOURNEY SAFETY FIX */
+          @media (max-width: 780px) {
+            /* Keep each cinematic scene inside the actual phone viewport. */
+            .journey-sticky {
+              height: calc(100svh - var(--nav-h));
+              min-height: 0;
+            }
+
+            .journey-scene {
+              grid-template-rows: auto minmax(0, 1fr);
+              align-content: center;
+              gap: 10px;
+              padding-top: 55px;
+              padding-bottom: 42px;
+            }
+
+            .journey-copy h2 {
+              margin-top: 11px;
+              margin-bottom: 12px;
+            }
+
+            .journey-copy > p:not(.scene-number) {
+              line-height: 1.65;
+            }
+
+            .scene-metrics {
+              margin-top: 14px;
+              gap: 6px;
+            }
+
+            .scene-metrics span {
+              min-width: 0;
+              padding: 7px 8px;
+              line-height: 1.35;
+            }
+
+            .journey-visual {
+              min-height: 0;
+              height: 100%;
+              max-height: 31vh;
+            }
+
+            /* The systems rack is intentionally compact on phones so all six
+               infrastructure layers remain visible instead of being clipped. */
+            .systems-visual {
+              min-height: 0;
+              height: 100%;
+            }
+
+            .rack {
+              width: min(92%, 560px);
+              height: 100%;
+              max-height: 100%;
+              padding: 8px;
+              transform: perspective(900px) rotateY(-4deg);
+            }
+
+            .rack-top {
+              padding-bottom: 6px;
+              font-size: 6px;
+            }
+
+            .rack-row {
+              min-height: 0;
+              height: calc((100% - 42px) / 6);
+              margin-top: 4px;
+              padding: 5px 7px;
+            }
+
+            .rack-row b {
+              font-size: 6.5px;
+              line-height: 1.25;
+            }
+
+            .rack-row i {
+              width: 4px;
+              height: 4px;
+            }
+
+            .network-node small {
+              top: calc(100% + 4px);
+            }
+          }
+
+          @media (max-width: 460px) {
+            .journey-scene {
+              gap: 7px;
+              padding-top: 50px;
+              padding-bottom: 38px;
+            }
+
+            .journey-copy h2 {
+              font-size: clamp(2.45rem, 12vw, 4.5rem);
+            }
+
+            .journey-copy > p:not(.scene-number) {
+              font-size: 12px;
+              line-height: 1.55;
+            }
+
+            .journey-visual {
+              max-height: 29vh;
+            }
+
+            .rack {
+              width: 94%;
+              padding: 7px;
+            }
+
+            .rack-row {
+              height: calc((100% - 38px) / 6);
+              margin-top: 3px;
+              padding: 4px 6px;
+            }
+
+            .rack-row b {
+              font-size: 6px;
+            }
+          }
+          '''
+              path.write_text(css, encoding="utf-8")
+          PY
+
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add styles.css
+          git diff --cached --quiet || git commit -m "Fix mobile cinematic journey overflow"
+          git push
